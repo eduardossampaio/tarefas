@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    style="@style/list_item"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?android:attr/selectableItemBackground"
+    android:layout_height="match_parent">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_list_subtasks_item_completed"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:includeFontPadding="false"
+        android:id="@+id/activity_list_subtasks_item_name"
+        android:scrollHorizontally="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/activity_list_subtasks_item_completed" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_list_subtasks_item_description"
+        android:layout_below="@+id/activity_list_subtasks_item_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+</RelativeLayout>

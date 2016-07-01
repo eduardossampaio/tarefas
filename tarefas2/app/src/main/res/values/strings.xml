@@ -1,0 +1,40 @@
+<resources>
+
+    <string name="app_name">Taks</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="change_notes">
+        * Minimum Android version decreased.\n
+        * Layout problems solved.
+    </string>
+
+    <!-- Task activity-->
+    <string name="empty_task_list">No Tasks Registered</string>
+    <string name="task_item_completed_tasks">Completed Task: </string>
+
+    <!-- Dialogs -->
+    <string name="dialog_message_ok">Ok</string>
+    <string name="dialog_message_cancel">Cancel</string>
+    <string name="dialog_options_edit">Edit</string>
+    <string name="dialog_options_delete">Delete</string>
+    <string name="dialog_release_notes_title">Release Notes</string>
+
+    <!-- New Task dialog -->
+    <string name="new_task_title">New Task</string>
+    <string name="new_task_task_name">Task Name</string>
+
+
+    <!-- Task delete dialog -->
+    <string name="dialog_delete_task_title">Delete the task: </string>
+
+
+    <!-- New Subtask Dialog-->
+    <string name="dialog_new_subtask_title">New Subtask</string>
+    <string name="dialog_new_subtask_name">Subtask Name</string>
+    <string name="dialog_new_subtask_description">Description</string>
+
+    <!-- Subtask options -->
+    <string name="dialog_delete_subtask_title">Delete the subtask: </string>
+
+
+</resources>

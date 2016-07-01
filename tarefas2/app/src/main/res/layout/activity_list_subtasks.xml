@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_list_subtasks"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.ListSubtasksActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list_subtasks_items_list"
+        android:visibility="invisible">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|center_vertical"
+        android:id="@+id/list_subtasks_empty_task_list"
+        android:text="@string/empty_task_list"
+        />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/list_subtask_new_task_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_input_add_white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        app:layout_behavior="com.apps.esampaio.tarefas.view.Behaviors.ScrollAwareFABBehavior"
+        app:layout_anchor="@+id/list_subtasks_empty_task_list"
+        app:layout_anchorGravity="bottom|right"
+        android:layout_gravity="top|left" />
+
+</android.support.design.widget.CoordinatorLayout>
