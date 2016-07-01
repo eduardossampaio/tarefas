@@ -48,8 +48,9 @@ public class ListSubtasksActivity extends AppCompatActivity {
         newTaskButton = (FloatingActionButton)findViewById(R.id.list_subtask_new_task_button);
         tasks = new Tasks(this);
 
+        int itemId = getIntent().getExtras().getInt("item");
+        item = tasks.getTask(itemId);
 
-        item = (Task)  getIntent().getExtras().getSerializable("item");
         setTitle(item.getName());
 
         adapter = new ListSubtaskAdapter(item,this) {
@@ -88,7 +89,6 @@ public class ListSubtasksActivity extends AppCompatActivity {
     }
 
     private void updateItems(){
-//        item = tasks.getTask(item.getId());
         List<Subtask> taskList = item.getSubtasks();
         if ( taskList.size()==0){
             emptyListMessage.setVisibility(View.VISIBLE);
@@ -163,7 +163,7 @@ public class ListSubtasksActivity extends AppCompatActivity {
         deleteDialog.show();
     }
 
-    class UpdateTaskAsync extends AsyncTask<Subtask,Void,Subtask>{
+    private class UpdateTaskAsync extends AsyncTask<Subtask,Void,Subtask>{
         @Override
         protected Subtask doInBackground(Subtask... params) {
             Subtask subtask = params[0];

@@ -4,18 +4,17 @@
 
     <string name="title_activity_main">MainActivity</string>
     <string name="change_notes">
-        * Minimum Android version decreased.\n
-        * Layout problems solved.
+        * Layout improvements.
     </string>
 
     <!-- Task activity-->
     <string name="empty_task_list">No Tasks Registered</string>
     <string name="task_item_completed_tasks">Completed Task: </string>
-    <string name="task_no_subtasks_registered">No subtasks registered.Touch to add.</string>
+    <string name="task_no_subtasks_registered">Touch to add subtasks.</string>
 
 
     <!-- Dialogs -->
-    <string name="dialog_message_ok">Ok</string>
+    <string name="dialog_message_ok">OK</string>
     <string name="dialog_message_cancel">Cancel</string>
     <string name="dialog_options_edit">Edit</string>
     <string name="dialog_options_delete">Delete</string>
