@@ -11,6 +11,7 @@
     <!-- Task activity-->
     <string name="empty_task_list">Nenhuma tarefa registrada</string>
     <string name="task_item_completed_tasks">Tarefas Concluídas: </string>
+    <string name="task_no_subtasks_registered">Toque para adicionar subtarefas.</string>
 
     <!-- Dialogs -->
     <string name="dialog_message_ok">Ok</string>
@@ -27,6 +28,9 @@
     <!-- Task delete dialog -->
     <string name="dialog_delete_task_title">Deseja deletar a tarefa: </string>
 
+    <!-- Subtasks -->
+    <string name="subtasks_updated_message_checked"> marcado como completado</string>
+    <string name="subtasks_updated_message_unchecked"> marcado como não completado</string>
 
     <!-- New Subtask Dialog-->
     <string name="dialog_new_subtask_title">Nova Subtarefa</string>

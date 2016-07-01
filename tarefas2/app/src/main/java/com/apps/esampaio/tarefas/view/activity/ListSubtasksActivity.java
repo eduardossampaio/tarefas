@@ -2,6 +2,7 @@ package com.apps.esampaio.tarefas.view.activity;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -32,12 +33,14 @@ public class ListSubtasksActivity extends AppCompatActivity {
     private Tasks tasks;
     private Task item;
 
+    private View layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_subtasks);
 
-        final View layout = findViewById(R.id.activity_list_subtasks);
+        layout = findViewById(R.id.activity_list_subtasks);
 
         recyclerView = (RecyclerView) findViewById(R.id.list_subtasks_items_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -47,6 +50,7 @@ public class ListSubtasksActivity extends AppCompatActivity {
 
 
         item = (Task)  getIntent().getExtras().getSerializable("item");
+        setTitle(item.getName());
 
         adapter = new ListSubtaskAdapter(item,this) {
             @Override
@@ -64,10 +68,8 @@ public class ListSubtasksActivity extends AppCompatActivity {
             }
 
             @Override
-            public void itemUpdated(Task item) {
-                tasks.updateTask(item);
-                updateItems();
-                Snackbar.make(layout,"Teste",Snackbar.LENGTH_LONG).show();
+            public void itemUpdated(Task item,Subtask subtask) {
+                new UpdateTaskAsync().execute(subtask);
             }
         };
 
@@ -161,4 +163,29 @@ public class ListSubtasksActivity extends AppCompatActivity {
         deleteDialog.show();
     }
 
+    class UpdateTaskAsync extends AsyncTask<Subtask,Void,Subtask>{
+        @Override
+        protected Subtask doInBackground(Subtask... params) {
+            Subtask subtask = params[0];
+            tasks.updateTask(item);
+            return subtask;
+        }
+
+        @Override
+        protected void onPostExecute(Subtask subtask) {
+            super.onPostExecute(subtask);
+            updateItems();
+            String message = subtask.getName();
+            if ( subtask.isComplete())
+                message += ListSubtasksActivity.this.getString(R.string.subtasks_updated_message_checked);
+            else
+                message += ListSubtasksActivity.this.getString(R.string.subtasks_updated_message_unchecked);
+            Snackbar.make(layout,message,Snackbar.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+
+        }
+    }
 }

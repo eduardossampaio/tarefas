@@ -11,6 +11,8 @@
     <!-- Task activity-->
     <string name="empty_task_list">No Tasks Registered</string>
     <string name="task_item_completed_tasks">Completed Task: </string>
+    <string name="task_no_subtasks_registered">No subtasks registered.Touch to add.</string>
+
 
     <!-- Dialogs -->
     <string name="dialog_message_ok">Ok</string>
@@ -27,6 +29,9 @@
     <!-- Task delete dialog -->
     <string name="dialog_delete_task_title">Delete the task: </string>
 
+    <!-- Subtasks -->
+    <string name="subtasks_updated_message_checked"> checked as completed</string>
+    <string name="subtasks_updated_message_unchecked"> checked as uncompleted</string>
 
     <!-- New Subtask Dialog-->
     <string name="dialog_new_subtask_title">New Subtask</string>
