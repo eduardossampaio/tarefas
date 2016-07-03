@@ -17,10 +17,10 @@ import com.apps.esampaio.tarefas.Constants;
 import com.apps.esampaio.tarefas.R;
 import com.apps.esampaio.tarefas.Tasks;
 import com.apps.esampaio.tarefas.entities.Task;
-import com.apps.esampaio.tarefas.view.Dialogs.ConfirmationDialog;
-import com.apps.esampaio.tarefas.view.Dialogs.MessageDialog;
-import com.apps.esampaio.tarefas.view.Dialogs.NewTaskDialog;
-import com.apps.esampaio.tarefas.view.Dialogs.OptionsDialog;
+import com.apps.esampaio.tarefas.view.dialogs.ConfirmationDialog;
+import com.apps.esampaio.tarefas.view.dialogs.MessageDialog;
+import com.apps.esampaio.tarefas.view.dialogs.NewTaskDialog;
+import com.apps.esampaio.tarefas.view.dialogs.OptionsDialog;
 import com.apps.esampaio.tarefas.view.activity.adapter.ListTaskAdapter;
 
 import java.util.List;

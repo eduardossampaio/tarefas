@@ -1,10 +1,8 @@
-package com.apps.esampaio.tarefas.view.Dialogs;
+package com.apps.esampaio.tarefas.view.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
-
-import com.apps.esampaio.tarefas.R;
 
 /**
  * Created by eduardo on 30/06/2016.

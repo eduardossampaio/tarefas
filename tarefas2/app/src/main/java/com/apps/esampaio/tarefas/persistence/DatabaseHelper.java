@@ -4,8 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.apps.esampaio.tarefas.entities.Subtask;
-import com.apps.esampaio.tarefas.entities.Task;
+import com.apps.esampaio.tarefas.persistence.DAO.Impl.entities.SubtaskEntity;
+import com.apps.esampaio.tarefas.persistence.DAO.Impl.entities.TaskEntity;
+import com.apps.esampaio.tarefas.persistence.DAO.Impl.entities.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final List<Class> entitiesClasses=new ArrayList<>();
     static {
-        entitiesClasses.add(Task.class);
-        entitiesClasses.add(Subtask.class);
+        entitiesClasses.add(TaskEntity.class);
+        entitiesClasses.add(SubtaskEntity.class);
     }
 
     private Context context;
@@ -36,7 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for (Class clasz: entitiesClasses) {
             try {
                 Entity entity = (Entity)clasz.newInstance();
-                db.execSQL(entity.getCreateTable());
+                db.execSQL(entity.getCreateTableSQL());
             }catch (Exception e){
                 e.printStackTrace();
             }

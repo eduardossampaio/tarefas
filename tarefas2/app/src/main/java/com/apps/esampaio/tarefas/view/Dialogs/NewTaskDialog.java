@@ -1,4 +1,4 @@
-package com.apps.esampaio.tarefas.view.Dialogs;
+package com.apps.esampaio.tarefas.view.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
