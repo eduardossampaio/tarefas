@@ -31,14 +31,21 @@
     <!-- Subtasks -->
     <string name="subtasks_updated_message_checked"> checked as completed</string>
     <string name="subtasks_updated_message_unchecked"> checked as uncompleted</string>
+    <string name="subtasks_no_description">No description</string>
+    <string name="subtasks_enter_name">Enter name</string>
+    <string name="subtasks_enter_description">Enter description</string>
 
     <!-- New Subtask Dialog-->
     <string name="dialog_new_subtask_title">New Subtask</string>
-    <string name="dialog_new_subtask_name">Subtask Name</string>
+    <string name="dialog_new_subtask_name">Name</string>
     <string name="dialog_new_subtask_description">Description</string>
 
     <!-- Subtask options -->
     <string name="dialog_delete_subtask_title">Delete the subtask: </string>
+    <string name="title_activity_create_subtask">DetailSubtaskActivity</string>
+
+    <!-- Detail subtasks -->
+    <string name="detail_subtasks_details_title">Details</string>
 
 
 </resources>

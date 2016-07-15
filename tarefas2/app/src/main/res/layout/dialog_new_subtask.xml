@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,11 +21,12 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/dialog_new_subtask_description"
-        android:layout_below="@+id/dialog_new_subtask_name"
-        android:layout_alignParentStart="true"
         android:lines="3"
         android:maxLines="3"
-        android:layout_alignParentEnd="true"
-        android:hint="@string/dialog_new_subtask_description"/>
+        android:hint="@string/dialog_new_subtask_description"
+        android:layout_below="@+id/dialog_new_subtask_name"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true" />
+
 
 </RelativeLayout>

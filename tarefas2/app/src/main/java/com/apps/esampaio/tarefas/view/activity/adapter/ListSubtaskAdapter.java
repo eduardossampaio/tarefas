@@ -65,7 +65,7 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
 
     @Override
     public ListSubtaskAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        final View view  = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_list_subtasks_item,viewGroup,false);
+        final View view  = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_list_subtasks_item2,viewGroup,false);
 
         final ListSubtaskAdapter.ViewHolder viewHolder = new ListSubtaskAdapter.ViewHolder(view);
 
@@ -107,7 +107,10 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
     public void onBindViewHolder(ListSubtaskAdapter.ViewHolder viewHolder, int i) {
         Subtask subtask = item.getSubtasks().get(i);
         viewHolder.taskName.setText(subtask.getName());
-        viewHolder.taskDescription.setText(subtask.getDescription());
+        if ( subtask.getDescription() != null && ! subtask.getDescription().isEmpty())
+            viewHolder.taskDescription.setText(subtask.getDescription());
+        else
+            viewHolder.taskDescription.setText(context.getString(R.string.subtasks_no_description));
         viewHolder.completed.setChecked(subtask.isComplete());
     }
 

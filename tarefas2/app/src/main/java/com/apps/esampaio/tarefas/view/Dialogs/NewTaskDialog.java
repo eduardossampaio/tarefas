@@ -31,7 +31,7 @@ public abstract class NewTaskDialog extends Dialog{
 
         super(context);
 
-        View layout = (View) LayoutInflater.from(context).inflate(R.layout.dialog_new_task_layout,null);
+        View layout = (View) LayoutInflater.from(context).inflate(R.layout.dialog_new_task,null);
         this.title  = (EditText) layout.findViewById(R.id.new_task_task_name);
 
         if(task != null){

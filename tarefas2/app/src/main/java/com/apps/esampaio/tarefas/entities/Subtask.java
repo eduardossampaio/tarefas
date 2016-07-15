@@ -1,6 +1,7 @@
 package com.apps.esampaio.tarefas.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by eduardo on 28/06/2016.
@@ -14,6 +15,7 @@ public class Subtask implements Serializable{
     private String description;
     private boolean complete;
 
+    private Date date;
 
     public Subtask(String name){
         this.name = name;
@@ -37,6 +39,14 @@ public class Subtask implements Serializable{
         this.name = name;
         this.complete = completed;
         this.description = description;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getDate() {
+        return date;
     }
 
     public String getName() {

@@ -21,7 +21,10 @@
         </activity>
         <activity android:name=".view.activity.ListTasksActivity" />
         <activity android:name=".view.activity.ListSubtasksActivity" />
-        <activity android:name=".view.activity.DetailSubtask"></activity>
+        <activity
+            android:name=".view.activity.DetailSubtaskActivity"
+            android:label="@string/title_activity_create_subtask"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

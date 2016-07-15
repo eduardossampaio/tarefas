@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/detail_subtasks_details_title"
+        style="@style/icon_subheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/detail_subtask_detail"
+        android:layout_alignParentRight="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_subtask_name"
+        android:paddingLeft="16dp"
+        android:id="@+id/imageView"
+        android:layout_weight="0.00"
+        android:layout_below="@+id/detail_subtask_detail"
+        android:layout_alignParentLeft="true"
+        android:layout_alignBottom="@+id/activity_detail_subtask_name_edittext" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/dialog_new_subtask_name"
+        android:ems="10"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="16dp"
+        android:id="@+id/activity_detail_subtask_name_edittext"
+        android:layout_below="@+id/detail_subtask_detail"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_subtask_desc"
+        android:paddingLeft="16dp"
+        android:id="@+id/imageView2"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignBottom="@+id/activity_detail_subtask_description_edittext" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="16dp"
+        android:hint="@string/dialog_new_subtask_description"
+        android:ems="10"
+        android:layout_below="@+id/imageView"
+        android:id="@+id/activity_detail_subtask_description_edittext"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true" />
+</RelativeLayout>

@@ -2,6 +2,7 @@ package com.apps.esampaio.tarefas.view.activity;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -56,9 +57,9 @@ public class ListSubtasksActivity extends AppCompatActivity {
         adapter = new ListSubtaskAdapter(item,this) {
             @Override
             public void itemClicked(RecyclerView.ViewHolder viewHolder, Subtask item) {
-//                Intent intent = new Intent(ListSubtasksActivity.this,DetailSubtask.class);
-//                intent.putExtra("subtask",item);
-//                startActivity(intent);
+                Intent intent = new Intent(ListSubtasksActivity.this,DetailSubtaskActivity.class);
+                intent.putExtra("subtask",item);
+                startActivity(intent);
 
             }
 
@@ -78,6 +79,8 @@ public class ListSubtasksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showNewSubtaskDialog();
+//                Intent intent = new Intent(ListSubtasksActivity.this,CreateSubtaskActivity.class);
+//                startActivity(intent);
             }
         });
 
