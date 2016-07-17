@@ -11,7 +11,7 @@
     <include
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        layout="@layout/activity_detail_subtask_description2"
+        layout="@layout/activity_detail_subtask_description"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true" />
 </RelativeLayout>

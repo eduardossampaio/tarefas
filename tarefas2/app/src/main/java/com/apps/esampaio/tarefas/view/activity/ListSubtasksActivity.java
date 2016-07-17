@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CalendarView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.apps.esampaio.tarefas.R;
@@ -22,6 +25,7 @@ import com.apps.esampaio.tarefas.view.dialogs.NewSubtaskDialog;
 import com.apps.esampaio.tarefas.view.dialogs.OptionsDialog;
 import com.apps.esampaio.tarefas.view.activity.adapter.ListSubtaskAdapter;
 
+import java.util.Date;
 import java.util.List;
 
 public class ListSubtasksActivity extends AppCompatActivity {
@@ -57,10 +61,8 @@ public class ListSubtasksActivity extends AppCompatActivity {
         adapter = new ListSubtaskAdapter(item,this) {
             @Override
             public void itemClicked(RecyclerView.ViewHolder viewHolder, Subtask item) {
-                Intent intent = new Intent(ListSubtasksActivity.this,DetailSubtaskActivity.class);
-                intent.putExtra("subtask",item);
-                startActivity(intent);
-
+//                createDetailDialog(item);
+                startDetailActivity(item);
             }
 
             @Override
@@ -106,7 +108,7 @@ public class ListSubtasksActivity extends AppCompatActivity {
     private void showNewSubtaskDialog(){
         Dialog dialog = new NewSubtaskDialog(this) {
             @Override
-            public void onItemEntered(String name, String description) {
+            public void onItemEntered(String name, String description,Date date) {
                 Subtask subtask = new Subtask(name,description);
                 item.addSubtask(subtask);
                 tasks.updateTask(item);
@@ -141,7 +143,7 @@ public class ListSubtasksActivity extends AppCompatActivity {
     private void createEditDialog(final Subtask subtask) {
         Dialog dialog = new NewSubtaskDialog(this,subtask) {
             @Override
-            public void onItemEntered(String name, String description) {
+            public void onItemEntered(String name, String description,Date date) {
                 subtask.setName(name);
                 subtask.setDescription(description);
                 item.updateTask(subtask);
@@ -150,6 +152,21 @@ public class ListSubtasksActivity extends AppCompatActivity {
             }
         };
         dialog.show();
+    }
+    private void createDetailDialog(final Subtask subtask){
+        Dialog dialog = new NewSubtaskDialog(this,subtask) {
+            @Override
+            public void onItemEntered(String name, String description,Date date) {
+                subtask.setName(name);
+                subtask.setDescription(description);
+                item.updateTask(subtask);
+                tasks.updateTask(item);
+                updateItems();
+            }
+        };
+        dialog.setTitle("-Subtask-");
+        dialog.show();
+
     }
 
     private void createDeleteDialog(final Subtask subtask) {
@@ -190,5 +207,12 @@ public class ListSubtasksActivity extends AppCompatActivity {
         protected void onProgressUpdate(Void... values) {
 
         }
+    }
+
+
+    private void startDetailActivity(Subtask subtask){
+        Intent intent = new Intent(ListSubtasksActivity.this,DetailSubtaskActivity.class);
+        intent.putExtra("subtask",subtask);
+        startActivity(intent);
     }
 }

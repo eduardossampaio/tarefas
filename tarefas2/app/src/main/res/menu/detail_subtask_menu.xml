@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/detail_subtask_menu_delete"
+        android:src="@drawable/ic_delete"
+        android:visible="true"
+        android:title="-delete-"
+        android:icon="@drawable/ic_delete" />
+    <item
+        android:id="@+id/detail_subtask_menu_save"
+        android:icon="@drawable/ic_done_white"
+        app:showAsAction="always"
+        android:title=""
+        />
+</menu>

@@ -21,6 +21,7 @@ public class SubtaskEntity implements Entity {
                     " FOREIGN KEY(task_id) REFERENCES task(id)" +
                     ");";
 
+    private static final String tableName = "subtask";
     private Subtask object;
 
     public SubtaskEntity(Subtask object){
@@ -37,7 +38,7 @@ public class SubtaskEntity implements Entity {
 
     @Override
     public String getTableName() {
-        return "subtask";
+        return tableName;
     }
 
     public String getIdColumnName(){
@@ -62,7 +63,10 @@ public class SubtaskEntity implements Entity {
     }
 
     @Override
-    public String getUpdateSQL(int dabataseVersion) {
+    public String getUpdateSQL(int databaseVersion) {
+        if(databaseVersion == 2){
+            return "ALTER TABLE " + tableName+" ADD task_date date";
+        }
         return null;
     }
 }

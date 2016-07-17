@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -11,9 +12,11 @@
         android:ems="10"
         android:id="@+id/dialog_new_subtask_name"
         android:layout_weight="1"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:hint="@string/dialog_new_subtask_name"/>
+        android:hint="@string/dialog_new_subtask_name"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -24,9 +27,70 @@
         android:lines="3"
         android:maxLines="3"
         android:hint="@string/dialog_new_subtask_description"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_below="@+id/dialog_new_subtask_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/dialog_new_subtask_date"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/dialog_new_subtask_description"
         android:layout_alignParentRight="true"
+        android:hint="-Data-"
+        android:layout_alignParentLeft="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_hour"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/ic_hour"
+        android:paddingLeft="16dp"
+        android:layout_below="@+id/dialog_new_subtask_date"
+        android:layout_alignBottom="@+id/dialog_new_subtask_time" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_calendar"
+        android:id="@+id/ic_date"
+        android:paddingLeft="16dp"
+        android:layout_below="@+id/dialog_new_subtask_description"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/ic_hour" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/dialog_new_subtask_date"
+        android:id="@+id/dialog_new_subtask_time"
+        android:layout_alignParentRight="true"
+        android:hint="-Hora-"
         android:layout_alignParentLeft="true" />
 
 
+
+    <!--
+         <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_new_subtask_time"
+        android:layout_alignParentRight="true"
+        android:id="@+id/button"
+        android:visibility="invisible"
+        android:theme="@style/button"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
+    -->
 </RelativeLayout>

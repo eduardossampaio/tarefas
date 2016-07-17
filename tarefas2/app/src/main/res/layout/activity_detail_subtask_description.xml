@@ -61,4 +61,13 @@
         android:id="@+id/activity_detail_subtask_description_edittext"
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true" />
+
+    <CalendarView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/calendarView"
+        android:layout_below="@+id/imageView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+
 </RelativeLayout>

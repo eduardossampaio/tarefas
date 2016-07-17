@@ -16,8 +16,8 @@ import java.util.List;
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final int    VERSION = 1;
-    private static final String NAME   = "tasks_database";
+    private static final int    VERSION = 2;
+    private static final String NAME    = "tasks_database";
 
     private static final List<Class> entitiesClasses=new ArrayList<>();
     static {
@@ -39,13 +39,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Entity entity = (Entity)clasz.newInstance();
                 db.execSQL(entity.getCreateTableSQL());
             }catch (Exception e){
-                e.printStackTrace();
+                throw new IllegalStateException(e);
             }
         }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        for (Class clasz: entitiesClasses) {
+            try {
+                Entity entity = (Entity)clasz.newInstance();
+                String usql = entity.getUpdateSQL(newVersion);
+                if(usql != null && !usql.isEmpty())
+                    db.execSQL(usql);
+            }catch (Exception e){
+                throw new IllegalStateException(e);
+            }
+        }
     }
 }
