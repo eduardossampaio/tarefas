@@ -22,6 +22,7 @@ import com.apps.esampaio.tarefas.view.dialogs.MessageDialog;
 import com.apps.esampaio.tarefas.view.dialogs.NewTaskDialog;
 import com.apps.esampaio.tarefas.view.dialogs.OptionsDialog;
 import com.apps.esampaio.tarefas.view.activity.adapter.ListTaskAdapter;
+import com.esampaio.apps.tarefas.AddTaskActivity;
 
 import java.util.List;
 
@@ -76,7 +77,6 @@ public class ListTasksActivity extends AppCompatActivity {
         int versionCode = BuildConfig.VERSION_CODE;
         String versionName = BuildConfig.VERSION_NAME;
 
-
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREFERENCE_VERSION_NOTES_KEY, 0);
         boolean displayed = sharedPreferences.getBoolean(versionName,false);
         if ( ! displayed){
@@ -85,11 +85,7 @@ public class ListTasksActivity extends AppCompatActivity {
             Dialog dialog = new MessageDialog(this,R.string.dialog_release_notes_title,R.string.change_notes);
             dialog.show();
             editor.apply();
-
         }
-
-
-
     }
 
 
@@ -173,5 +169,7 @@ public class ListTasksActivity extends AppCompatActivity {
             }
         };
         dialog.show();
+//        Intent intent = new Intent(this, AddTaskActivity.class);
+//        startActivity(intent);
     }
 }

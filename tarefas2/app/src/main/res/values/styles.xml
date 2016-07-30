@@ -9,6 +9,14 @@
         <item name="android:fontFamily">Roboto Regular 16sp</item>
     </style>
 
+    <style name="AppThemeDialog" parent="Base.Theme.AppCompat.Light.Dialog">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">Roboto Regular 16sp</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -34,6 +42,8 @@
         <item name="android:paddingLeft">72dp</item>
     </style>
     <style name="button" parent="AppTheme">
+        <item name="android:minWidth">88dp</item>
+        <item name="android:height">36dp</item>
         <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
 

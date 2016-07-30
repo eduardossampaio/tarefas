@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.lucasr.dspec.DesignSpecFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    app:designSpec="@raw/spec"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/activity_list_tasks"/>
+</org.lucasr.dspec.DesignSpecFrameLayout>

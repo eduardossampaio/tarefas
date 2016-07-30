@@ -33,19 +33,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/dialog_new_subtask_date"
-        android:layout_marginLeft="72dp"
-        android:layout_marginRight="16dp"
-        android:layout_below="@+id/dialog_new_subtask_description"
-        android:layout_alignParentRight="true"
-        android:hint="-Data-"
-        android:layout_alignParentLeft="true" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,13 +59,48 @@
         android:inputType="time"
         android:ems="10"
         android:layout_marginLeft="72dp"
-        android:layout_marginRight="16dp"
         android:layout_below="@+id/dialog_new_subtask_date"
         android:id="@+id/dialog_new_subtask_time"
-        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
         android:hint="-Hora-"
-        android:layout_alignParentLeft="true" />
+        style="@android:style/Widget.Holo.Spinner"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/imageButton" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_clear"
+
+        android:layout_below="@+id/dialog_new_subtask_description"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentRight="true"
+        android:id="@+id/imageButton"
+        android:layout_above="@+id/dialog_new_subtask_time" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_marginRight="16dp"
+        android:id="@+id/dialog_new_subtask_date"
+        style="@android:style/Widget.Holo.Spinner"
+        android:hint="-Data-"
+
+        android:layout_below="@+id/dialog_new_subtask_description"
+        android:layout_alignLeft="@+id/dialog_new_subtask_time"
+        android:layout_toLeftOf="@+id/imageButton" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_clear"
+        android:id="@+id/imageButton2"
+
+        android:layout_alignBottom="@+id/dialog_new_subtask_time"
+        android:layout_toRightOf="@+id/dialog_new_subtask_time"
+        android:layout_below="@+id/imageButton" />
 
 
     <!--
@@ -91,6 +113,6 @@
         android:id="@+id/button"
         android:visibility="invisible"
         android:theme="@style/button"
-        style="@style/Widget.AppCompat.Button.Borderless"/>
+       android:style="@style/Widget.AppCompat.Button.Borderless"/>
     -->
 </RelativeLayout>

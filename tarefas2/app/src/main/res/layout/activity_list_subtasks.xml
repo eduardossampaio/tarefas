@@ -24,7 +24,8 @@
         android:src="@drawable/ic_input_add_white"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
+        android:layout_marginRight="@dimen/floating_action_button_margin_right"
+        android:layout_marginBottom="@dimen/floating_action_button_margin_bottom"
         app:layout_behavior="com.apps.esampaio.tarefas.view.behaviors.ScrollAwareFABBehavior"
         app:layout_anchor="@+id/list_subtasks_empty_task_list"
         />

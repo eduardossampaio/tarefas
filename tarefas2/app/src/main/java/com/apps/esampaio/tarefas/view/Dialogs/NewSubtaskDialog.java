@@ -2,7 +2,9 @@ package com.apps.esampaio.tarefas.view.dialogs;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDialog;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 
 import com.apps.esampaio.tarefas.R;
 import com.apps.esampaio.tarefas.entities.Subtask;
+import com.codetroopers.betterpickers.datepicker.DatePickerBuilder;
+import com.codetroopers.betterpickers.datepicker.DatePickerDialogFragment;
 
 import java.util.Date;
 
@@ -31,13 +35,14 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
     private EditText description;
     private EditText date;
     private EditText time;
+    private View layout;
 
     private AlertDialog.Builder builder;
 
     public NewSubtaskDialog(final Context context){
         super(context);
 
-        View layout = (View) LayoutInflater.from(context).inflate(R.layout.dialog_new_subtask,null);
+        layout = (View) LayoutInflater.from(context).inflate(R.layout.dialog_new_subtask,null);
 
         this.name        = (EditText) layout.findViewById(R.id.dialog_new_subtask_name);
         this.description = (EditText) layout.findViewById(R.id.dialog_new_subtask_description);
@@ -68,11 +73,30 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
             @Override
             public void onClick(View v) {
 
+                DatePickerBuilder dpb = new DatePickerBuilder()
+                        .setFragmentManager(((AppCompatActivity)context).getSupportFragmentManager())
+                        .setStyleResId(R.style.BetterPickersDialogFragment)
+                        .setYear(2016)
+                        .addDatePickerDialogHandler(new DatePickerDialogFragment.DatePickerDialogHandler(){
+                            @Override
+                            public void onDialogDateSet(int reference, int year, int monthOfYear, int dayOfMonth) {
+                                Snackbar snackbar  = Snackbar.make(layout,"year/"+monthOfYear+"/"+dayOfMonth,Snackbar.LENGTH_SHORT);
+                                snackbar.show();
+                            }
+                        })
+                        .setYearOptional(true);
+
+                dpb.show();
+
+
             }
         });
 
 
     }
+
+
+
 
     public NewSubtaskDialog(Context context, Subtask subtask){
         this(context);

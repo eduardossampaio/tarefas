@@ -20,11 +20,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.ListTasksActivity" />
-        <activity android:name=".view.activity.ListSubtasksActivity" />
+        <activity android:name=".view.activity.ListSubtasksActivity" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".view.activity.ListTasksActivity"/>
+        </activity>
         <activity
-            android:name=".view.activity.DetailSubtaskActivity"
-            android:label="@string/title_activity_create_subtask"
-            android:theme="@style/AppTheme"></activity>
+            android:name=".view.activity.SubtaskDialogActivity"
+            android:label="@string/title_activity_dialog_subtask"
+            android:theme="@style/AppThemeDialog" />
+        <activity
+            android:name="com.esampaio.apps.tarefas.AddTaskActivity"
+            android:theme="@style/AppThemeDialog"
+            android:label="@string/title_activity_add_task"></activity>
     </application>
 
 </manifest>
