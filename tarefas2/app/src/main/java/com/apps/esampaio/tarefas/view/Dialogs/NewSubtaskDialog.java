@@ -18,9 +18,9 @@ import com.apps.esampaio.tarefas.view.listeners.GestureDetectorTouchListener;
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
 import com.codetroopers.betterpickers.radialtimepicker.RadialTimePickerDialogFragment;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by eduardo on 28/06/2016.
@@ -38,8 +38,8 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
 
     private EditText name;
     private EditText description;
-    private EditText date;
-    private EditText time;
+    private EditText dateText;
+    private EditText timeText;
     private View layout;
 
     //TODO por isso em uma classe prória
@@ -60,8 +60,8 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
 
         this.name = (EditText) layout.findViewById(R.id.dialog_new_subtask_name);
         this.description = (EditText) layout.findViewById(R.id.dialog_new_subtask_description);
-        this.date = (EditText) layout.findViewById(R.id.dialog_new_subtask_date);
-        this.time = (EditText) layout.findViewById(R.id.dialog_new_subtask_time);
+        this.dateText = (EditText) layout.findViewById(R.id.dialog_new_subtask_date);
+        this.timeText = (EditText) layout.findViewById(R.id.dialog_new_subtask_time);
 
         builder = new AlertDialog.Builder(context);
         builder.setTitle(context.getResources().getString(R.string.dialog_new_subtask_title));
@@ -97,7 +97,7 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
                 onItemCanceled();
             }
         });
-        this.date.setOnTouchListener(new GestureDetectorTouchListener(context) {
+        this.dateText.setOnTouchListener(new GestureDetectorTouchListener(context) {
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
                 showDatePicker();
@@ -105,7 +105,7 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
             }
         });
 
-        this.time.setOnTouchListener(new GestureDetectorTouchListener(context) {
+        this.timeText.setOnTouchListener(new GestureDetectorTouchListener(context) {
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
                 showTimePicker();
@@ -121,20 +121,18 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
                 .setOnDateSetListener(new CalendarDatePickerDialogFragment.OnDateSetListener() {
                     @Override
                     public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
-                        date.setText(dayOfMonth + "/" + monthOfYear + "/" + year);
                         NewSubtaskDialog.this.year = year;
                         NewSubtaskDialog.this.month = monthOfYear;
                         NewSubtaskDialog.this.day = dayOfMonth;
+                        displayDate(year,monthOfYear,dayOfMonth);
                     }
                 })
                 .setFirstDayOfWeek(Calendar.SUNDAY)
-                .setPreselectedDate(2016, 1, 1)
+                .setPreselectedDate(year !=-1 ? year : 2016, month != -1 ? month : 1, day != -1 ? day : 1)
                 .setDoneText("-OK-")
                 //TODO data atual
                 .setCancelText("-Cancel-");
-        if (this.year != 0 && this.month != 0 && this.day != 0) {
-            cdp.setPreselectedDate(year, month, day);
-        }
+
         cdp.show(fragmentManager, FRAG_TAG_DATE_PICKER);
     }
 
@@ -144,9 +142,9 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
                 .setOnTimeSetListener(new RadialTimePickerDialogFragment.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(RadialTimePickerDialogFragment dialog, int hourOfDay, int minute) {
-                        time.setText(hourOfDay + ":" + minute);
                         NewSubtaskDialog.this.hour = hourOfDay;
                         NewSubtaskDialog.this.minute = minute;
+                        displayTime(hourOfDay,minute);
                     }
                 })
                 .setStartTime(hour==-1 ? 12 : hour,minute ==-1 ? 0 : minute)
@@ -171,19 +169,12 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
         }
         if (subtask.getTaskTime() != null) {
             calendar.setTime(subtask.getTaskTime());
-
             hour = calendar.get(Calendar.HOUR_OF_DAY);
             minute = calendar.get(Calendar.MINUTE);
         }
 
-        //TODO por isso em um método
-        if (this.year != 0 && this.month != 0 && this.day != 0) {
-            date.setText(day + "/" + month + "/" + year);
-        }
-
-        if (hour >= 0 && minute >= 0) {
-            time.setText(hour + ":" + minute);
-        }
+        displayDate(subtask.getTaskDate());
+        displayTime(subtask.getTaskTime());
 
     }
 
@@ -196,6 +187,44 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
     @Override
     public void show() {
         builder.show();
+    }
+
+    private void displayDate(int year,int month,int day){
+        if (this.year != -1 && this.month != -1 && this.day != -1) {
+            Calendar calendar =Calendar.getInstance();
+            calendar.set(Calendar.YEAR,year);
+            calendar.set(Calendar.MONTH,month);
+            calendar.set(Calendar.DAY_OF_MONTH,day);
+            displayDate(calendar.getTime());
+        }else{
+            displayDate(null);
+        }
+    }
+    private void displayDate(Date date){
+        if(date!=null){
+            dateText.setText(DateFormat.getDateInstance(DateFormat.SHORT).format(date));
+        }else{
+            dateText.setText("-SELECT DATE-");
+        }
+    }
+
+    private void displayTime(int hour ,int minute){
+        if(hour!=-1 && minute!=-1){
+            Calendar calendar =Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY,hour);
+            calendar.set(Calendar.MINUTE,minute);
+            displayTime(calendar.getTime());
+        }else{
+            displayTime(null);
+        }
 
     }
+    private void displayTime(Date date){
+        if(date!=null){
+            timeText.setText(DateFormat.getTimeInstance(DateFormat.SHORT).format(date));
+        }else{
+            timeText.setText("-SELECT TIME-");
+        }
+    }
+
 }
