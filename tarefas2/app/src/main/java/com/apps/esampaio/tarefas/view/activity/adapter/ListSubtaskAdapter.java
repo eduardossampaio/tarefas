@@ -13,6 +13,7 @@ import com.apps.esampaio.tarefas.R;
 import com.apps.esampaio.tarefas.entities.Subtask;
 import com.apps.esampaio.tarefas.entities.Task;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private TextView taskName;
         private TextView taskDescription;
+        private TextView taskDate;
         private CheckBox completed;
 
         public ViewHolder(View itemView) {
@@ -34,6 +36,7 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
             taskName = (TextView) itemView.findViewById(R.id.activity_list_subtasks_item_name);
             taskDescription = (TextView) itemView.findViewById(R.id.activity_list_subtasks_item_description);
             completed= (CheckBox) itemView.findViewById(R.id.activity_list_subtasks_item_completed);
+            taskDate= (TextView) itemView.findViewById(R.id.activity_list_subtasks_item_date);
         }
     }
 
@@ -111,6 +114,14 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
             viewHolder.taskDescription.setText(subtask.getDescription());
         else
             viewHolder.taskDescription.setText(context.getString(R.string.subtasks_no_description));
+        //TODO ARRUMAR ISSO TB
+        if(subtask.getTaskDate()!=null){
+            String at = context.getString(R.string.subtasks_schedule_date);
+            String formatedDate = DateFormat.getDateInstance(DateFormat.SHORT).format(subtask.getTaskDate());
+            viewHolder.taskDate.setText(at+formatedDate);
+        }else{
+            viewHolder.taskDate.setText(context.getString(R.string.subtasks_no_date));
+        }
         viewHolder.completed.setChecked(subtask.isComplete());
     }
 

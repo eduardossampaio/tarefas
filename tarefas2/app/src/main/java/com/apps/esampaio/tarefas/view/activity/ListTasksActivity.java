@@ -72,6 +72,13 @@ public class ListTasksActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateItems();
+        refreshItems();
+    }
+
     private void showVersionNotes() {
         int versionCode = BuildConfig.VERSION_CODE;
         String versionName = BuildConfig.VERSION_NAME;
@@ -155,11 +162,7 @@ public class ListTasksActivity extends AppCompatActivity {
         deleteDialog.show();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateItems();
-    }
+
 
     private void createNewTaskDialog(){
         Dialog dialog = new NewTaskDialog(this) {
@@ -178,8 +181,7 @@ public class ListTasksActivity extends AppCompatActivity {
             }
         };
         dialog.show();
-//        Intent intent = new Intent(this, AddTaskActivity.class);
-//        startActivity(intent);
+
     }
 
 

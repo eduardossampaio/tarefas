@@ -210,7 +210,8 @@ public class ListSubtasksActivity extends AppCompatActivity {
         protected void onPostExecute(Subtask subtask) {
             super.onPostExecute(subtask);
             updateItems();
-            String message = subtask.getName();
+            String message = subtask.getName().trim();
+            message+=" ";
             if ( subtask.isComplete())
                 message += ListSubtasksActivity.this.getString(R.string.subtasks_updated_message_checked);
             else

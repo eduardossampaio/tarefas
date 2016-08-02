@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.apps.esampaio.tarefas.R;
 import com.apps.esampaio.tarefas.entities.Subtask;
@@ -35,6 +36,7 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
     private FragmentManager fragmentManager;
     private Button createButton;
     private Button cancelButton;
+    private ImageView clearDate;
 
     private EditText name;
     private EditText description;
@@ -56,12 +58,20 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
         this.context = context;
         this.fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
 
-        layout = (View) LayoutInflater.from(context).inflate(R.layout.dialog_new_subtask, null);
+        layout =  LayoutInflater.from(context).inflate(R.layout.dialog_new_subtask, null);
 
         this.name = (EditText) layout.findViewById(R.id.dialog_new_subtask_name);
         this.description = (EditText) layout.findViewById(R.id.dialog_new_subtask_description);
         this.dateText = (EditText) layout.findViewById(R.id.dialog_new_subtask_date);
         this.timeText = (EditText) layout.findViewById(R.id.dialog_new_subtask_time);
+        this.clearDate = (ImageView) layout.findViewById(R.id.clear_date);
+
+        this.clearDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                invalidateDate();
+            }
+        });
 
         builder = new AlertDialog.Builder(context);
         builder.setTitle(context.getResources().getString(R.string.dialog_new_subtask_title));
@@ -128,10 +138,20 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
                     }
                 })
                 .setFirstDayOfWeek(Calendar.SUNDAY)
-                .setPreselectedDate(year !=-1 ? year : 2016, month != -1 ? month : 1, day != -1 ? day : 1)
-                .setDoneText("-OK-")
-                //TODO data atual
-                .setCancelText("-Cancel-");
+                .setDoneText(context.getString(R.string.dialog_message_ok))
+                .setCancelText(context.getString(R.string.dialog_message_cancel));
+
+        //TODO arrumar isso
+        if ( year ==-1 && month ==-1 && day ==-1){
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date(System.currentTimeMillis()));
+            int y =calendar.get(Calendar.YEAR);
+            int m =calendar.get(Calendar.MONTH);
+            int d =calendar.get(Calendar.DAY_OF_MONTH);
+            cdp.setPreselectedDate(y,m,d);
+        }else{
+            cdp.setPreselectedDate(year,month,day);
+        }
 
         cdp.show(fragmentManager, FRAG_TAG_DATE_PICKER);
     }
@@ -148,8 +168,8 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
                     }
                 })
                 .setStartTime(hour==-1 ? 12 : hour,minute ==-1 ? 0 : minute)
-                .setDoneText("-Yay-")
-                .setCancelText("-Nop-");
+                .setDoneText(context.getString(R.string.dialog_message_ok))
+                .setCancelText(context.getString(R.string.dialog_message_cancel));
         rtpd.show(fragmentManager, FRAG_TAG_TIME_PICKER);
     }
 
@@ -204,7 +224,7 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
         if(date!=null){
             dateText.setText(DateFormat.getDateInstance(DateFormat.SHORT).format(date));
         }else{
-            dateText.setText("-SELECT DATE-");
+            dateText.setText(context.getString(R.string.dialog_new_subtask_select_date));
         }
     }
 
@@ -223,8 +243,13 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
         if(date!=null){
             timeText.setText(DateFormat.getTimeInstance(DateFormat.SHORT).format(date));
         }else{
-            timeText.setText("-SELECT TIME-");
+            timeText.setText(context.getString(R.string.dialog_new_subtask_select_time));
         }
     }
-
+    private void invalidateDate(){
+        this.year=-1;
+        this.month=-1;
+        this.day=-1;
+        displayDate(null);
+    }
 }
