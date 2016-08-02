@@ -2,13 +2,11 @@ package com.apps.esampaio.tarefas.view.activity;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.design.widget.CoordinatorLayout;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -19,10 +17,10 @@ import com.apps.esampaio.tarefas.R;
 import com.apps.esampaio.tarefas.Tasks;
 import com.apps.esampaio.tarefas.entities.Subtask;
 import com.apps.esampaio.tarefas.entities.Task;
+import com.apps.esampaio.tarefas.view.activity.adapter.ListSubtaskAdapter;
 import com.apps.esampaio.tarefas.view.dialogs.ConfirmationDialog;
 import com.apps.esampaio.tarefas.view.dialogs.NewSubtaskDialog;
 import com.apps.esampaio.tarefas.view.dialogs.OptionsDialog;
-import com.apps.esampaio.tarefas.view.activity.adapter.ListSubtaskAdapter;
 
 import java.util.Date;
 import java.util.List;
@@ -80,8 +78,6 @@ public class ListSubtasksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showNewSubtaskDialog();
-//                Intent intent = new Intent(ListSubtasksActivity.this,CreateSubtaskActivity.class);
-//                startActivity(intent);
             }
         });
 
@@ -164,6 +160,7 @@ public class ListSubtasksActivity extends AppCompatActivity {
                 updateItems();
             }
         };
+        dialog.setTitle(getString(R.string.dialog_new_subtask_title_edit));
         dialog.show();
     }
     private void createDetailDialog(final Subtask subtask){
@@ -226,22 +223,7 @@ public class ListSubtasksActivity extends AppCompatActivity {
     }
 
 
-    private void startCreatelActivity(Subtask subtask){
-        Intent intent = new Intent(ListSubtasksActivity.this,SubtaskDialogActivity.class);
-        intent.putExtra("subtask",subtask);
-        startActivityForResult(intent,SubtaskDialogActivity.REQUEST_CODE_ADD,null);
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==SubtaskDialogActivity.REQUEST_CODE_ADD){
-            if(resultCode==SubtaskDialogActivity.RESULT_CODE_COMPLETE){
-                Subtask subtask = (Subtask)data.getSerializableExtra("subtask");
-                if(subtask!=null){
-                    item.updateSubtask(subtask);
-                    tasks.updateTask(item);
-                }
-            }
-        }
-    }
+
+
 }

@@ -39,6 +39,7 @@
 
     <!-- New Subtask Dialog-->
     <string name="dialog_new_subtask_title">New Subtask</string>
+    <string name="dialog_new_subtask_title_edit">Edit Subtask</string>
     <string name="dialog_new_subtask_name">Name</string>
     <string name="dialog_new_subtask_description">Description</string>
     <string name="dialog_new_subtask_select_date">Select Date</string>

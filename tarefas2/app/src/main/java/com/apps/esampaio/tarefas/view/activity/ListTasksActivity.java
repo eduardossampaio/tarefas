@@ -80,7 +80,6 @@ public class ListTasksActivity extends AppCompatActivity {
     }
 
     private void showVersionNotes() {
-        int versionCode = BuildConfig.VERSION_CODE;
         String versionName = BuildConfig.VERSION_NAME;
 
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREFERENCE_VERSION_NOTES_KEY, 0);
@@ -171,7 +170,6 @@ public class ListTasksActivity extends AppCompatActivity {
                 Task task  = new Task(taskName);
                 try{
                     tasks.addTask(task);
-//                    updateItems();
                     insertItem(task);
                     updateItems();
 

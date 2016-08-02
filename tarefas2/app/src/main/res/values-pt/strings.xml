@@ -39,6 +39,7 @@
 
     <!-- New Subtask Dialog-->
     <string name="dialog_new_subtask_title">Nova Subtarefa</string>
+    <string name="dialog_new_subtask_title_edit">Editar Subtarefa</string>
     <string name="dialog_new_subtask_name">Nome</string>
     <string name="dialog_new_subtask_description">Descrição</string>
     <string name="dialog_new_subtask_select_date">Selecione a Data</string>
