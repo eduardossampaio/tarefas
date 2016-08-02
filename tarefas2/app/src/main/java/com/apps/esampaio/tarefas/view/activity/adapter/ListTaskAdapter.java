@@ -21,31 +21,62 @@ import java.util.List;
 public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
+
         private TextView taskName;
         private TextView progressNumber;
         private ProgressBar progressBar;
-
         public ViewHolder(View itemView){
                 super(itemView);
                 taskName = (TextView) itemView.findViewById(R.id.list_task_item_task_name);
                 progressNumber = (TextView) itemView.findViewById(R.id.list_task_item_completed_number);
                 progressBar = (ProgressBar) itemView.findViewById(R.id.list_task_item_progress);
             }
+
     }
-
-
     private List<Task> items;
-    private Context context;
 
+
+    private Context context;
     public ListTaskAdapter(Context context){
         this.context = context;
         this.items = new ArrayList<>();
     }
 
     public void refreshItens(List<Task> items){
+        //for(int i=0;i<)
         this.items = items;
         notifyDataSetChanged();
     }
+
+    private int getItemPosition(Task item){
+        for (int i=0;i<items.size();i++) {
+            Task task = items.get(i);
+            if(task.equals(item)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void addItemToEnd(Task task){
+        int lastIndex = items.size();
+        this.items.add(task);
+        notifyItemInserted(lastIndex);
+
+    }
+
+    public void deleteItem(Task item) {
+        int pos = getItemPosition(item);
+        if ( pos != -1){
+            notifyItemRemoved(pos);
+            this.items.remove(pos);
+        }
+    }
+    public void refreshItem(Task item){
+        int pos = getItemPosition(item);
+        notifyItemChanged(pos);
+    }
+
 
     public abstract void itemClicked(RecyclerView.ViewHolder viewHolder,Task item);
 

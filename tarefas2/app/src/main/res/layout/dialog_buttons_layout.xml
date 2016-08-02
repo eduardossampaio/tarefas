@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout
+    android:background="#F0F"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="56dp">
 
     <Button
         android:text="Button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:theme="@style/button"
-        style="?attr/borderlessButtonStyle"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:id="@+id/dialog_button_1"
         android:paddingRight="8dp"
         android:layout_alignParentTop="true"
@@ -17,14 +17,14 @@
 
     <Button
         android:text="Button2"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/button"
-        style="?attr/borderlessButtonStyle"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:id="@+id/dialog_button_2"
         android:layout_marginRight="8dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true" />
-
+    <!--style="?attr/borderlessButtonStyle"-->
 
 </RelativeLayout>

@@ -1,10 +1,10 @@
 <resources>
 
-    <string name="app_name">Taks</string>
+    <string name="app_name">Tasks</string>
 
     <string name="title_activity_main">MainActivity</string>
     <string name="change_notes">
-        * Layout improvements.
+        * Layout improvements.\n* Time and Date now can be assigned to task\n* Now you can move app to SD CARD
     </string>
 
     <!-- Task activity-->

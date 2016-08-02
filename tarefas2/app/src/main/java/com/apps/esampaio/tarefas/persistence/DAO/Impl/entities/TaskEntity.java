@@ -57,7 +57,7 @@ public class TaskEntity implements Entity {
     }
 
     @Override
-    public String getUpdateSQL(int dabataseVersion) {
+    public String[] getUpdateSQLs(int dabataseVersion) {
         return null;
     }
 

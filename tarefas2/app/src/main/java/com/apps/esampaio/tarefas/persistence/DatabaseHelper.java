@@ -49,9 +49,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for (Class clasz: entitiesClasses) {
             try {
                 Entity entity = (Entity)clasz.newInstance();
-                String usql = entity.getUpdateSQL(newVersion);
-                if(usql != null && !usql.isEmpty())
-                    db.execSQL(usql);
+                String[] usqls = entity.getUpdateSQLs(newVersion);
+                if(usqls != null && usqls.length!=0) {
+                    for (String  usql :usqls) {
+                        db.execSQL(usql);
+                    }
+                }
             }catch (Exception e){
                 throw new IllegalStateException(e);
             }

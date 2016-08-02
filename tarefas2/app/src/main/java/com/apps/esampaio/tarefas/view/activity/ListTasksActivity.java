@@ -22,7 +22,6 @@ import com.apps.esampaio.tarefas.view.dialogs.MessageDialog;
 import com.apps.esampaio.tarefas.view.dialogs.NewTaskDialog;
 import com.apps.esampaio.tarefas.view.dialogs.OptionsDialog;
 import com.apps.esampaio.tarefas.view.activity.adapter.ListTaskAdapter;
-import com.esampaio.apps.tarefas.AddTaskActivity;
 
 import java.util.List;
 
@@ -64,11 +63,11 @@ public class ListTasksActivity extends AppCompatActivity {
         newTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openNewTaskDialog();
+                createNewTaskDialog();
             }
         });
         updateItems();
-
+        refreshItems();
         showVersionNotes();
 
     }
@@ -110,16 +109,23 @@ public class ListTasksActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private void insertItem(Task task) {
+        adapter.addItemToEnd(task);
+    }
+
     private void updateItems(){
-        List<Task> taskList = tasks.getTasks();
-        if ( taskList.size()==0){
+        int itemCount= this.adapter.getItemCount();
+        if ( itemCount==0){
             emptyListMessage.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.INVISIBLE);
         }else{
             emptyListMessage.setVisibility(View.INVISIBLE);
             recyclerView.setVisibility(View.VISIBLE);
-            adapter.refreshItens(taskList);
         }
+    }
+    private void refreshItems(){
+        List<Task> taskList = tasks.getTasks();
+        adapter.refreshItens(taskList);
     }
 
     private void createEditDialog(final Task item){
@@ -128,7 +134,7 @@ public class ListTasksActivity extends AppCompatActivity {
             public void onItemEntered(String taskName) {
                 item.setName(taskName);
                 tasks.updateTask(item);
-                updateItems();
+                adapter.refreshItem(item);
             }
         };
 
@@ -140,6 +146,7 @@ public class ListTasksActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 super.onClick(dialog, which);
+                adapter.deleteItem(item);
                 tasks.delete(item);
                 updateItems();
             }
@@ -154,13 +161,15 @@ public class ListTasksActivity extends AppCompatActivity {
         updateItems();
     }
 
-    private void openNewTaskDialog(){
+    private void createNewTaskDialog(){
         Dialog dialog = new NewTaskDialog(this) {
             @Override
             public void onItemEntered(String taskName) {
                 Task task  = new Task(taskName);
                 try{
                     tasks.addTask(task);
+//                    updateItems();
+                    insertItem(task);
                     updateItems();
 
                 }catch (Exception e){
@@ -172,4 +181,6 @@ public class ListTasksActivity extends AppCompatActivity {
 //        Intent intent = new Intent(this, AddTaskActivity.class);
 //        startActivity(intent);
     }
+
+
 }

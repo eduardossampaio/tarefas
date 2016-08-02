@@ -12,6 +12,7 @@ import com.apps.esampaio.tarefas.persistence.DAO.SubtaskDAO;
 import com.apps.esampaio.tarefas.persistence.DatabaseHelper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -59,17 +60,31 @@ public class SubtaskDAOImpl extends DAOImpl implements SubtaskDAO {
 
     @Override
     public List<Subtask> getSubTasks(int task_id) {
-        String[] columns = {"id","name","description","completed"};
+        String[] columns = {"id","name","description","completed","task_date","task_time"};
+//        String[] columns = {"id","name","description","completed"};
         String [] args = {""+task_id};
         List<Subtask> tasks = new ArrayList<>();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
         Cursor cursor = db.query("subtask",columns,"task_id = ?",args,null,null,null);
         while(cursor.moveToNext()){
+            Date taskDate = null;
+            Date taskTime = null;
             int id = cursor.getInt(0);
             String name = cursor.getString(1);
             String description = cursor.getString(2);
             int completed = cursor.getInt(3);
-            tasks.add( new Subtask(id,name,description,completed == 1) );
+            long dateMillis = cursor.getLong(4);
+//            //todo ver um jeito melhor de fazer isso
+            if ( dateMillis > 0){
+                taskDate= new Date(dateMillis);
+            }
+
+            long timeillis = cursor.getLong(5);
+//            //todo ver um jeito melhor de fazer isso
+            if ( timeillis > 0){
+                taskTime= new Date(timeillis);
+            }
+            tasks.add( new Subtask(id,name,description,completed == 1,taskDate,taskTime) );
         }
         return tasks;
     }

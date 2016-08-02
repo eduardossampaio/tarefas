@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    app:designSpec="@raw/spec"
+    app:designSpec="@raw/dialog"
     android:layout_height="match_parent">
 
-    <include layout="@layout/activity_list_tasks"/>
+    <include layout="@layout/activity_detail_subtask"/>
 </org.lucasr.dspec.DesignSpecFrameLayout>
