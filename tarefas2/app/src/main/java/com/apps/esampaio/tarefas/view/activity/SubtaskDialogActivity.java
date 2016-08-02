@@ -79,16 +79,12 @@ public class SubtaskDialogActivity extends AppCompatActivity {
                 calendar.set(Calendar.MINUTE, minute);
 
                 Date date = calendar.getTime();
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss z");
-                String dateString = dateFormat.format(date);
-
                 if(subtask==null){
                     subtask= new Subtask();
                 }
 
                 subtask.setName(name.getText().toString());
                 subtask.setDescription(description.getText().toString());
-//                subtask.setDate(date);
 
                 Intent intent = getIntent();
                 intent.putExtra("subtask",subtask);

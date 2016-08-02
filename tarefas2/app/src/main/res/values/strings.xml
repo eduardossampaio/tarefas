@@ -39,6 +39,8 @@
     <string name="dialog_new_subtask_title">New Subtask</string>
     <string name="dialog_new_subtask_name">Name</string>
     <string name="dialog_new_subtask_description">Description</string>
+    <string name="dialog_new_subtask_select_date">Select Date</string>
+    <string name="dialog_new_subtask_select_time">Select Time</string>
 
     <!-- Subtask options -->
     <string name="dialog_delete_subtask_title">Delete the subtask: </string>
