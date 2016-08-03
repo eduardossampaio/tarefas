@@ -37,6 +37,8 @@ public class ListSubtasksActivity extends AppCompatActivity {
 
     private View layout;
 
+
+    //TODO verificar essa lib de material design https://github.com/rey5137/material
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,8 +86,10 @@ public class ListSubtasksActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         updateItems();
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar()!=null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
     }
 
@@ -163,23 +167,23 @@ public class ListSubtasksActivity extends AppCompatActivity {
         dialog.setTitle(getString(R.string.dialog_new_subtask_title_edit));
         dialog.show();
     }
-    private void createDetailDialog(final Subtask subtask){
-        Dialog dialog = new NewSubtaskDialog(this,subtask) {
-            @Override
-            public void onItemEntered(String name, String description,Date taskDate,Date taskTime) {
-                subtask.setName(name);
-                subtask.setDescription(description);
-                subtask.setTaskDate(taskDate);
-                subtask.setTaskTime(taskTime);
-                item.updateSubtask(subtask);
-                tasks.updateTask(item);
-                updateItems();
-            }
-        };
-        dialog.setTitle("-Subtask-");
-        dialog.show();
-
-    }
+//    private void createDetailDialog(final Subtask subtask){
+//        Dialog dialog = new NewSubtaskDialog(this,subtask) {
+//            @Override
+//            public void onItemEntered(String name, String description,Date taskDate,Date taskTime) {
+//                subtask.setName(name);
+//                subtask.setDescription(description);
+//                subtask.setTaskDate(taskDate);
+//                subtask.setTaskTime(taskTime);
+//                item.updateSubtask(subtask);
+//                tasks.updateTask(item);
+//                updateItems();
+//            }
+//        };
+//        dialog.setTitle("-Subtask-");
+//        dialog.show();
+//
+//    }
 
     private void createDeleteDialog(final Subtask subtask) {
         Dialog deleteDialog = new ConfirmationDialog(ListSubtasksActivity.this,getString(R.string.dialog_delete_subtask_title)+subtask.getName()+"?"){
@@ -216,10 +220,6 @@ public class ListSubtasksActivity extends AppCompatActivity {
             Snackbar.make(layout,message,Snackbar.LENGTH_SHORT).show();
         }
 
-        @Override
-        protected void onProgressUpdate(Void... values) {
-
-        }
     }
 
 

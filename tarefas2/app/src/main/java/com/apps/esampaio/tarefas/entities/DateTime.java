@@ -1,11 +1,10 @@
 package com.apps.esampaio.tarefas.entities;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by eduardo on 02/08/2016.
- */
+
 
 public class DateTime {
     private Date date;
@@ -81,6 +80,18 @@ public class DateTime {
     public void invalidateTime(){
         this.time=null;
         applyChanges();
+    }
+
+    public String formatDate(){
+        if(date==null)
+            return null;
+        return DateFormat.getDateInstance(DateFormat.SHORT).format(date);
+    }
+
+    public String formatTime(){
+        if(time==null)
+            return null;
+        return DateFormat.getDateInstance(DateFormat.SHORT).format(time);
     }
 
 
