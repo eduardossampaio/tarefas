@@ -42,11 +42,17 @@ public class DateTime {
     }
 
     private void applyChanges(){
-        year    = calendar.get(Calendar.YEAR);
-        month   = calendar.get(Calendar.MONTH);
-        day     = calendar.get(Calendar.DAY_OF_MONTH);
-        hour    = calendar.get(Calendar.HOUR);
-        minute  = calendar.get(Calendar.MINUTE);
+        if(date!=null) {
+            calendar.setTime(date);
+            year = calendar.get(Calendar.YEAR);
+            month = calendar.get(Calendar.MONTH);
+            day = calendar.get(Calendar.DAY_OF_MONTH);
+        }
+        if(time!=null) {
+            calendar.setTime(time);
+            hour = calendar.get(Calendar.HOUR);
+            minute = calendar.get(Calendar.MINUTE);
+        }
     }
 
     public void setDate(int year,int month,int day){

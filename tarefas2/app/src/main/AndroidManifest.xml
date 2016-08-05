@@ -26,10 +26,13 @@
         <activity android:name=".view.activity.ListSubtasksActivity" >
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".view.activity.ListTasksActivity"/>
         </activity>
-        <activity
-            android:name="com.esampaio.apps.tarefas.AddTaskActivity"
-            android:theme="@style/AppThemeDialog"
-            android:label="@string/title_activity_add_task"/>
+
+        <receiver android:name=".receives.NotificationReceiver">
+            <intent-filter>
+                <action android:name="EXECUTE_NOTIFICATION_TASK"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

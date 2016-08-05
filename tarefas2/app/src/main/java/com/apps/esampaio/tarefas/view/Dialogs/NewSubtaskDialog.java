@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.apps.esampaio.tarefas.R;
+import com.apps.esampaio.tarefas.entities.DateTime;
 import com.apps.esampaio.tarefas.entities.Subtask;
 import com.apps.esampaio.tarefas.view.listeners.GestureDetectorTouchListener;
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
@@ -44,12 +45,7 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
     private EditText timeText;
     private View layout;
 
-    //TODO por isso em uma classe prória
-    private int year = -1;
-    private int month = -1;
-    private int day = -1;
-    private int hour = -1;
-    private int minute = -1;
+    private DateTime dateTime;
 
     private AlertDialog.Builder builder;
 
@@ -58,7 +54,7 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
         this.context = context;
         this.fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
 
-        layout =  LayoutInflater.from(context).inflate(R.layout.dialog_new_subtask, null);
+        layout = LayoutInflater.from(context).inflate(R.layout.dialog_new_subtask, null);
 
         this.name = (EditText) layout.findViewById(R.id.dialog_new_subtask_name);
         this.description = (EditText) layout.findViewById(R.id.dialog_new_subtask_description);
@@ -73,30 +69,15 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
             }
         });
 
+        this.dateTime = new DateTime();
         builder = new AlertDialog.Builder(context);
         builder.setTitle(context.getResources().getString(R.string.dialog_new_subtask_title));
         builder.setPositiveButton(context.getResources().getString(R.string.dialog_message_ok), new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                Date taskDate = null;
-                Date taskTime = null;
-                Calendar calendar = Calendar.getInstance();
-                if (year != -1 && month != -1 && day != -1) {
-                    calendar.set(Calendar.YEAR, year);
-                    calendar.set(Calendar.MONTH, month);
-                    calendar.set(Calendar.DAY_OF_MONTH, day);
-                    taskDate = calendar.getTime();
-                }
-                if (hour != -1 && minute != -1) {
-                    calendar = Calendar.getInstance();
-                    calendar.set(Calendar.HOUR_OF_DAY, hour);
-                    calendar.set(Calendar.MINUTE, minute);
-                    taskTime = calendar.getTime();
-                }
-
                 if (NewSubtaskDialog.this.name.getText().length() > 0) {
-                    onItemEntered(name.getText().toString(), description.getText().toString(), taskDate, taskTime);
+                    onItemEntered(name.getText().toString(), description.getText().toString(), dateTime.getDate(), dateTime.getTime());
                     dismiss();
                 }
             }
@@ -131,27 +112,24 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
                 .setOnDateSetListener(new CalendarDatePickerDialogFragment.OnDateSetListener() {
                     @Override
                     public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
-                        NewSubtaskDialog.this.year = year;
-                        NewSubtaskDialog.this.month = monthOfYear;
-                        NewSubtaskDialog.this.day = dayOfMonth;
-                        displayDate(year,monthOfYear,dayOfMonth);
+                        dateTime.setDate(year, monthOfYear, dayOfMonth);
+                        displayDate();
                     }
                 })
                 .setFirstDayOfWeek(Calendar.SUNDAY)
                 .setDoneText(context.getString(R.string.dialog_message_ok))
                 .setCancelText(context.getString(R.string.dialog_message_cancel));
 
-        //TODO arrumar isso
-        if ( year ==-1 && month ==-1 && day ==-1){
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(new Date(System.currentTimeMillis()));
-            int y =calendar.get(Calendar.YEAR);
-            int m =calendar.get(Calendar.MONTH);
-            int d =calendar.get(Calendar.DAY_OF_MONTH);
-            cdp.setPreselectedDate(y,m,d);
-        }else{
-            cdp.setPreselectedDate(year,month,day);
+        DateTime timeToSet;
+        if (!this.dateTime.dateSetted()) {
+            timeToSet = DateTime.getCurrentDateTime();
+        } else {
+            timeToSet = this.dateTime;
         }
+        int y = timeToSet.getYear();
+        int m = timeToSet.getMonth();
+        int d = timeToSet.getDay();
+        cdp.setPreselectedDate(y, m, d);
 
         cdp.show(fragmentManager, FRAG_TAG_DATE_PICKER);
     }
@@ -162,40 +140,27 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
                 .setOnTimeSetListener(new RadialTimePickerDialogFragment.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(RadialTimePickerDialogFragment dialog, int hourOfDay, int minute) {
-                        NewSubtaskDialog.this.hour = hourOfDay;
-                        NewSubtaskDialog.this.minute = minute;
-                        displayTime(hourOfDay,minute);
+                        dateTime.setTime(hourOfDay,minute);
+                        displayTime();
                     }
                 })
-                .setStartTime(hour==-1 ? 12 : hour,minute ==-1 ? 0 : minute)
                 .setDoneText(context.getString(R.string.dialog_message_ok))
                 .setCancelText(context.getString(R.string.dialog_message_cancel));
+
+        if(dateTime.timeSetted())
+            rtpd.setStartTime(dateTime.getHour(),dateTime.getMinute());
+
         rtpd.show(fragmentManager, FRAG_TAG_TIME_PICKER);
     }
 
-    //TODO set date
     public NewSubtaskDialog(Context context, Subtask subtask) {
         this(context);
         this.name.setText(subtask.getName());
         this.description.setText(subtask.getDescription());
-        //set date
-        //TODO por isso em um método
-        Calendar calendar = Calendar.getInstance();
-        if (subtask.getTaskDate() != null) {
-            calendar.setTime(subtask.getTaskDate());
-            year = calendar.get(Calendar.YEAR);
-            month = calendar.get(Calendar.MONTH);
-            day = calendar.get(Calendar.DAY_OF_MONTH);
-        }
-        if (subtask.getTaskTime() != null) {
-            calendar.setTime(subtask.getTaskTime());
-            hour = calendar.get(Calendar.HOUR_OF_DAY);
-            minute = calendar.get(Calendar.MINUTE);
-        }
+        this.dateTime = new DateTime(subtask.getTaskDate(),subtask.getTaskTime());
 
-        displayDate(subtask.getTaskDate());
-        displayTime(subtask.getTaskTime());
-
+        displayDate();
+        displayTime();
     }
 
     public abstract void onItemEntered(String name, String description, Date taskDate, Date taskTime);
@@ -209,47 +174,30 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
         builder.show();
     }
 
-    private void displayDate(int year,int month,int day){
-        if (this.year != -1 && this.month != -1 && this.day != -1) {
-            Calendar calendar =Calendar.getInstance();
-            calendar.set(Calendar.YEAR,year);
-            calendar.set(Calendar.MONTH,month);
-            calendar.set(Calendar.DAY_OF_MONTH,day);
-            displayDate(calendar.getTime());
-        }else{
-            displayDate(null);
-        }
+    @Override
+    public void setTitle(CharSequence title) {
+        builder.setTitle(title);
     }
-    private void displayDate(Date date){
-        if(date!=null){
-            dateText.setText(DateFormat.getDateInstance(DateFormat.SHORT).format(date));
-        }else{
+
+    private void displayDate() {
+        if (this.dateTime.dateSetted()) {
+            dateText.setText(this.dateTime.formatDate());
+        } else {
             dateText.setText(context.getString(R.string.dialog_new_subtask_select_date));
         }
-    }
-
-    private void displayTime(int hour ,int minute){
-        if(hour!=-1 && minute!=-1){
-            Calendar calendar =Calendar.getInstance();
-            calendar.set(Calendar.HOUR_OF_DAY,hour);
-            calendar.set(Calendar.MINUTE,minute);
-            displayTime(calendar.getTime());
-        }else{
-            displayTime(null);
-        }
 
     }
-    private void displayTime(Date date){
-        if(date!=null){
-            timeText.setText(DateFormat.getTimeInstance(DateFormat.SHORT).format(date));
-        }else{
+
+    private void displayTime() {
+        if (this.dateTime.timeSetted()) {
+            timeText.setText(this.dateTime.formatTime());
+        } else {
             timeText.setText(context.getString(R.string.dialog_new_subtask_select_time));
         }
     }
-    private void invalidateDate(){
-        this.year=-1;
-        this.month=-1;
-        this.day=-1;
-        displayDate(null);
+
+    private void invalidateDate() {
+        this.dateTime.invalidateDate();
+        displayDate();
     }
 }
