@@ -97,7 +97,7 @@ public class DateTime {
     public String formatTime(){
         if(time==null)
             return null;
-        return DateFormat.getDateInstance(DateFormat.SHORT).format(time);
+        return DateFormat.getTimeInstance(DateFormat.SHORT).format(time);
     }
 
 
