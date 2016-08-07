@@ -86,6 +86,7 @@ public class ListSubtasksActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         updateItems();
+        adapter.refreshItens(item.getSubtasks());
         if(getSupportActionBar()!=null) {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -110,9 +111,9 @@ public class ListSubtasksActivity extends AppCompatActivity {
         }else{
             emptyListMessage.setVisibility(View.INVISIBLE);
             recyclerView.setVisibility(View.VISIBLE);
-            adapter.refreshItens(taskList);
         }
     }
+
 
     private void showNewSubtaskDialog(){
         Dialog dialog = new NewSubtaskDialog(this) {
@@ -123,6 +124,7 @@ public class ListSubtasksActivity extends AppCompatActivity {
                 subtask.setTaskTime(taskTime);
                 item.addSubtask(subtask);
                 tasks.updateTask(item);
+                adapter.addItemToEnd(subtask);
                 updateItems();
             }
         };
@@ -161,6 +163,7 @@ public class ListSubtasksActivity extends AppCompatActivity {
                 subtask.setDescription(description);
                 item.updateSubtask(subtask);
                 tasks.updateTask(item);
+                adapter.refreshItem(subtask);
                 updateItems();
             }
         };
@@ -191,7 +194,8 @@ public class ListSubtasksActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 super.onClick(dialog, which);
                 tasks.deleteSubtask(subtask);
-                item.getSubtasks().remove(subtask);
+//                item.getSubtasks().remove(subtask);
+                adapter.deleteItem(subtask);
                 updateItems();
             }
         };

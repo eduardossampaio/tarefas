@@ -4,7 +4,7 @@
     <string name="app_name">Tarefas</string>
 
     <string name="change_notes">
-        * Melhorias de layout.\n* Agora você pode adicionar uma data para uma tarefa\n* Agora você pode mover o aplicativo para o cartão SD
+        * As tarefas do dia agora são notificadas
     </string>
 
 
@@ -52,5 +52,9 @@
     <!-- Detail subtasks -->
     <string name="detail_subtasks_details_title">Detalhes</string>
     <string name="title_activity_add_task">AddTaskActivity</string>
+
+    <!-- Notifications -->
+    <string name="notification_tasks_title">Você tem tarefas para hoje</string>
+    <string name="notification_tasks_list_title">Tarefas de hoje</string>
 
 </resources>

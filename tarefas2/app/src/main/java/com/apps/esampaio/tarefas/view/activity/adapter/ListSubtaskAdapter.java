@@ -50,6 +50,35 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
         notifyDataSetChanged();
     }
 
+    public void addItemToEnd(Subtask task){
+        int lastIndex = item.getSubtasks().size();
+        notifyItemInserted(lastIndex);
+
+    }
+
+    public void deleteItem(Subtask item) {
+        int pos = getItemPosition(item);
+        if ( pos != -1){
+            notifyItemRemoved(pos);
+            this.items.remove(pos);
+        }
+    }
+    public void refreshItem(Subtask item){
+        int pos = getItemPosition(item);
+        notifyItemChanged(pos);
+    }
+
+    private int getItemPosition(Subtask item) {
+        for(int i=0;i<items.size();i++){
+            Subtask subtask = items.get(i);
+            if(item.equals(subtask)){
+                return i;
+            }
+        }
+        return  -1;
+    }
+
+
     public abstract void itemClicked(RecyclerView.ViewHolder viewHolder,Subtask item);
 
     public abstract void itemUpdated(Task task,Subtask subtask);

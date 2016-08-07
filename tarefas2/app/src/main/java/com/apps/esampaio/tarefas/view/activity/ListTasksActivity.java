@@ -152,7 +152,7 @@ public class ListTasksActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 super.onClick(dialog, which);
-                adapter.deleteItem(item);
+//                adapter.deleteItem(item);
                 tasks.delete(item);
                 updateItems();
             }

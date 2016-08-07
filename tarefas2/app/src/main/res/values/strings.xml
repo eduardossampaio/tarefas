@@ -4,7 +4,7 @@
 
     <string name="title_activity_main">MainActivity</string>
     <string name="change_notes">
-        * Layout improvements.\n* Now you can assign date to task\n* Now you can move app to SD CARD
+        * Day tasks are notified
     </string>
 
     <!-- Task activity-->

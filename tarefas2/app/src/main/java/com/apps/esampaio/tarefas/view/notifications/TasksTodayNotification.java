@@ -44,6 +44,7 @@ public class TasksTodayNotification extends Notification {
         for (Subtask subtask:subtasks) {
             inboxStyle.addLine(subtask.getName());
         }
+        notificationBuilder.setAutoCancel(true);
         notificationBuilder.setContentIntent(createIntent());
         notificationBuilder.setStyle(inboxStyle);
 

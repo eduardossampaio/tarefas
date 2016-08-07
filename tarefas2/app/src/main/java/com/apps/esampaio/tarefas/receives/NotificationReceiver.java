@@ -13,6 +13,7 @@ import com.apps.esampaio.tarefas.view.notifications.Notification;
 import com.apps.esampaio.tarefas.view.notifications.TasksTodayNotification;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -23,8 +24,9 @@ public class NotificationReceiver extends BroadcastReceiver{
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        if ( !isInTime() )
+            return;
         Tasks tasks = new Tasks(context);
-
         List<Task> myTasks = tasks.getTasks();
         for (Task task : myTasks) {
             List<Subtask> tasksToday =new ArrayList<>();
@@ -41,6 +43,10 @@ public class NotificationReceiver extends BroadcastReceiver{
         }
 
     }
+    private boolean isInTime(){
+        Calendar calendar=Calendar.getInstance();
+        return calendar.get(Calendar.MINUTE) == 0 && calendar.get(Calendar.HOUR_OF_DAY)==0;
+    }
 
     private boolean isToNotificate(Subtask subtask){
         if(subtask==null)
@@ -56,6 +62,5 @@ public class NotificationReceiver extends BroadcastReceiver{
             return true;
         }
         return false;
-
     }
 }
