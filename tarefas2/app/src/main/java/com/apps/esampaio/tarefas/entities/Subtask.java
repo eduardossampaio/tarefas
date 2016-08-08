@@ -14,8 +14,7 @@ public class Subtask implements Serializable{
     private String name;
     private String description;
     private boolean complete;
-    private Date taskDate;
-    private Date taskTime;
+    private DateTime dateTime;
 
     public Subtask(String name){
         this.name = name;
@@ -28,40 +27,44 @@ public class Subtask implements Serializable{
     public Subtask(String name,boolean completed){
         this.name = name;
         this.complete = completed;
+        this.dateTime=new DateTime();
     }
     public Subtask(String name,String description){
         this.name = name;
         this.description = description;
+        this.dateTime=new DateTime();
     }
 
     public Subtask(int id,String name,String description,boolean completed){
         this(name,description);
         this.id = id;
         this.complete = completed;
-
     }
 
     public Subtask(int id,String name,String description,boolean completed,Date taskDate,Date taskTime){
         this(id,name,description,completed);
         this.description = description;
-        this.taskDate = taskDate;
-        this.taskTime = taskTime;
+        this.dateTime=new DateTime(taskDate,taskTime);
     }
 
     public Date getTaskDate() {
-        return taskDate;
+        return dateTime.getDate();
     }
 
     public void setTaskDate(Date taskDate) {
-        this.taskDate = taskDate;
+        this.dateTime.setDate(taskDate);
     }
 
     public Date getTaskTime() {
-        return taskTime;
+        return dateTime.getTime();
     }
 
     public void setTaskTime(Date taskTime) {
-        this.taskTime = taskTime;
+        this.dateTime.setTime(taskTime);
+    }
+
+    public DateTime getDateTime() {
+        return dateTime;
     }
 
     public String getName() {

@@ -2,6 +2,7 @@ package com.apps.esampaio.tarefas.persistence.DAO;
 
 import com.apps.esampaio.tarefas.entities.Subtask;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,5 +21,11 @@ public interface SubtaskDAO {
     public void deleteSubtask(Subtask task);
 
     public List<Subtask> getSubTasks(int task_id);
+
+    public List<Subtask> getSubTasksByDate(int task_id, Date date);
+
+    public List<Subtask> getSubTasksByDate(int task_id, Date date, boolean complete);
+
+    public List<Subtask> getSubTasksByTime(int task_id, Date date, boolean complete);
 
 }

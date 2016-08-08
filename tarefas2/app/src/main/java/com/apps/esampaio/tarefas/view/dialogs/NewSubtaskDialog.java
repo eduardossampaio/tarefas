@@ -227,14 +227,12 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
         displayTime();
     }
     private void enableTime(){
-//        this.timeText.setEnabled(true);
         this.timeText.setVisibility(View.VISIBLE);
         this.clearTime.setVisibility(View.VISIBLE);
         this.timeIcon.setVisibility(View.VISIBLE);
 
     }
     private void disableTime(){
-//        this.timeText.setEnabled(false);
         this.timeText.setVisibility(View.GONE);
         this.clearTime.setVisibility(View.GONE);
         this.timeIcon.setVisibility(View.GONE);

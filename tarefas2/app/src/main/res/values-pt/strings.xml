@@ -35,7 +35,7 @@
     <string name="subtasks_no_date">Sem data definida</string>
     <string name="subtasks_enter_name">Informe o Nome</string>
     <string name="subtasks_enter_description">Informe a Descrição</string>
-    <string name="subtasks_schedule_date">Dia: </string>
+    <string name="subtasks_schedule_date">As</string>
 
     <!-- New Subtask Dialog-->
     <string name="dialog_new_subtask_title">Nova Subtarefa</string>

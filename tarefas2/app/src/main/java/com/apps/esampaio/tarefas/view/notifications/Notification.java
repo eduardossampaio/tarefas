@@ -29,6 +29,7 @@ public class Notification {
         notificationBuilder = new NotificationCompat.Builder(context);
         mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationBuilder.setSmallIcon(R.mipmap.launcher_icon);
+        notificationBuilder.setVibrate(new long[]{1000,400,1000});
     }
 
     public void show(){

@@ -35,7 +35,7 @@
     <string name="subtasks_no_date">No defined date</string>
     <string name="subtasks_enter_name">Enter name</string>
     <string name="subtasks_enter_description">Enter description</string>
-    <string name="subtasks_schedule_date">At: </string>
+    <string name="subtasks_schedule_date">At</string>
 
     <!-- New Subtask Dialog-->
     <string name="dialog_new_subtask_title">New Subtask</string>

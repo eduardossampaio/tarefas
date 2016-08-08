@@ -32,6 +32,25 @@ public abstract class DAOImpl {
         return exists;
     }
 
+    protected String dateSql(String dateVal){
+        return "date("+dateVal+"/1000, 'unixepoch','localtime')";
+    }
+    protected String dateSql(long dateVal){
+        return dateSql(""+dateVal);
+    }
+
+    protected String dateTimeSql(String dateVal){
+        return "datetime("+dateVal+"/1000, 'unixepoch','localtime')";
+    }
+
+    protected String timeSql(String dateVal){
+        return "time("+dateVal+"/1000, 'unixepoch','localtime')";
+    }
+    protected String timeSql(long dateVal){
+        return timeSql(""+dateVal);
+    }
+
+
     public void updateById(SQLiteDatabase database,Entity entity){
         String [] args = new String[]{""+entity.getId()};
         String where = entity.getIdColumnName()+" = ?";

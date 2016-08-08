@@ -9,6 +9,7 @@ import com.apps.esampaio.tarefas.persistence.DAO.Impl.TaskDAOImpl;
 import com.apps.esampaio.tarefas.persistence.DAO.SubtaskDAO;
 import com.apps.esampaio.tarefas.persistence.DAO.TaskDAO;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +32,29 @@ public class Tasks {
         List<Task> tasks = taskDAO.getTasks();
         for (Task task: tasks) {
             task.setSubtasks(subtaskDAO.getSubTasks(task.getId()));
+        }
+        return tasks;
+    }
+
+    public List<Task> getTasksByDate(Date date){
+        List<Task> tasks = taskDAO.getTasksByDate(date);
+        for (Task task: tasks) {
+            task.setSubtasks(subtaskDAO.getSubTasksByDate(task.getId(),date));
+        }
+        return tasks;
+    }
+    public List<Task> getTasksByDate(Date date,boolean completed){
+        List<Task> tasks = taskDAO.getTasksByDate(date);
+        for (Task task: tasks) {
+            task.setSubtasks(subtaskDAO.getSubTasksByDate(task.getId(),date,completed));
+        }
+        return tasks;
+    }
+
+    public List<Task> getTasksByTime(Date time,boolean completed){
+        List<Task> tasks = taskDAO.getTasksByTime(time);
+        for (Task task: tasks) {
+            task.setSubtasks(subtaskDAO.getSubTasksByTime(task.getId(),time,completed));
         }
         return tasks;
     }
