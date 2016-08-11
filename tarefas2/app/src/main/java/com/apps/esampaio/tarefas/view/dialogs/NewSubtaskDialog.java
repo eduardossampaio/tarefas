@@ -14,13 +14,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.apps.esampaio.tarefas.R;
-import com.apps.esampaio.tarefas.entities.DateTime;
-import com.apps.esampaio.tarefas.entities.Subtask;
+import com.apps.esampaio.tarefas.core.entities.DateTime;
+import com.apps.esampaio.tarefas.core.entities.Subtask;
 import com.apps.esampaio.tarefas.view.listeners.GestureDetectorTouchListener;
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
 import com.codetroopers.betterpickers.radialtimepicker.RadialTimePickerDialogFragment;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 

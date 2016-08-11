@@ -1,4 +1,4 @@
-package com.apps.esampaio.tarefas;
+package com.apps.esampaio.tarefas.core;
 
 /**
  * Created by eduardo on 30/06/2016.

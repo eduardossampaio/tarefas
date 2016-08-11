@@ -1,6 +1,6 @@
-package com.apps.esampaio.tarefas.persistence.DAO;
+package com.apps.esampaio.tarefas.core.entities.persistence.DAO;
 
-import com.apps.esampaio.tarefas.entities.Task;
+import com.apps.esampaio.tarefas.core.entities.Task;
 
 import java.util.Date;
 import java.util.List;

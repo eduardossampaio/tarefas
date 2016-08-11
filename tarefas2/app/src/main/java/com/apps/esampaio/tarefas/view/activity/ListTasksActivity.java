@@ -1,42 +1,24 @@
 package com.apps.esampaio.tarefas.view.activity;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.view.Menu;
-import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.apps.esampaio.tarefas.BuildConfig;
-import com.apps.esampaio.tarefas.Constants;
+import com.apps.esampaio.tarefas.core.Constants;
 import com.apps.esampaio.tarefas.R;
-import com.apps.esampaio.tarefas.Tasks;
 import com.apps.esampaio.tarefas.actions.NotificationScheduler;
-import com.apps.esampaio.tarefas.entities.Task;
-import com.apps.esampaio.tarefas.view.dialogs.ConfirmationDialog;
 import com.apps.esampaio.tarefas.view.dialogs.MessageDialog;
-import com.apps.esampaio.tarefas.view.dialogs.NewTaskDialog;
-import com.apps.esampaio.tarefas.view.dialogs.OptionsDialog;
-import com.apps.esampaio.tarefas.view.activity.adapter.ListTaskAdapter;
 import com.apps.esampaio.tarefas.view.fragment.CompletedTasksFragment;
 import com.apps.esampaio.tarefas.view.fragment.ListTasksFragment;
 import com.apps.esampaio.tarefas.view.fragment.TodayTasksFragment;
-
-import java.util.List;
 
 import br.liveo.interfaces.OnItemClickListener;
 import br.liveo.model.HelpLiveo;

@@ -1,10 +1,10 @@
-package com.apps.esampaio.tarefas.persistence.DAO.Impl;
+package com.apps.esampaio.tarefas.core.entities.persistence.DAO.Impl;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.apps.esampaio.tarefas.persistence.DAO.Impl.entities.Entity;
+import com.apps.esampaio.tarefas.core.entities.persistence.DAO.Impl.entities.Entity;
 
 
 public abstract class DAOImpl {

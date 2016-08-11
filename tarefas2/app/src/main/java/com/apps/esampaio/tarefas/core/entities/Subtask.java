@@ -1,4 +1,4 @@
-package com.apps.esampaio.tarefas.entities;
+package com.apps.esampaio.tarefas.core.entities;
 
 import java.io.Serializable;
 import java.util.Date;

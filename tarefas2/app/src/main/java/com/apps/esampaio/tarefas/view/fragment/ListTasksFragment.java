@@ -16,8 +16,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.apps.esampaio.tarefas.R;
-import com.apps.esampaio.tarefas.Tasks;
-import com.apps.esampaio.tarefas.entities.Task;
+import com.apps.esampaio.tarefas.core.Tasks;
+import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.view.activity.ListSubtasksActivity;
 import com.apps.esampaio.tarefas.view.activity.adapter.ListTaskAdapter;
 import com.apps.esampaio.tarefas.view.dialogs.ConfirmationDialog;

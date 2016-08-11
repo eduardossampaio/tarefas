@@ -9,7 +9,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.apps.esampaio.tarefas.R;
-import com.apps.esampaio.tarefas.entities.Task;
+import com.apps.esampaio.tarefas.core.Settings;
+import com.apps.esampaio.tarefas.core.entities.Task;
+import com.apps.esampaio.tarefas.core.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +120,9 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
     @Override
     public void onBindViewHolder(ListTaskAdapter.ViewHolder viewHolder, int i) {
         Task task = items.get(i);
-        viewHolder.taskName.setText(task.getName());
+        Settings settings = Settings.getInstance(this.context);
+        boolean capitalize = settings.capitalizeFirst();
+        viewHolder.taskName.setText(StringUtils.capitalize(task.getName(),capitalize));
 
         String completedTaskMessages ="";
         if(task.getSubtasksNumber()==0){

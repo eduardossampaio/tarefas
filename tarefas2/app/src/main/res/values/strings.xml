@@ -14,7 +14,7 @@
 
     <!-- Tasks fragments -->
     <string name="today_task_fragment_empty_message">No tasks for today</string>
-    <string name="completed_task_fragment_empty_message">No tasks for today</string>
+    <string name="completed_task_fragment_empty_message">No completed tasks</string>
 
 
     <!-- Dialogs -->
@@ -81,11 +81,13 @@
     <string name="settings_title_order">Order</string>
     <string name="settings_summary_order">The order that tasks are displayed</string>
     <string-array name="settings_order_labels">
+        <item>No order</item>
         <item>Order by name</item>
         <item>Order by date</item>
         <item>Completed first</item>
     </string-array>
     <string-array name="settings_order_values">
+        <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -95,6 +97,7 @@
 
     <!-- Notifications -->
     <string name="settings_notification_notify_all">Notify all tasks of day</string>
+    <string name="settings_notification_notify_all_summary">Tasks are notifyed at midnight</string>
     <string name="settings_notification_notify_before">Notify tasks before</string>
     <string-array name="settings_notification_notify_before_label">
         <item>5 hours</item>
@@ -105,14 +108,15 @@
         <item>15 minutes</item>
     </string-array>
     <string-array name="settings_notification_notify_before_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
+        <item>300</item>
+        <item>180</item>
+        <item>120</item>
+        <item>60</item>
+        <item>30</item>
+        <item>15</item>
     </string-array>
     <string name="settings_notification_vibrate">Vibrate</string>
+
 
 
 </resources>

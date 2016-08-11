@@ -1,17 +1,15 @@
-package com.apps.esampaio.tarefas.persistence.DAO.Impl;
+package com.apps.esampaio.tarefas.core.entities.persistence.DAO.Impl;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.apps.esampaio.tarefas.entities.Subtask;
-import com.apps.esampaio.tarefas.entities.Task;
-import com.apps.esampaio.tarefas.persistence.DAO.Impl.entities.Entity;
-import com.apps.esampaio.tarefas.persistence.DAO.Impl.entities.TaskEntity;
-import com.apps.esampaio.tarefas.persistence.DAO.TaskDAO;
-import com.apps.esampaio.tarefas.persistence.DatabaseHelper;
+import com.apps.esampaio.tarefas.core.entities.Task;
+import com.apps.esampaio.tarefas.core.entities.persistence.DAO.Impl.entities.Entity;
+import com.apps.esampaio.tarefas.core.entities.persistence.DAO.Impl.entities.TaskEntity;
+import com.apps.esampaio.tarefas.core.entities.persistence.DAO.TaskDAO;
+import com.apps.esampaio.tarefas.core.entities.persistence.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.Date;

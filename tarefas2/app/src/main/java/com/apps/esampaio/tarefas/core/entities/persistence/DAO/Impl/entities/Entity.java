@@ -1,4 +1,4 @@
-package com.apps.esampaio.tarefas.persistence.DAO.Impl.entities;
+package com.apps.esampaio.tarefas.core.entities.persistence.DAO.Impl.entities;
 
 import android.content.ContentValues;
 

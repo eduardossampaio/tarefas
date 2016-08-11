@@ -10,12 +10,14 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.apps.esampaio.tarefas.R;
-import com.apps.esampaio.tarefas.entities.Subtask;
-import com.apps.esampaio.tarefas.entities.Task;
+import com.apps.esampaio.tarefas.core.Settings;
+import com.apps.esampaio.tarefas.core.entities.Subtask;
+import com.apps.esampaio.tarefas.core.entities.Task;
+import com.apps.esampaio.tarefas.core.utils.StringUtils;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtaskAdapter.ViewHolder> {
 
@@ -129,8 +131,10 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
 
     @Override
     public void onBindViewHolder(ListSubtaskAdapter.ViewHolder viewHolder, int i) {
+        Settings settings = Settings.getInstance(this.context);
+        boolean capitalize = settings.capitalizeFirst();
         Subtask subtask = item.getSubtasks().get(i);
-        viewHolder.taskName.setText(subtask.getName());
+        viewHolder.taskName.setText(StringUtils.capitalize(subtask.getName(),capitalize));
         if ( subtask.getDescription() != null && ! subtask.getDescription().isEmpty())
             viewHolder.taskDescription.setText(subtask.getDescription());
         else
@@ -138,12 +142,12 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
 
 
         if(subtask.getDateTime().dateSetted()){
-            viewHolder.taskDate.setText(subtask.getDateTime().formatDate());
+            String formatedDate = subtask.getDateTime().formatDate();
+            viewHolder.taskDate.setText(formatedDate);
             if ( subtask.getDateTime().timeSetted()){
                 String at = context.getString(R.string.subtasks_schedule_date);
                 String formatedTime = subtask.getDateTime().formatTime();
-                //TODO usar uma função utilitária
-                viewHolder.taskDate.append(" "+at+" "+formatedTime);
+                viewHolder.taskDate.setText(StringUtils.append(formatedDate,at,formatedTime));
             }
         }else{
             viewHolder.taskDate.setText(context.getString(R.string.subtasks_no_date));

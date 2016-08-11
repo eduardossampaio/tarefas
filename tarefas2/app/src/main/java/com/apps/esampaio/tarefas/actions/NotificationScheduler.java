@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.apps.esampaio.tarefas.Constants;
+import com.apps.esampaio.tarefas.core.Constants;
 
 /**
  * Created by eduardo on 05/08/16.
@@ -36,7 +36,7 @@ public class NotificationScheduler {
     private void scheduleNotifications(){
         Log.d("TAREFAS","scheduling notifications to every minute");
         long startTime = 0;
-        long interval = 60 * 1000;
+        long interval = 60 * 1000; //1 minute
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,0,notificationIntent,0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);

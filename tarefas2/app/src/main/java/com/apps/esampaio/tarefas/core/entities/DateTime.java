@@ -1,4 +1,4 @@
-package com.apps.esampaio.tarefas.entities;
+package com.apps.esampaio.tarefas.core.entities;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -110,7 +110,7 @@ public class DateTime implements Serializable{
     public String formatDate() {
         if (date == null)
             return null;
-        return DateFormat.getDateInstance(DateFormat.SHORT).format(date);
+        return DateFormat.getDateInstance(DateFormat.MEDIUM).format(date);
     }
 
     public String formatTime() {

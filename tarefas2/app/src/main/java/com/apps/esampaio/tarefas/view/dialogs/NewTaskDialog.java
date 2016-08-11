@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.apps.esampaio.tarefas.R;
-import com.apps.esampaio.tarefas.entities.Task;
+import com.apps.esampaio.tarefas.core.entities.Task;
 
 /**
  * Created by eduardo on 28/06/2016.

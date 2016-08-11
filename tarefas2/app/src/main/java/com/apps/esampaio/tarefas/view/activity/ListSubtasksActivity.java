@@ -15,9 +15,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.apps.esampaio.tarefas.R;
-import com.apps.esampaio.tarefas.Tasks;
-import com.apps.esampaio.tarefas.entities.Subtask;
-import com.apps.esampaio.tarefas.entities.Task;
+import com.apps.esampaio.tarefas.core.Tasks;
+import com.apps.esampaio.tarefas.core.entities.Subtask;
+import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.view.activity.adapter.ListSubtaskAdapter;
 import com.apps.esampaio.tarefas.view.dialogs.ConfirmationDialog;
 import com.apps.esampaio.tarefas.view.dialogs.NewSubtaskDialog;
@@ -39,7 +39,6 @@ public class ListSubtasksActivity extends AppCompatActivity {
     private View layout;
 
 
-    //TODO verificar essa lib de material design https://github.com/rey5137/material
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

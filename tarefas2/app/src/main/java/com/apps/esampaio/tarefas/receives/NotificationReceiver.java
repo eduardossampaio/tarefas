@@ -4,15 +4,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.apps.esampaio.tarefas.R;
-import com.apps.esampaio.tarefas.Tasks;
-import com.apps.esampaio.tarefas.entities.DateTime;
-import com.apps.esampaio.tarefas.entities.Subtask;
-import com.apps.esampaio.tarefas.entities.Task;
+import com.apps.esampaio.tarefas.core.Settings;
+import com.apps.esampaio.tarefas.core.Tasks;
+import com.apps.esampaio.tarefas.core.entities.DateTime;
+import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.view.notifications.Notification;
 import com.apps.esampaio.tarefas.view.notifications.TasksTodayNotification;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -22,12 +20,13 @@ import java.util.List;
 
 public class NotificationReceiver extends BroadcastReceiver {
     private Tasks tasks;
+    private Settings settings;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if (tasks == null)
             tasks = new Tasks(context);
-
+        settings = Settings.getInstance(context);
         List<Task> myTasks = getTasksToNotificate();
         for (Task task : myTasks) {
             Notification notification = new TasksTodayNotification(context, task, task.getSubtasks());
@@ -37,12 +36,16 @@ public class NotificationReceiver extends BroadcastReceiver {
     }
 
     private List<Task> getTasksToNotificate(){
+
         DateTime nowDate = DateTime.getCurrentDateTime();
-        if(nowDate.getHour()==0  && nowDate.getMinute() ==0){
+        if(nowDate.getHour()==0  && nowDate.getMinute() ==0 && settings.notifyAllTasks()){
             return tasks.getTasksByDate(nowDate.getDate(),false);
         }
-        nowDate.setTime(nowDate.getHour()+2,nowDate.getMinute());
-        return tasks.getTasksByTime(nowDate.getTime(),false);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(nowDate.getTime());
+        int minutes = settings.notifyBefore();
+        calendar.add(Calendar.MINUTE,minutes);
+        return tasks.getTasksByTime(calendar.getTime(),false);
     }
 
 }
