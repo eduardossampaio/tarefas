@@ -25,7 +25,7 @@ import br.liveo.model.HelpLiveo;
 import br.liveo.model.Navigation;
 import br.liveo.navigationliveo.NavigationLiveo;
 
-public class ListTasksActivity   extends NavigationLiveo implements OnItemClickListener{
+public class ListTasksActivity extends NavigationLiveo implements OnItemClickListener{
 
 
     private HelpLiveo mHelpLiveo;
@@ -38,7 +38,6 @@ public class ListTasksActivity   extends NavigationLiveo implements OnItemClickL
 
     @Override
     public void onInt(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_main);
         new NotificationScheduler(this).schedule();
 
         mHelpLiveo = new HelpLiveo();
@@ -50,15 +49,13 @@ public class ListTasksActivity   extends NavigationLiveo implements OnItemClickL
         mHelpLiveo.add(getString(R.string.navigation_drawer_settings));
         mHelpLiveo.add(getString(R.string.navigation_drawer_rate));
 
-        with(this, Navigation.THEME_LIGHT) // default theme is dark
+        with(this, Navigation.THEME_DARK) // default theme is dark
                 .addAllHelpItem(mHelpLiveo.getHelp())
                 .removeHeader()
                 .startingPosition(0)
                 .build();
 
         new NotificationScheduler(this).schedule();
-        getToolbar().setTitleTextColor(Color.WHITE);
-
 
         allTasksFragment = new ListTasksFragment();
         todaysTasksFragment = new TodayTasksFragment();
