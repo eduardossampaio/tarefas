@@ -6,9 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.apps.esampaio.tarefas.persistence.DAO.Impl.entities.Entity;
 
-/**
- * Created by eduardo on 02/07/2016.
- */
 
 public abstract class DAOImpl {
 
@@ -16,12 +13,12 @@ public abstract class DAOImpl {
         ContentValues contentValues = entity.getContentValues();
         String idTable = entity.getTableName();
         int id = entity.getId();
-        int primaryKey =(int) database.insert(entity.getTableName(),idTable,contentValues);
-        return primaryKey;
+        return  (int) database.insert(entity.getTableName(),idTable,contentValues);
+
     }
 
     public boolean exists(SQLiteDatabase database,Entity entity){
-        boolean exists = false;
+        boolean exists ;
         String where = entity.getIdColumnName()+" = ?";
         String [] args = new String[]{""+entity.getId()};
 
@@ -50,6 +47,9 @@ public abstract class DAOImpl {
         return timeSql(""+dateVal);
     }
 
+    protected String boolSql(boolean v){
+        return v ? "1" : "0";
+    }
 
     public void updateById(SQLiteDatabase database,Entity entity){
         String [] args = new String[]{""+entity.getId()};

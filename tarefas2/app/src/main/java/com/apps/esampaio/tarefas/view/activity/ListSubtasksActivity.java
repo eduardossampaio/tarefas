@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -45,17 +46,17 @@ public class ListSubtasksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_subtasks);
 
         layout = findViewById(R.id.activity_list_subtasks);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         recyclerView = (RecyclerView) findViewById(R.id.list_subtasks_items_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         emptyListMessage = (TextView) findViewById(R.id.list_subtasks_empty_task_list);
         newTaskButton = (FloatingActionButton)findViewById(R.id.list_subtask_new_task_button);
         tasks = new Tasks(this);
-
-        int itemId = getIntent().getExtras().getInt("item");
-        item = tasks.getTask(itemId);
-
-        setTitle(item.getName());
+        item = (Task) getIntent().getExtras().get("item");
+        if(item != null)
+            setTitle(item.getName());
 
         adapter = new ListSubtaskAdapter(item,this) {
             @Override

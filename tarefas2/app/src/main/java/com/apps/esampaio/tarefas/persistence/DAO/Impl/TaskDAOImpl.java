@@ -41,6 +41,7 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
             String name = cursor.getString(1);
             tasks.add(new Task(id,name));
         }
+        cursor.close();
         return tasks;
 
     }
@@ -56,6 +57,7 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
             String name = cursor.getString(1);
             task = new Task(id,name);
         }
+        cursor.close();
         return task;
     }
 
@@ -74,6 +76,11 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
         sql = sql.replaceAll("\\?",args[0]);
         return rawQuery(sql);
     }
+
+    public List<Task> getTasksByCompleted(boolean completed){
+        String sql =SELECT_TASK_SUBTASK+" where t.id = s.task_id and s.completed = "+boolSql(completed)+GROUP_BY;
+        return rawQuery(sql);
+    }
     private List<Task> rawQuery(String sql){
         List<Task> tasks = new ArrayList<>();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
@@ -84,6 +91,7 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
             Task task = new Task(id,name);
             tasks.add(task);
         }
+        cursor.close();
         return tasks;
     }
 

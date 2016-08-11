@@ -35,6 +35,21 @@ public class Tasks {
         }
         return tasks;
     }
+    //TODO arrumar isso em uma sql
+    public List<Task> getCompletedTasks(){
+        List<Task> tasks = getTasks();
+        List<Task> uncompletedTasks = getTasksByCompleted(false);
+        tasks.removeAll(uncompletedTasks);
+        return tasks;
+    }
+
+    private List<Task> getTasksByCompleted(boolean completed) {
+        List<Task> tasks = taskDAO.getTasksByCompleted(completed);
+        for (Task task: tasks) {
+            task.setSubtasks(subtaskDAO.getSubTasks(task.getId()));
+        }
+        return tasks;
+    }
 
     public List<Task> getTasksByDate(Date date){
         List<Task> tasks = taskDAO.getTasksByDate(date);

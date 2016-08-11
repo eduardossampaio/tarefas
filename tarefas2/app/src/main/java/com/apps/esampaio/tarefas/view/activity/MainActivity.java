@@ -1,57 +1,59 @@
 package com.apps.esampaio.tarefas.view.activity;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 
 import com.apps.esampaio.tarefas.R;
-import com.apps.esampaio.tarefas.Tasks;
 import com.apps.esampaio.tarefas.actions.NotificationScheduler;
-import com.apps.esampaio.tarefas.entities.DateTime;
-import com.apps.esampaio.tarefas.entities.Task;
-import com.apps.esampaio.tarefas.view.notifications.TasksTodayNotification;
+import com.apps.esampaio.tarefas.view.fragment.ListTasksFragment;
 
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import br.liveo.interfaces.OnItemClickListener;
+import br.liveo.model.HelpLiveo;
+import br.liveo.model.Navigation;
+import br.liveo.navigationliveo.NavigationLiveo;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends NavigationLiveo implements OnItemClickListener{
+
+
+    private HelpLiveo mHelpLiveo;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onInt(Bundle savedInstanceState) {
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        Tasks tasks = new Tasks(this);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date(System.currentTimeMillis()));
-        calendar.set(Calendar.YEAR,2016);
-        calendar.set(Calendar.MONTH,Calendar.AUGUST);
-        calendar.set(Calendar.DAY_OF_MONTH,7);
-        calendar.set(Calendar.HOUR_OF_DAY,9);
-        calendar.set(Calendar.MINUTE,10);
-        calendar.set(Calendar.SECOND,0);
-        Date date = calendar.getTime();
-        String dateS= DateFormat.getDateInstance().format(date);
-        List<Task> notifyTasks = tasks.getTasksByTime(date,false);
-        for(Task task:notifyTasks){
-            TasksTodayNotification tasksTodayNotification = new TasksTodayNotification(this, task, task.getSubtasks());
-            tasksTodayNotification.show();
-        }
-
         new NotificationScheduler(this).schedule();
 
-        Intent intent = new Intent(MainActivity.this,ListTasksActivity.class);
-        startActivity(intent);
+        mHelpLiveo = new HelpLiveo();
+
+        mHelpLiveo.add("inbox");
+        mHelpLiveo.addSubHeader("categories"); //Item subHeader
+        mHelpLiveo.add("starred");
+        mHelpLiveo.add("sent_mail");
+        mHelpLiveo.add("R.string.drafts");
+        mHelpLiveo.addSeparator(); // Item separator
+        mHelpLiveo.add("trash");
+        mHelpLiveo.add("spam");
+
+        with(this, Navigation.THEME_LIGHT) // default theme is dark
+                .addAllHelpItem(mHelpLiveo.getHelp())
+                .removeHeader()
+                .build();
+
+        new NotificationScheduler(this).schedule();
     }
 
 
 
 
+    @Override
+    public void onItemClick(int position) {
+        FragmentManager mFragmentManager = getSupportFragmentManager();
+        Fragment mFragment = new ListTasksFragment();
+        mFragmentManager.beginTransaction().replace(R.id.container, mFragment).commit();
+    }
 }

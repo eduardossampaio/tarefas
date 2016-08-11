@@ -4,17 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by eduardo on 28/06/2016.
- */
 
 public class Task implements Serializable{
     private int id;
     private String name;
     private List<Subtask> subtasks;
-
-
-
 
     public Task(int id,String name){
         this.id = id;
@@ -71,7 +65,7 @@ public class Task implements Serializable{
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof Task != false && ((Task) o).id == this.id;
+        return o instanceof Task && ((Task) o).id == this.id;
     }
 
     public List<Subtask> getSubtasks() {

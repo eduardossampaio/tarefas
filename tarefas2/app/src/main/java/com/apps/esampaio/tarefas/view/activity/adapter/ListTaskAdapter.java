@@ -41,6 +41,10 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
         this.context = context;
         this.items = new ArrayList<>();
     }
+    public ListTaskAdapter(Context context,List<Task> items){
+        this.context = context;
+        this.items = items;
+    }
 
     public void refreshItens(List<Task> items){
         //for(int i=0;i<)

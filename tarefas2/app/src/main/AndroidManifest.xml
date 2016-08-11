@@ -14,15 +14,19 @@
         <activity
             android:name=".view.activity.MainActivity"
             android:label="@string/app_name"
-            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
+        <activity
+            android:name=".view.activity.ListTasksActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".view.activity.ListTasksActivity" />
         <activity android:name=".view.activity.ListSubtasksActivity" >
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".view.activity.ListTasksActivity"/>
         </activity>

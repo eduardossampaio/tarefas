@@ -1,11 +1,12 @@
 package com.apps.esampaio.tarefas.entities;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 
-public class DateTime {
+public class DateTime implements Serializable{
     private Date date;
     private Date time;
 
