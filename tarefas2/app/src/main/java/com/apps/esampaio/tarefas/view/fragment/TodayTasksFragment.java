@@ -18,7 +18,7 @@ public class TodayTasksFragment extends ListTasksFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  super.onCreateView(inflater, container, savedInstanceState);
-        setEmptyMessage("=Sem tarefas para hoje=");
+        setEmptyMessage(getActivity().getString(R.string.today_task_fragment_empty_message));
         return view;
     }
 

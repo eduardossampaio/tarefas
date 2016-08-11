@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -55,20 +56,17 @@ public class ListTasksActivity   extends NavigationLiveo implements OnItemClickL
 
     @Override
     public void onInt(Bundle savedInstanceState) {
-
         setContentView(R.layout.activity_main);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
         new NotificationScheduler(this).schedule();
 
         mHelpLiveo = new HelpLiveo();
 
-        mHelpLiveo.add("=Todas as tarefas=");
-        mHelpLiveo.add("=tarefas de hoje=");
-        mHelpLiveo.add("=tarefas concluídas=");
+        mHelpLiveo.add(getString(R.string.navigation_drawer_all_tasks));
+        mHelpLiveo.add(getString(R.string.navigation_drawer_today_tasks));
+        mHelpLiveo.add(getString(R.string.navigation_drawer_completed_tasks));
         mHelpLiveo.addSeparator(); // Item separator
-        mHelpLiveo.add("=configurações=");
-        mHelpLiveo.add("=avalie=");
+        mHelpLiveo.add(getString(R.string.navigation_drawer_settings));
+        mHelpLiveo.add(getString(R.string.navigation_drawer_rate));
 
         with(this, Navigation.THEME_LIGHT) // default theme is dark
                 .addAllHelpItem(mHelpLiveo.getHelp())
@@ -102,16 +100,33 @@ public class ListTasksActivity   extends NavigationLiveo implements OnItemClickL
 
     @Override
     public void onItemClick(int position) {
+        //All tasks
         if(position==0){
             setContentFragment(allTasksFragment);
+        //today tasks
         }else if(position ==1){
             setContentFragment(todaysTasksFragment);
+        //completed tasks
         }else if(position ==2){
             setContentFragment(completedTasksFragment);
-        }else if(position ==3){
-
+        //configuration
         }else if(position ==4){
+            Intent intent = new Intent(this,SettingsActivity.class);
+            startActivity(intent);
+        //rate
+        }else if(position ==5){
+            openAppInStore();
+        }
+    }
 
+    private void openAppInStore(){
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("market://details?id=com.esampaio.apps.tarefas"));
+            startActivity(intent);
+        }catch (Exception e){
+            MessageDialog messageDialog = new MessageDialog(this,"=Error=","=Não foi possível abrir o aplicativo na loja=");
+            messageDialog.show();
         }
     }
 

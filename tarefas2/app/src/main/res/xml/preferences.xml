@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/settings_category_display_tasks">
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/settings_order_labels"
+            android:entryValues="@array/settings_order_labels"
+            android:key="order_type"
+            android:summary="@string/settings_summary_order"
+            android:title="@string/settings_title_order" />
+
+        <CheckBoxPreference android:title="@string/settings_capitalize_first"
+            android:defaultValue="false"
+            android:key="capitalize_first" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_category_notifications">
+        <CheckBoxPreference android:title="@string/settings_notification_notify_all"
+            android:defaultValue="true"
+            android:key="notify_all" />
+
+        <ListPreference
+            android:defaultValue="2"
+            android:entries="@array/settings_notification_notify_before_label"
+            android:entryValues="@array/settings_notification_notify_before_values"
+            android:key="notify_before"
+            android:title="@string/settings_notification_notify_before" />
+
+        <CheckBoxPreference android:title="@string/settings_notification_vibrate"
+            android:defaultValue="true"
+            android:key="vibrate" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
