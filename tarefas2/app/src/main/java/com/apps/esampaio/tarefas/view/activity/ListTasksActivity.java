@@ -61,6 +61,7 @@ public class ListTasksActivity extends NavigationLiveo implements OnItemClickLis
         todaysTasksFragment = new TodayTasksFragment();
         completedTasksFragment = new CompletedTasksFragment();
 
+
         showVersionNotes();
         changeDrawerLayoutWitdh();
     }
@@ -82,12 +83,15 @@ public class ListTasksActivity extends NavigationLiveo implements OnItemClickLis
         //All tasks
         if(position==0){
             setContentFragment(allTasksFragment);
+            getSupportActionBar().setSubtitle("Todas as tarefas");
         //today tasks
         }else if(position ==1){
             setContentFragment(todaysTasksFragment);
+            getSupportActionBar().setSubtitle("Tarefas de hoje");
         //completed tasks
         }else if(position ==2){
             setContentFragment(completedTasksFragment);
+            getSupportActionBar().setSubtitle("Tarefas completas");
         //configuration
         }else if(position ==4){
             Intent intent = new Intent(this,SettingsActivity.class);

@@ -22,10 +22,4 @@ public interface SubtaskDAO {
 
     public List<Subtask> getSubTasks(int task_id);
 
-    public List<Subtask> getSubTasksByDate(int task_id, Date date);
-
-    public List<Subtask> getSubTasksByDate(int task_id, Date date, boolean complete);
-
-    public List<Subtask> getSubTasksByTime(int task_id, Date date, boolean complete);
-
 }

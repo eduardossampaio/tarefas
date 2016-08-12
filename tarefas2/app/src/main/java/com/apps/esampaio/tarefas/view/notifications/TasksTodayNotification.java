@@ -56,7 +56,7 @@ public class TasksTodayNotification extends Notification {
 
     private PendingIntent createIntent(){
         Intent resultIntent = new Intent(context, ListSubtasksActivity.class);
-        resultIntent.putExtra("item",task.getId());
+        resultIntent.putExtra("item",task);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(ListTasksActivity.class);
         stackBuilder.addNextIntent(resultIntent);

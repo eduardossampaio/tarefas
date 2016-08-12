@@ -45,8 +45,8 @@ public class ListSubtasksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_subtasks);
 
         layout = findViewById(R.id.activity_list_subtasks);
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
         recyclerView = (RecyclerView) findViewById(R.id.list_subtasks_items_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -54,9 +54,6 @@ public class ListSubtasksActivity extends AppCompatActivity {
         newTaskButton = (FloatingActionButton)findViewById(R.id.list_subtask_new_task_button);
         tasks = new Tasks(this);
         item = (Task) getIntent().getExtras().get("item");
-        if(item != null)
-            setTitle(item.getName());
-
         adapter = new ListSubtaskAdapter(item,this) {
             @Override
             public void itemClicked(RecyclerView.ViewHolder viewHolder, Subtask item) {
@@ -90,6 +87,7 @@ public class ListSubtasksActivity extends AppCompatActivity {
         if(getSupportActionBar()!=null) {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setSubtitle(item.getName());
         }
 
     }

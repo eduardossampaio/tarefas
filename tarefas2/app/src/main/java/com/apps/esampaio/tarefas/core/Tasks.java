@@ -59,9 +59,6 @@ public class Tasks {
 
     public List<Task> getTasks(){
         List<Task> tasks = taskDAO.getTasks();
-        for (Task task: tasks) {
-            task.setSubtasks(subtaskDAO.getSubTasks(task.getId()));
-        }
         return order(tasks);
     }
     //TODO arrumar isso em uma sql
@@ -74,32 +71,19 @@ public class Tasks {
 
     private List<Task> getTasksByCompleted(boolean completed) {
         List<Task> tasks = taskDAO.getTasksByCompleted(completed);
-        for (Task task: tasks) {
-            task.setSubtasks(subtaskDAO.getSubTasks(task.getId()));
-        }
         return order(tasks);
     }
-
     public List<Task> getTasksByDate(Date date){
         List<Task> tasks = taskDAO.getTasksByDate(date);
-        for (Task task: tasks) {
-            task.setSubtasks(subtaskDAO.getSubTasksByDate(task.getId(),date));
-        }
         return order(tasks);
     }
     public List<Task> getTasksByDate(Date date,boolean completed){
-        List<Task> tasks = taskDAO.getTasksByDate(date);
-        for (Task task: tasks) {
-            task.setSubtasks(subtaskDAO.getSubTasksByDate(task.getId(),date,completed));
-        }
+        List<Task> tasks = taskDAO.getTasksByDate(date,completed);
         return order(tasks);
     }
 
     public List<Task> getTasksByTime(Date time,boolean completed){
         List<Task> tasks = taskDAO.getTasksByTime(time);
-        for (Task task: tasks) {
-            task.setSubtasks(subtaskDAO.getSubTasksByTime(task.getId(),time,completed));
-        }
         return order(tasks);
     }
 
@@ -109,8 +93,6 @@ public class Tasks {
             subtaskDAO.addSubtask(subtask);
         }
     }
-
-
 
     public void updateTask(Task item) {
         taskDAO.updateTask(item);
