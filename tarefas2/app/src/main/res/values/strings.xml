@@ -97,7 +97,7 @@
 
     <!-- Notifications -->
     <string name="settings_notification_notify_all">Notify all tasks of day</string>
-    <string name="settings_notification_notify_all_summary">Tasks are notifyed at midnight</string>
+    <string name="settings_notification_notify_all_summary">Tasks are notified at midnight</string>
     <string name="settings_notification_notify_before">Notify tasks before</string>
     <string-array name="settings_notification_notify_before_label">
         <item>5 hours</item>

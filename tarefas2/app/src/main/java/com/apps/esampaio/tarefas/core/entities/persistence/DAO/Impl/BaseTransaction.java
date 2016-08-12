@@ -1,15 +1,9 @@
 package com.apps.esampaio.tarefas.core.entities.persistence.DAO.Impl;
 
-import android.content.ContentValues;
-
 import com.apps.esampaio.tarefas.core.entities.persistence.DAO.Transaction;
 
 import java.util.Date;
-import java.util.Set;
 
-/**
- * Created by eduardo on 12/08/2016.
- */
 
 public abstract class BaseTransaction<T> implements Transaction<T> {
     protected StringBuilder sql = new StringBuilder();
@@ -33,8 +27,7 @@ public abstract class BaseTransaction<T> implements Transaction<T> {
     public Transaction<T> select(String table, String[] columns){
         if(sql.indexOf("SELECT")==-1)
             sql.append(" SELECT ");
-        for (int i=0;i<columns.length;i++){
-            String key = columns[i];
+        for (String key : columns){
             sql.append(table.charAt(0));
             sql.append(".");
             sql.append(key);
@@ -57,10 +50,8 @@ public abstract class BaseTransaction<T> implements Transaction<T> {
         sql.append(args.charAt(0));
         return this;
     }
-//    LEFT JOIN FUNCIONARIO AS F ON C.IDCARGO = F.IDCARGO
     public Transaction<T> leftJoin(String table1,String id1,String table2,String id2){
         sql.append(" LEFT OUTER JOIN ");
-//        sql.append(table2);
         sql.append(table2).append( " as ").append(table2.charAt(0));
         sql.append(" ON ");
         sql.append(table1.charAt(0)).append(".").append(id1);
@@ -146,7 +137,8 @@ public abstract class BaseTransaction<T> implements Transaction<T> {
 
     @Override
     public Transaction<T> group(String args) {
-        sql.append(" GROUP BY " + args);
+        sql.append(" GROUP BY ");
+        sql.append(args);
         return this;
     }
 

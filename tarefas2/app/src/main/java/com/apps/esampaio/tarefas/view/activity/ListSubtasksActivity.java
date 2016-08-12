@@ -9,7 +9,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -30,7 +29,7 @@ public class ListSubtasksActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private TextView emptyListMessage;
-    private FloatingActionButton newTaskButton;
+
 
     private ListSubtaskAdapter adapter;
     private Tasks tasks;
@@ -51,7 +50,7 @@ public class ListSubtasksActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.list_subtasks_items_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         emptyListMessage = (TextView) findViewById(R.id.list_subtasks_empty_task_list);
-        newTaskButton = (FloatingActionButton)findViewById(R.id.list_subtask_new_task_button);
+        FloatingActionButton newTaskButton = (FloatingActionButton)findViewById(R.id.list_subtask_new_task_button);
         tasks = new Tasks(this);
         item = (Task) getIntent().getExtras().get("item");
         adapter = new ListSubtaskAdapter(item,this) {

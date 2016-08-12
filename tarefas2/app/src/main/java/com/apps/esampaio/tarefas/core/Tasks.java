@@ -3,8 +3,6 @@ package com.apps.esampaio.tarefas.core;
 import android.content.Context;
 
 import com.apps.esampaio.tarefas.core.entities.Comparators.Comparators;
-import com.apps.esampaio.tarefas.core.entities.Comparators.OrderTaskByCompletedComparator;
-import com.apps.esampaio.tarefas.core.entities.Comparators.OrderTaskByNameComparator;
 import com.apps.esampaio.tarefas.core.entities.Subtask;
 import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.core.entities.persistence.DAO.Impl.SubtaskDAOImpl;
@@ -16,10 +14,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-
-/**
- * Created by eduardo on 28/06/2016.
- */
 
 public class Tasks {
     private static TaskDAO taskDAO = null;

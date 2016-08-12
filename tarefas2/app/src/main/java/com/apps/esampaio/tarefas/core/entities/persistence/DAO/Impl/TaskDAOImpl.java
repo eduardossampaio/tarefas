@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.apps.esampaio.tarefas.core.entities.Subtask;
 import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.core.entities.persistence.DAO.Impl.entities.Entity;
-import com.apps.esampaio.tarefas.core.entities.persistence.DAO.Impl.entities.SubtaskEntity;
 import com.apps.esampaio.tarefas.core.entities.persistence.DAO.Impl.entities.TaskEntity;
 import com.apps.esampaio.tarefas.core.entities.persistence.DAO.TaskDAO;
 import com.apps.esampaio.tarefas.core.entities.persistence.DAO.Transaction;
@@ -18,9 +17,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by eduardo on 28/06/2016.
- */
 
 public class TaskDAOImpl extends DAOImpl implements TaskDAO {
     private SQLiteOpenHelper databaseHelper;

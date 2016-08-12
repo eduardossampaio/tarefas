@@ -3,15 +3,12 @@ package com.apps.esampaio.tarefas.core;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.IntegerRes;
 
-/**
- * Created by eduardo on 11/08/2016.
- */
+
 
 public class Settings {
 
-    public static enum Order{
+    public enum Order{
         NO_ORDER,
         Name,
         Date,
@@ -24,14 +21,10 @@ public class Settings {
             return null;
         }
     }
-    private static Settings instance;
-    private Context context;
 
+    private Context context;
     public static Settings getInstance(Context context){
-        if(instance == null){
-            instance = new Settings(context);
-        }
-        return instance;
+        return  new Settings(context);
     }
 
     public Settings(Context context){

@@ -17,7 +17,6 @@ import com.apps.esampaio.tarefas.core.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtaskAdapter.ViewHolder> {
 

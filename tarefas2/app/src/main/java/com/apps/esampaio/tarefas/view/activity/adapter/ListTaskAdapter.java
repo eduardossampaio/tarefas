@@ -16,9 +16,6 @@ import com.apps.esampaio.tarefas.core.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by eduardo on 28/06/2016.
- */
 
 public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapter.ViewHolder> {
 
@@ -124,7 +121,7 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
         boolean capitalize = settings.capitalizeFirst();
         viewHolder.taskName.setText(StringUtils.capitalize(task.getName(),capitalize));
 
-        String completedTaskMessages ="";
+        String completedTaskMessages;
         if(task.getSubtasksNumber()==0){
             completedTaskMessages=context.getString(R.string.task_no_subtasks_registered);
         }else {

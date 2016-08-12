@@ -31,14 +31,12 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class ListTasksFragment extends Fragment {
-    protected RecyclerView tasksList;
-
-    protected ListTaskAdapter adapter;
-    protected TextView emptyListMessage;
-    protected FloatingActionButton newTaskButton;
+    private RecyclerView tasksList;
+    private  ListTaskAdapter adapter;
+    private  TextView emptyListMessage;
+    private  FloatingActionButton newTaskButton;
     protected Tasks tasks;
 
-    private Bundle savedInstanceState;
     public ListTasksFragment() {
 
     }
@@ -47,11 +45,10 @@ public class ListTasksFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View baseLayout =  inflater.inflate(R.layout.activity_list_tasks, container, false);
 
-        this.savedInstanceState = savedInstanceState;
+
         tasks = new Tasks(getActivity());
         tasksList = (RecyclerView) baseLayout.findViewById(R.id.list_tasks_items_list);
         tasksList.setLayoutManager(new LinearLayoutManager(getActivity()));
