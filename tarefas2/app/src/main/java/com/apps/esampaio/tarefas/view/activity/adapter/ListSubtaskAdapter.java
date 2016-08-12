@@ -56,6 +56,10 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
         notifyItemInserted(lastIndex);
 
     }
+    public void addItem(Subtask subtask,int index){
+        this.items.add(index,subtask);
+        notifyItemInserted(index);
+    }
 
     public void deleteItem(Subtask item) {
         int pos = getItemPosition(item);

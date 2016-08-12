@@ -61,11 +61,9 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
         return -1;
     }
 
-    public void addItemToEnd(Task task){
-        int lastIndex = items.size();
-        this.items.add(task);
-        notifyItemInserted(lastIndex);
-
+    public void addItem(Task task,int index){
+        this.items.add(index,task);
+        notifyItemInserted(index);
     }
 
     public void deleteItem(Task item) {
@@ -78,6 +76,16 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
     public void refreshItem(Task item){
         int pos = getItemPosition(item);
         notifyItemChanged(pos);
+    }
+
+    public void refreshItem(Task item,int oldPos,int newPos){
+        Task toMove = items.get(oldPos);
+        items.set(newPos, items.get(oldPos));
+        items.set(newPos, toMove);
+
+        int pos = getItemPosition(item);
+        notifyItemChanged(pos);
+        notifyItemMoved(newPos,oldPos);
     }
 
 
@@ -138,5 +146,9 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public List<Task> getItems() {
+        return items;
     }
 }

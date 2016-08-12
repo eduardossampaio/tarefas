@@ -107,8 +107,6 @@ public class ListTasksFragment extends Fragment {
     }
 
 
-
-
     private void createOptionsMenu(final Task item) {
         final int [] messagesIds={
                 R.string.dialog_options_edit,
@@ -129,9 +127,18 @@ public class ListTasksFragment extends Fragment {
         };
         dialog.show();
     }
+    private int getItemPosition(List<Task> tasksList,Task task){
 
+        for(int i=0;i<tasksList.size();i++){
+            if ( tasksList.get(i).equals(task))
+                return i;
+        }
+
+        return -1;
+    }
     private void insertItem(Task task) {
-        adapter.addItemToEnd(task);
+        List<Task> taskList = getContentTasks();
+        adapter.addItem(task,getItemPosition(taskList,task));
     }
 
     private void updateItems(){
@@ -153,13 +160,23 @@ public class ListTasksFragment extends Fragment {
         Dialog editDialog = new NewTaskDialog(getActivity(),item) {
             @Override
             public void onItemEntered(String taskName) {
-                item.setName(taskName);
-                tasks.updateTask(item);
-                adapter.refreshItem(item);
+                editItem(item,taskName);
             }
         };
 
         editDialog.show();
+    }
+
+    private void editItem(Task item,String taskName){
+        int oldIndex = getItemPosition(adapter.getItems(),item);
+        item.setName(taskName);
+        tasks.updateTask(item);
+        int newIndex = getItemPosition(getContentTasks(),item);
+        if(newIndex != oldIndex){
+            adapter.refreshItem(item,oldIndex,newIndex);
+        }else {
+            adapter.refreshItem(item);
+        }
     }
 
     private void createDeleteDialog(final Task item){
