@@ -4,6 +4,7 @@ package com.apps.esampaio.tarefas.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -27,12 +28,12 @@ import com.apps.esampaio.tarefas.R;
 
 import java.util.List;
 
-//TODO mostrar valor selecionado http://stackoverflow.com/questions/531427/how-do-i-display-the-current-value-of-an-android-preference-in-the-preference-su
 public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
+
         if(getSupportActionBar()!=null) {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -49,13 +50,37 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private static void changePreferenceSummary(Preference preference,String value){
+        if (preference instanceof ListPreference) {
+            ListPreference listPref = (ListPreference) preference;
+            int newIndex = listPref.findIndexOfValue(value);
+            CharSequence newEntry = listPref.getEntries()[newIndex];
+            preference.setSummary(newEntry);
+        }
+    }
 
     public static class MyPreferenceFragment extends PreferenceFragment{
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
+            findPreference("preference_notify_before").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    changePreferenceSummary(preference,newValue.toString());
+                    return true;
+                }
+            });
+
+            findPreference("preference_order_type").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    changePreferenceSummary(preference,newValue.toString());
+                    return true;
+                }
+            });
         }
+
     }
 
 

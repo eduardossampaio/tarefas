@@ -6,7 +6,7 @@
             android:entries="@array/settings_order_labels"
             android:entryValues="@array/settings_order_values"
             android:key="preference_order_type"
-            android:summary="@string/settings_summary_order"
+            android:summary="%s"
             android:title="@string/settings_title_order" />
 
         <CheckBoxPreference android:title="@string/settings_capitalize_first"
@@ -22,7 +22,8 @@
             android:key="preference_notify_all" />
 
         <ListPreference
-            android:defaultValue="2"
+            android:defaultValue="120"
+            android:summary="%s"
             android:entries="@array/settings_notification_notify_before_label"
             android:entryValues="@array/settings_notification_notify_before_values"
             android:key="preference_notify_before"
