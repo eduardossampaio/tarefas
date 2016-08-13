@@ -16,9 +16,12 @@ import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.core.utils.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtaskAdapter.ViewHolder> {
+
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private TextView taskName;
@@ -42,22 +45,21 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
 
     public ListSubtaskAdapter(Task item,Context context){
         this.context = context;
-        this.items = new ArrayList<>();
         this.item = item;
+        this.items =new ArrayList<>();
+        for (Subtask subtask:item.getSubtasks()) {
+            items.add(subtask);
+        }
     }
 
-    public void refreshItens(List<Subtask> items){
-        this.items = items;
-        notifyDataSetChanged();
-    }
 
     public void addItemToEnd(Subtask task){
         int lastIndex = item.getSubtasks().size();
         notifyItemInserted(lastIndex);
 
     }
-    public void addItem(Subtask subtask,int index){
-        this.items.add(index,subtask);
+    public void addItem(Subtask subtask,int index) {
+        items.add(index,subtask);
         notifyItemInserted(index);
     }
 
@@ -72,7 +74,17 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
         int pos = getItemPosition(item);
         notifyItemChanged(pos);
     }
-
+    public void refreshItem(Subtask subtask,int oldPos,int newPos){
+        refreshItem(subtask);
+        items.remove(oldPos);
+        items.add(newPos,subtask);
+        notifyItemMoved(oldPos,newPos);
+    }
+    public void refreshAll() {
+        for (int i=0;i<items.size();i++) {
+            notifyItemChanged(i);
+        }
+    }
     private int getItemPosition(Subtask item) {
         for(int i=0;i<items.size();i++){
             Subtask subtask = items.get(i);

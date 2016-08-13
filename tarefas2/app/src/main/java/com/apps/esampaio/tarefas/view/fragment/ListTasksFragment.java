@@ -25,6 +25,7 @@ import com.apps.esampaio.tarefas.view.dialogs.NewTaskDialog;
 import com.apps.esampaio.tarefas.view.dialogs.OptionsDialog;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -58,9 +59,13 @@ public class ListTasksFragment extends Fragment {
         adapter = new ListTaskAdapter(getActivity(),getContentTasks()) {
             @Override
             public void itemClicked(RecyclerView.ViewHolder viewHolder, Task item) {
-                Intent intent = new Intent(getActivity(),ListSubtasksActivity.class);
-                intent.putExtra("item",item);
-                startActivity(intent);
+                try {
+                    Intent intent = new Intent(getActivity(), ListSubtasksActivity.class);
+                    intent.putExtra("item", item);
+                    startActivity(intent);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -128,13 +133,7 @@ public class ListTasksFragment extends Fragment {
         dialog.show();
     }
     private int getItemPosition(List<Task> tasksList,Task task){
-
-        for(int i=0;i<tasksList.size();i++){
-            if ( tasksList.get(i).equals(task))
-                return i;
-        }
-
-        return -1;
+        return tasksList.indexOf(task);
     }
     private void insertItem(Task task) {
         List<Task> taskList = getContentTasks();

@@ -4,7 +4,7 @@
 
     <string name="title_activity_main">MainActivity</string>
     <string name="change_notes">
-        * Time now can be added to subtask\n * Task filter by category\n * You can configure how items can be displayed\n * You can configure notifications\n * Layout improvements
+        * Interface improvements
     </string>
 
     <!-- Task activity-->

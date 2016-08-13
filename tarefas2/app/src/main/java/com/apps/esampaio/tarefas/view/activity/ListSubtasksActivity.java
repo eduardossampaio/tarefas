@@ -82,7 +82,6 @@ public class ListSubtasksActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         updateItems();
-        adapter.refreshItens(item.getSubtasks());
         if(getSupportActionBar()!=null) {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -121,7 +120,8 @@ public class ListSubtasksActivity extends AppCompatActivity {
                 subtask.setTaskTime(taskTime);
                 item.addSubtask(subtask);
                 tasks.updateTask(item);
-                adapter.addItemToEnd(subtask);
+                item.sortSubtasks();
+                adapter.addItem(subtask,item.getSubtaskIndex(subtask));
                 updateItems();
             }
         };
@@ -154,18 +154,33 @@ public class ListSubtasksActivity extends AppCompatActivity {
         Dialog dialog = new NewSubtaskDialog(this,subtask) {
             @Override
             public void onItemEntered(String name, String description,Date taskDate,Date taskTime) {
-                subtask.setName(name);
-                subtask.setTaskDate(taskDate);
-                subtask.setTaskTime(taskTime);
-                subtask.setDescription(description);
-                item.updateSubtask(subtask);
-                tasks.updateTask(item);
-                adapter.refreshItem(subtask);
-                updateItems();
+                editSubtask(subtask,name,description,taskDate,taskTime);
             }
         };
         dialog.setTitle(getString(R.string.dialog_new_subtask_title_edit));
         dialog.show();
+    }
+    private void editSubtask(Subtask subtask,String newName, String newDescription,Date newDate,Date newTime){
+        int oldPos = item.getSubtaskIndex(subtask);
+        subtask.setName(newName);
+        subtask.setTaskDate(newDate);
+        subtask.setTaskTime(newTime);
+        subtask.setDescription(newDescription);
+        item.updateSubtask(subtask);
+        tasks.updateTask(item);
+        adapter.refreshItem(subtask);
+        item.sortSubtasks();
+
+        int newPos = item.getSubtaskIndex(subtask);
+        if(oldPos != newPos){
+            adapter.refreshItem(subtask,oldPos,newPos);
+        }else{
+            adapter.refreshItem(subtask);
+        }
+        updateItems();
+    }
+    private void editSubtask(Subtask subtask){
+        editSubtask(subtask, subtask.getName(), subtask.getDescription(), subtask.getTaskDate(), subtask.getTaskTime());
     }
 //    private void createDetailDialog(final Subtask subtask){
 //        Dialog dialog = new NewSubtaskDialog(this,subtask) {
@@ -214,11 +229,14 @@ public class ListSubtasksActivity extends AppCompatActivity {
             updateItems();
             String message = subtask.getName().trim();
             message+=" ";
-            if ( subtask.isComplete())
+            if ( subtask.isComplete()) {
                 message += ListSubtasksActivity.this.getString(R.string.subtasks_updated_message_checked);
-            else
+            }
+            else {
                 message += ListSubtasksActivity.this.getString(R.string.subtasks_updated_message_unchecked);
+            }
             Snackbar.make(layout,message,Snackbar.LENGTH_SHORT).show();
+            editSubtask(subtask);
         }
 
     }

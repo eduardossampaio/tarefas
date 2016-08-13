@@ -46,7 +46,8 @@ public class Tasks {
         }
         Collections.sort(tasks,taskComparator);
         for (Task task:tasks) {
-            Collections.sort(task.getSubtasks(),subtaskComparator);
+            task.setComparator(subtaskComparator);
+            task.sortSubtasks();
         }
         return tasks;
     }

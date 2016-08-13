@@ -79,13 +79,10 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
     }
 
     public void refreshItem(Task item,int oldPos,int newPos){
-        Task toMove = items.get(oldPos);
-        items.set(newPos, items.get(oldPos));
-        items.set(newPos, toMove);
-
-        int pos = getItemPosition(item);
-        notifyItemChanged(pos);
-        notifyItemMoved(newPos,oldPos);
+        refreshItem(item);
+        items.remove(oldPos);
+        items.add(newPos,item);
+        notifyItemMoved(oldPos,newPos);
     }
 
 
