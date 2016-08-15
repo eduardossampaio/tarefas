@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/linearLayout">
+
+
+        <Button
+            android:text="@string/backup_task_button_delete_label"
+            android:id="@+id/list_backup_task_button_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_weight="0.5"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:text="@string/backup_task_button_restore_label"
+            android:id="@+id/list_backup_task_button_restore"
+            android:layout_width="wrap_content"
+            android:enabled="false"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_weight="0.5"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_alignParentRight="true" />
+
+    </LinearLayout>
+
+    <TextView
+        android:text="@string/backup_task_empty_list"
+        android:id="@+id/list_backup_task_empty_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/linearLayout"
+        android:gravity="center_vertical|center_horizontal"
+       />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_backup_task_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/linearLayout" />
+
+
+</RelativeLayout>

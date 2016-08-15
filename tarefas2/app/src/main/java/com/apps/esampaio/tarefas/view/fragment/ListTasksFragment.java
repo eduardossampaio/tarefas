@@ -14,8 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apps.esampaio.tarefas.R;
+import com.apps.esampaio.tarefas.core.Backup;
 import com.apps.esampaio.tarefas.core.Tasks;
 import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.view.activity.ListSubtasksActivity;
@@ -84,7 +86,7 @@ public class ListTasksFragment extends Fragment {
             }
         });
         updateItems();
-        refreshItems();
+//        refreshItems();
         return baseLayout;
 
     }
@@ -112,10 +114,11 @@ public class ListTasksFragment extends Fragment {
     }
 
 
-    private void createOptionsMenu(final Task item) {
+    protected void createOptionsMenu(final Task item) {
         final int [] messagesIds={
                 R.string.dialog_options_edit,
                 R.string.dialog_options_delete,
+                R.string.dialog_options_backup
         };
         Dialog dialog = new OptionsDialog(getActivity(),messagesIds){
             @Override
@@ -127,20 +130,29 @@ public class ListTasksFragment extends Fragment {
                     createEditDialog(item);
                 }else if ( selectedId == R.string.dialog_options_delete){
                     createDeleteDialog(item);
+                }else if(selectedId == R.string.dialog_options_backup){
+
+                    try {
+                        new Backup(getContext()).saveTask(item);
+                        Toast.makeText(getContext(),"Task "+item.getName()+" Saved" ,Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Toast.makeText(getContext(),"Error :"+e.getMessage(),Toast.LENGTH_LONG).show();
+
+                    }
                 }
             }
         };
         dialog.show();
     }
-    private int getItemPosition(List<Task> tasksList,Task task){
+    protected int getItemPosition(List<Task> tasksList,Task task){
         return tasksList.indexOf(task);
     }
-    private void insertItem(Task task) {
+    protected void insertItem(Task task) {
         List<Task> taskList = getContentTasks();
         adapter.addItem(task,getItemPosition(taskList,task));
     }
 
-    private void updateItems(){
+    protected void updateItems(){
         int itemCount= this.adapter.getItemCount();
         if ( itemCount==0){
             emptyListMessage.setVisibility(View.VISIBLE);
@@ -150,12 +162,12 @@ public class ListTasksFragment extends Fragment {
             tasksList.setVisibility(View.VISIBLE);
         }
     }
-    private void refreshItems(){
+    protected void refreshItems(){
         List<Task> taskList = getContentTasks();
         adapter.refreshItens(taskList);
     }
 
-    private void createEditDialog(final Task item){
+    protected void createEditDialog(final Task item){
         Dialog editDialog = new NewTaskDialog(getActivity(),item) {
             @Override
             public void onItemEntered(String taskName) {
@@ -166,7 +178,7 @@ public class ListTasksFragment extends Fragment {
         editDialog.show();
     }
 
-    private void editItem(Task item,String taskName){
+    protected void editItem(Task item,String taskName){
         int oldIndex = getItemPosition(adapter.getItems(),item);
         item.setName(taskName);
         tasks.updateTask(item);
@@ -178,7 +190,7 @@ public class ListTasksFragment extends Fragment {
         }
     }
 
-    private void createDeleteDialog(final Task item){
+    protected void createDeleteDialog(final Task item){
         Dialog deleteDialog = new ConfirmationDialog(getActivity(),getString(R.string.dialog_delete_subtask_title)+item.getName()+"?"){
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -194,7 +206,7 @@ public class ListTasksFragment extends Fragment {
 
 
 
-    private void createNewTaskDialog(){
+    protected void createNewTaskDialog(){
         Dialog dialog = new NewTaskDialog(getActivity()) {
             @Override
             public void onItemEntered(String taskName) {

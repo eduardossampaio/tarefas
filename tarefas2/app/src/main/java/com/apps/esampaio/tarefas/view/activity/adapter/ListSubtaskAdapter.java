@@ -162,7 +162,7 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
             if ( subtask.getDateTime().timeSetted()){
                 String at = context.getString(R.string.subtasks_schedule_date);
                 String formatedTime = subtask.getDateTime().formatTime();
-                viewHolder.taskDate.setText(StringUtils.append(formatedDate,at,formatedTime));
+                viewHolder.taskDate.setText(StringUtils.append(true,formatedDate,at,formatedTime));
             }
         }else{
             viewHolder.taskDate.setText(context.getString(R.string.subtasks_no_date));

@@ -21,7 +21,7 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView taskName;
+        protected TextView taskName;
         private TextView progressNumber;
         private ProgressBar progressBar;
         public ViewHolder(View itemView){
@@ -33,8 +33,6 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
 
     }
     private List<Task> items;
-
-
     private Context context;
     public ListTaskAdapter(Context context){
         this.context = context;

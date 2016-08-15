@@ -15,6 +15,7 @@ import com.apps.esampaio.tarefas.R;
 import com.apps.esampaio.tarefas.actions.NotificationScheduler;
 import com.apps.esampaio.tarefas.core.Constants;
 import com.apps.esampaio.tarefas.view.dialogs.MessageDialog;
+import com.apps.esampaio.tarefas.view.fragment.BackupedTaskFragment;
 import com.apps.esampaio.tarefas.view.fragment.CompletedTasksFragment;
 import com.apps.esampaio.tarefas.view.fragment.ListTasksFragment;
 import com.apps.esampaio.tarefas.view.fragment.TodayTasksFragment;
@@ -47,6 +48,7 @@ public class ListTasksActivity extends NavigationLiveo implements OnItemClickLis
         mHelpLiveo.addSeparator(); // Item separator
         mHelpLiveo.add(getString(R.string.navigation_drawer_settings));
         mHelpLiveo.add(getString(R.string.navigation_drawer_rate));
+        mHelpLiveo.add("=backuped=");
 
         with(this, Navigation.THEME_DARK) // default theme is dark
                 .addAllHelpItem(mHelpLiveo.getHelp())
@@ -98,6 +100,8 @@ public class ListTasksActivity extends NavigationLiveo implements OnItemClickLis
         //rate
         }else if(position ==5){
             openAppInStore();
+        }else if(position ==6){
+            setContentFragment(new BackupedTaskFragment());
         }
     }
     private void changeSubtitle(String message){

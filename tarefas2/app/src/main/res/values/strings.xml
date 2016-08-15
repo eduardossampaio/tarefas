@@ -22,6 +22,7 @@
     <string name="dialog_message_cancel">Cancel</string>
     <string name="dialog_options_edit">Edit</string>
     <string name="dialog_options_delete">Delete</string>
+    <string name="dialog_options_backup">Backup</string>
     <string name="dialog_release_notes_title">Release Notes</string>
 
     <!-- New Task dialog -->
@@ -116,7 +117,9 @@
         <item>15</item>
     </string-array>
     <string name="settings_notification_vibrate">Vibrate</string>
-
+    <string name="backup_task_button_restore_label">Restore</string>
+    <string name="backup_task_button_delete_label">Delete</string>
+    <string name="backup_task_empty_list">No backuped tasks</string>
 
 
 </resources>
