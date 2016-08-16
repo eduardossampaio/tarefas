@@ -13,13 +13,19 @@
     <string name="task_no_subtasks_registered">Touch to add subtasks.</string>
 
     <!-- Tasks fragments -->
+    <string name="all_task_fragment_title">All tasks</string>
+    <string name="today_task_fragment_title">Today tasks</string>
+    <string name="completed_task_fragment_title">Completed tasks</string>
+    <string name="backup_task_fragment_title">Backed up tasks</string>
+
     <string name="today_task_fragment_empty_message">No tasks for today</string>
     <string name="completed_task_fragment_empty_message">No completed tasks</string>
-
+    <string name="backup_task_fragment_empty_message">No backed up tasks</string>
 
     <!-- Dialogs -->
     <string name="dialog_message_ok">OK</string>
     <string name="dialog_message_cancel">Cancel</string>
+    <string name="dialog_message_error">Error</string>
     <string name="dialog_options_edit">Edit</string>
     <string name="dialog_options_delete">Delete</string>
     <string name="dialog_options_backup">Backup</string>
@@ -28,7 +34,6 @@
     <!-- New Task dialog -->
     <string name="new_task_title">New Task</string>
     <string name="new_task_task_name">Task Name</string>
-
 
     <!-- Task delete dialog -->
     <string name="dialog_delete_task_title">Delete the task: </string>
@@ -41,9 +46,6 @@
     <string name="subtasks_enter_name">Enter name</string>
     <string name="subtasks_enter_description">Enter description</string>
     <string name="subtasks_schedule_date">At</string>
-
-
-
 
     <!-- New Subtask Dialog-->
     <string name="dialog_new_subtask_title">New Subtask</string>
@@ -70,8 +72,10 @@
     <string name="navigation_drawer_all_tasks">All Tasks</string>
     <string name="navigation_drawer_today_tasks">Today\'s Tasks</string>
     <string name="navigation_drawer_completed_tasks">Completed Tasks</string>
+    <string name="navigation_drawer_backed_up_tasks">Backed up Tasks</string>
     <string name="navigation_drawer_settings">Settings</string>
     <string name="navigation_drawer_rate">Rate</string>
+    <string name="navigation_drawer_error_open_store">Cannot open app in Play Store</string>
 
     <!-- Settings -->
     <string name="title_activity_settings">Settings</string>
@@ -117,9 +121,16 @@
         <item>15</item>
     </string-array>
     <string name="settings_notification_vibrate">Vibrate</string>
+
+    <!-- Backup -->
     <string name="backup_task_button_restore_label">Restore</string>
     <string name="backup_task_button_delete_label">Delete</string>
-    <string name="backup_task_empty_list">No backuped tasks</string>
+    <string name="backup_task_restore_message">Do you wish to restore these backups?</string>
+    <string name="backup_task_delete_message">Do you wish to delete these backups?</string>
+    <string name="backup_task_already_restored_message">The tasks is already restored</string>
+    <string name="backup_task_time_message">Backup made at</string>
+    <string name="backup_task_backup_done">Task successfully backed up </string>
+    <string name="backup_task_restore_done">Task successfully restored</string>
 
 
 </resources>

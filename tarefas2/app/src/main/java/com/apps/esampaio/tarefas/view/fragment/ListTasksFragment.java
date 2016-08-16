@@ -143,7 +143,7 @@ public class ListTasksFragment extends Fragment {
     private void backupTask(Task item){
         try {
             new Backup(getContext()).saveTask(item);
-            Snackbar.make(baseLayout,"Task "+item.getName()+" Saved",Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(baseLayout,getString(R.string.backup_task_backup_done),Snackbar.LENGTH_SHORT).show();
         } catch (Exception e) {
             Snackbar.make(baseLayout,"Error :"+e.getMessage(),Snackbar.LENGTH_SHORT).show();
 
@@ -196,7 +196,7 @@ public class ListTasksFragment extends Fragment {
     }
 
     protected void createDeleteDialog(final Task item){
-        Dialog deleteDialog = new ConfirmationDialog(getActivity(),getString(R.string.dialog_delete_subtask_title)+item.getName()+"?"){
+        Dialog deleteDialog = new ConfirmationDialog(getActivity(),getString(R.string.dialog_delete_task_title)+item.getName()+"?"){
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 super.onClick(dialog, which);

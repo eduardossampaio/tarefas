@@ -45,10 +45,10 @@ public class ListTasksActivity extends NavigationLiveo implements OnItemClickLis
         mHelpLiveo.add(getString(R.string.navigation_drawer_all_tasks));
         mHelpLiveo.add(getString(R.string.navigation_drawer_today_tasks));
         mHelpLiveo.add(getString(R.string.navigation_drawer_completed_tasks));
+        mHelpLiveo.add(getString(R.string.navigation_drawer_backed_up_tasks));
         mHelpLiveo.addSeparator(); // Item separator
         mHelpLiveo.add(getString(R.string.navigation_drawer_settings));
         mHelpLiveo.add(getString(R.string.navigation_drawer_rate));
-        mHelpLiveo.add("=backuped=");
 
         with(this, Navigation.THEME_DARK) // default theme is dark
                 .addAllHelpItem(mHelpLiveo.getHelp())
@@ -81,30 +81,32 @@ public class ListTasksActivity extends NavigationLiveo implements OnItemClickLis
 
     @Override
     public void onItemClick(int position) {
-        //All tasks
         if(position==0){
             setContentFragment(allTasksFragment);
-            changeSubtitle("Todas as tarefas");
-        //today tasks
+            changeSubtitle(R.string.all_task_fragment_title);
+            //today tasks
         }else if(position ==1){
             setContentFragment(todaysTasksFragment);
-            changeSubtitle("Tarefas de hoje");
-        //completed tasks
-        }else if(position ==2){
+            changeSubtitle(R.string.today_task_fragment_title);
+            //completed tasks
+        }else if(position ==2) {
             setContentFragment(completedTasksFragment);
-            changeSubtitle("Tarefas completas");
-        //configuration
-        }else if(position ==4){
+            changeSubtitle(R.string.completed_task_fragment_title);
+        }else if(position ==3){
+            setContentFragment(new BackupedTaskFragment());
+            changeSubtitle(R.string.backup_task_fragment_title);
+            //configuration
+        }else if(position ==5){
             Intent intent = new Intent(this,SettingsActivity.class);
             startActivity(intent);
-        //rate
-        }else if(position ==5){
-            openAppInStore();
+            //rate
         }else if(position ==6){
-            setContentFragment(new BackupedTaskFragment());
+            openAppInStore();
         }
+        //All tasks
     }
-    private void changeSubtitle(String message){
+    private void changeSubtitle(int messageId){
+        String message = getString(messageId);
         if( getSupportActionBar() != null)
             getSupportActionBar().setSubtitle(message);
     }
@@ -114,7 +116,7 @@ public class ListTasksActivity extends NavigationLiveo implements OnItemClickLis
             intent.setData(Uri.parse("market://details?id=com.esampaio.apps.tarefas"));
             startActivity(intent);
         }catch (Exception e){
-            MessageDialog messageDialog = new MessageDialog(this,"=Error=","=Não foi possível abrir o aplicativo na loja=");
+            MessageDialog messageDialog = new MessageDialog(this,getString(R.string.dialog_message_error),getString(R.string.navigation_drawer_error_open_store));
             messageDialog.show();
         }
     }

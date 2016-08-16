@@ -14,12 +14,18 @@
     <string name="task_no_subtasks_registered">Toque para adicionar subtarefas.</string>
 
     <!-- Tasks fragments -->
+    <string name="all_task_fragment_title">Todas as tarefas</string>
+    <string name="today_task_fragment_title">Tarefas para hoje</string>
+    <string name="completed_task_fragment_title">Tarefas completas</string>
+    <string name="backup_task_fragment_title">Backup de tarefas</string>
+
     <string name="today_task_fragment_empty_message">Nenhuma tarefa para hoje</string>
     <string name="completed_task_fragment_empty_message">Nenhuma tarefa completa</string>
 
     <!-- Dialogs -->
     <string name="dialog_message_ok">Ok</string>
     <string name="dialog_message_cancel">Cancelar</string>
+    <string name="dialog_message_error">Erro</string>
     <string name="dialog_options_edit">Editar</string>
     <string name="dialog_options_delete">Deletar</string>
     <string name="dialog_release_notes_title">Novidades da versão</string>
@@ -65,8 +71,10 @@
     <string name="navigation_drawer_all_tasks">Todas as tarefas</string>
     <string name="navigation_drawer_today_tasks">Tarefas para hoje</string>
     <string name="navigation_drawer_completed_tasks">Tarefas completas</string>
+    <string name="navigation_drawer_backed_up_tasks">Backups de Tarefas</string>
     <string name="navigation_drawer_settings">Configurações</string>
     <string name="navigation_drawer_rate">Avalie</string>
+    <string name="navigation_drawer_error_open_store">Não foi possível abrir o aplicativo na Play Store</string>
 
 
     <!-- Settings -->
@@ -113,9 +121,15 @@
         <item>15</item>
     </string-array>
     <string name="settings_notification_vibrate">Vibrar</string>
-    <string name="backup_task_button_restore_label">Restore</string>
-    <string name="backup_task_empty_list">No backuped tasks</string>
+
+    <!-- Backup -->
+    <string name="backup_task_button_restore_label">Restaurar</string>
     <string name="backup_task_button_delete_label" >Deletar</string>
+    <string name="backup_task_restore_message">Deseja restaurar estes backups</string>
+    <string name="backup_task_delete_message">Deseja delete estes backups</string>
+    <string name="backup_task_already_restored_message">Esta tarefa já foi restaurada</string>
+    <string name="backup_task_time_message">Backup realizado em</string>
+    <string name="backup_task_backup_done">Backup realizado com sucesso</string>
 
 
 </resources>

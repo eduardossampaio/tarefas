@@ -54,7 +54,7 @@ public class BackupedTaskFragment extends Fragment {
             List<BackupItem> tasks = backup.getBackupedTasks();
             if(tasks.size()==0)
                 deleteButton.setEnabled(false);
-            adapter = new BackupTasksAdapter(tasks) {
+            adapter = new BackupTasksAdapter(getContext(),tasks) {
                 @Override
                 public void itemChanged(BackupTasksAdapter.Item item) {
                     int selectedItensCount = getSelectedItensCount();
@@ -99,8 +99,6 @@ public class BackupedTaskFragment extends Fragment {
             }else{
                 emptyMessage.setVisibility(View.INVISIBLE);
                 list.setVisibility(View.VISIBLE);
-//                restoreButton.setEnabled(true);
-//                deleteButton.setEnabled(true);
             }
         }catch (Exception e){
 
@@ -108,7 +106,7 @@ public class BackupedTaskFragment extends Fragment {
     }
 
     private void restoreButtonClick() {
-        MessageDialog dialog = new ConfirmationDialog(getContext(),"=Deseja restaurar esses backups="){
+        MessageDialog dialog = new ConfirmationDialog(getContext(),getString(R.string.backup_task_restore_message)){
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 restoreBackups();
@@ -117,7 +115,7 @@ public class BackupedTaskFragment extends Fragment {
         dialog.show();
     }
     private void deleteButtonClick() {
-        MessageDialog dialog = new ConfirmationDialog(getContext(),"=Deseja deletar esses backups="){
+        MessageDialog dialog = new ConfirmationDialog(getContext(),getString(R.string.backup_task_delete_message)){
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 deleteBackups();
@@ -140,9 +138,10 @@ public class BackupedTaskFragment extends Fragment {
         Backup backup = new Backup(getContext());
         for (BackupItem item : items) {
             if(tasks.exists(item.getTask())){
-                Snackbar.make(layout,"=Task já está salva=",Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(layout,getString(R.string.backup_task_already_restored_message),Snackbar.LENGTH_SHORT).show();
             }else{
                 backup.restore(item);
+                Snackbar.make(layout,getString(R.string.backup_task_restore_done),Snackbar.LENGTH_SHORT).show();
             }
         }
     }

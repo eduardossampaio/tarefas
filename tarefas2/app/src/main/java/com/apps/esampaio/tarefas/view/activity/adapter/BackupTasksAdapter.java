@@ -27,6 +27,8 @@ import java.util.List;
 
 public class BackupTasksAdapter extends RecyclerView.Adapter<BackupTasksAdapter.Holder>{
 
+    private Context context;
+
     public static class Holder extends RecyclerView.ViewHolder{
 
         private TextView taskName;
@@ -64,8 +66,9 @@ public class BackupTasksAdapter extends RecyclerView.Adapter<BackupTasksAdapter.
     }
     private List<Item> itens;
 
-    public BackupTasksAdapter(List<BackupItem> backupItems) {
+    public BackupTasksAdapter(Context context,List<BackupItem> backupItems) {
         this.itens = new ArrayList<>();
+        this.context = context;
         for (BackupItem backupItem :backupItems) {
             itens.add(new Item(backupItem));
         }
@@ -94,7 +97,7 @@ public class BackupTasksAdapter extends RecyclerView.Adapter<BackupTasksAdapter.
         BackupItem item = itens.get(position).backupItem;
         Task task = item.getTask();
         holder.taskName.setText(task.getName());
-        holder.backupDate.setText(StringUtils.append(true,"=Backup at=",item.getBackupDate().formatDate(),item.getBackupDate().formatTime()));
+        holder.backupDate.setText(StringUtils.append(true,context.getString(R.string.backup_task_time_message),item.getBackupDate().formatDate(),item.getBackupDate().formatTime()));
     }
 
 
