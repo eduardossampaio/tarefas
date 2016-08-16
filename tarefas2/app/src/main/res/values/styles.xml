@@ -30,10 +30,16 @@
     </style>
 
     <style name="ToolBarStyle" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:background">@color/primary</item>
+        <item name="android:background">@color/primary_dark</item>
     </style>
 
-    <style name="raised_button" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:colorBackground">@color/primary</item>
+    <style name="AppTheme.Button" parent="android:Widget.Button">
+        <item name="colorAccent">@color/primary</item>
+        <item name="android:textColor">@android:color/white</item>
+
     </style>
+    <!--<style name="AppTheme.Button" >-->
+        <!--<item name="android:textColor">@android:color/white</item>-->
+    <!--</style>-->
+
 </resources>

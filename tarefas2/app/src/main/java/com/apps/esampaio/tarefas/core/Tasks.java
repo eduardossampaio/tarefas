@@ -64,6 +64,10 @@ public class Tasks {
         return order(tasks);
     }
 
+    public boolean exists(Task task){
+        return taskDAO.getTask(task.getName()) != null;
+    }
+
     private List<Task> getTasksByCompleted(boolean completed) {
         List<Task> tasks = taskDAO.getTasksByCompleted(completed);
         return order(tasks);

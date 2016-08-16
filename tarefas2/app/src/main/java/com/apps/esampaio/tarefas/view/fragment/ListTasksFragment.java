@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,6 +40,7 @@ public class ListTasksFragment extends Fragment {
     private  TextView emptyListMessage;
     private  FloatingActionButton newTaskButton;
     protected Tasks tasks;
+    private View baseLayout;
 
     public ListTasksFragment() {
 
@@ -49,7 +51,7 @@ public class ListTasksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View baseLayout =  inflater.inflate(R.layout.activity_list_tasks, container, false);
+        baseLayout =  inflater.inflate(R.layout.activity_list_tasks, container, false);
 
 
         tasks = new Tasks(getActivity());
@@ -131,18 +133,21 @@ public class ListTasksFragment extends Fragment {
                 }else if ( selectedId == R.string.dialog_options_delete){
                     createDeleteDialog(item);
                 }else if(selectedId == R.string.dialog_options_backup){
-
-                    try {
-                        new Backup(getContext()).saveTask(item);
-                        Toast.makeText(getContext(),"Task "+item.getName()+" Saved" ,Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
-                        Toast.makeText(getContext(),"Error :"+e.getMessage(),Toast.LENGTH_LONG).show();
-
-                    }
+                    backupTask(item);
                 }
             }
         };
         dialog.show();
+    }
+
+    private void backupTask(Task item){
+        try {
+            new Backup(getContext()).saveTask(item);
+            Snackbar.make(baseLayout,"Task "+item.getName()+" Saved",Snackbar.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Snackbar.make(baseLayout,"Error :"+e.getMessage(),Snackbar.LENGTH_SHORT).show();
+
+        }
     }
     protected int getItemPosition(List<Task> tasksList,Task task){
         return tasksList.indexOf(task);

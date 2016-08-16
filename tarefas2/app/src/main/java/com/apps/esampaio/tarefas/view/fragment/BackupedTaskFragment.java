@@ -1,7 +1,10 @@
 package com.apps.esampaio.tarefas.view.fragment;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,12 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.apps.esampaio.tarefas.R;
 import com.apps.esampaio.tarefas.core.Backup;
+import com.apps.esampaio.tarefas.core.Tasks;
 import com.apps.esampaio.tarefas.core.entities.BackupItem;
-import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.view.activity.adapter.BackupTasksAdapter;
+import com.apps.esampaio.tarefas.view.dialogs.ConfirmationDialog;
+import com.apps.esampaio.tarefas.view.dialogs.MessageDialog;
 
 import java.util.List;
 
@@ -24,29 +30,41 @@ import java.util.List;
 
 public class BackupedTaskFragment extends Fragment {
 
+    private TextView emptyMessage;
     private RecyclerView list;
     private Button restoreButton;
     private Button deleteButton;
     private BackupTasksAdapter adapter;
+    private Tasks tasks;
+    private Backup backup;
 
+    private View layout;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.list_backup_tasks, container, false);
-        list = (RecyclerView) view.findViewById(R.id.list_backup_task_list);
-        restoreButton = (Button) view.findViewById(R.id.list_backup_task_button_restore);
-        deleteButton = (Button) view.findViewById(R.id.list_backup_task_button_delete);
-        Backup backup = new Backup(getContext());
+        layout = inflater.inflate(R.layout.list_backup_tasks, container, false);
+        list = (RecyclerView) layout.findViewById(R.id.list_backup_task_list);
+        restoreButton = (Button) layout.findViewById(R.id.list_backup_task_button_restore);
+        deleteButton = (Button) layout.findViewById(R.id.list_backup_task_button_delete);
+        emptyMessage= (TextView) layout.findViewById(R.id.list_backup_task_empty_message);
+
+        tasks = new Tasks(getContext());
+        backup = new Backup(getContext());
         try {
             List<BackupItem> tasks = backup.getBackupedTasks();
+            if(tasks.size()==0)
+                deleteButton.setEnabled(false);
             adapter = new BackupTasksAdapter(tasks) {
                 @Override
                 public void itemChanged(BackupTasksAdapter.Item item) {
                     int selectedItensCount = getSelectedItensCount();
-                    if (selectedItensCount == 0)
+                    if (selectedItensCount == 0) {
                         restoreButton.setEnabled(false);
-                    else
+                        deleteButton.setEnabled(false);
+                    }else {
                         restoreButton.setEnabled(true);
+                        deleteButton.setEnabled(true);
+                    }
                 }
             };
             list.setAdapter(adapter);
@@ -63,26 +81,69 @@ public class BackupedTaskFragment extends Fragment {
                     deleteButtonClick();
                 }
             });
-
+            refresh();
         } catch (Exception e) {
 
         }
-        return view;
+        return layout;
+    }
+
+    public void refresh(){
+        try {
+            List<BackupItem> tasks = backup.getBackupedTasks();
+            if(tasks.size()==0){
+                emptyMessage.setVisibility(View.VISIBLE);
+                list.setVisibility(View.INVISIBLE);
+                restoreButton.setEnabled(false);
+                deleteButton.setEnabled(false);
+            }else{
+                emptyMessage.setVisibility(View.INVISIBLE);
+                list.setVisibility(View.VISIBLE);
+//                restoreButton.setEnabled(true);
+//                deleteButton.setEnabled(true);
+            }
+        }catch (Exception e){
+
+        }
     }
 
     private void restoreButtonClick() {
-        List<BackupItem> items = adapter.getSelectedTasks();
-        Backup backup = new Backup(getContext());
-        for (BackupItem item : items) {
-            backup.restore(item);
-        }
+        MessageDialog dialog = new ConfirmationDialog(getContext(),"=Deseja restaurar esses backups="){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                restoreBackups();
+            }
+        };
+        dialog.show();
     }
     private void deleteButtonClick() {
+        MessageDialog dialog = new ConfirmationDialog(getContext(),"=Deseja deletar esses backups="){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteBackups();
+            }
+        };
+        dialog.show();
+    }
+
+    private void deleteBackups(){
         List<BackupItem> items = adapter.getSelectedTasks();
         Backup backup = new Backup(getContext());
         for (BackupItem item : items) {
             backup.delete(item);
             adapter.removeItem(item);
+        }
+        refresh();
+    }
+    private void restoreBackups(){
+        List<BackupItem> items = adapter.getSelectedTasks();
+        Backup backup = new Backup(getContext());
+        for (BackupItem item : items) {
+            if(tasks.exists(item.getTask())){
+                Snackbar.make(layout,"=Task já está salva=",Snackbar.LENGTH_SHORT).show();
+            }else{
+                backup.restore(item);
+            }
         }
     }
 }

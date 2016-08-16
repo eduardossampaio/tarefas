@@ -14,4 +14,6 @@ public interface Constants {
 
     String BASE_SAVE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath()+"/tarefas/backups";
 
+    String BACKUP_DATE_FORMAT = "yyyyMMddHHmmss";
+
 }

@@ -2,13 +2,16 @@ package com.apps.esampaio.tarefas.core;
 
 import android.content.Context;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.util.JsonWriter;
 
 import com.apps.esampaio.tarefas.core.entities.BackupItem;
+import com.apps.esampaio.tarefas.core.entities.DateTime;
 import com.apps.esampaio.tarefas.core.entities.Subtask;
 import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.core.entities.persistence.DAO.Impl.TaskDAOImpl;
 import com.apps.esampaio.tarefas.core.entities.persistence.DAO.TaskDAO;
+import com.apps.esampaio.tarefas.core.utils.DateUtils;
 import com.apps.esampaio.tarefas.core.utils.StringUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,6 +20,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,7 +38,8 @@ public class Backup {
         Gson gson = builder.create();
         String jsonTask = gson.toJson(task);
         if(jsonTask !=null){
-            String fileName = StringUtils.append(false,Constants.BASE_SAVE_DIR+"/"+task.getName(),".json");
+            String dateFormated = DateUtils.formatDate(System.currentTimeMillis(),Constants.BACKUP_DATE_FORMAT);
+            String fileName = StringUtils.append(false,Constants.BASE_SAVE_DIR+"/",task.getName(),"-",dateFormated,".json");
             File baseDir = new File(fileName);
             //TODO verificar se já tem backup salvo
             Files.saveToFile(baseDir,jsonTask);
@@ -48,8 +53,12 @@ public class Backup {
         File[] savedTasksFiles = Files.readDir(new File(Constants.BASE_SAVE_DIR));
         for (File file:savedTasksFiles) {
             String contentFile = Files.readFile(file);
+            int sepatarorIndex = file.getName().indexOf("-");
+            int formatIndex = file.getName().indexOf(".json");
+            String dateFormated = file.getName().substring(sepatarorIndex+1,formatIndex);
             Task task = gson.fromJson(contentFile,Task.class);
-            items.add(new BackupItem(file,task,null));
+            Date date = DateUtils.toDate(Constants.BACKUP_DATE_FORMAT, dateFormated);
+            items.add(new BackupItem(file,task,new DateTime(date,date)));
         }
         return items;
     }

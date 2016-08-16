@@ -18,6 +18,8 @@ public interface TaskDAO {
 
     Task getTask(int id);
 
+    Task getTask(String name);
+
     List<Task> getTasksByDate(Date date);
 
     List<Task> getTasksByDate(Date date,boolean completed);

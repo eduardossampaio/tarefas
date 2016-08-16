@@ -30,11 +30,13 @@ public class BackupTasksAdapter extends RecyclerView.Adapter<BackupTasksAdapter.
     public static class Holder extends RecyclerView.ViewHolder{
 
         private TextView taskName;
+        private TextView backupDate;
         private CheckBox selected;
         public Holder(View itemView) {
             super(itemView);
-            taskName = (TextView) itemView.findViewById(R.id.list_backup_task_item_name);
-            selected = (CheckBox) itemView.findViewById(R.id.list_backup_task_item_check);
+            taskName   = (TextView) itemView.findViewById(R.id.list_backup_task_item_name);
+            backupDate = (TextView) itemView.findViewById(R.id.list_backup_task_item_date);
+            selected   = (CheckBox) itemView.findViewById(R.id.list_backup_task_item_check);
         }
     }
     public class Item{
@@ -89,8 +91,10 @@ public class BackupTasksAdapter extends RecyclerView.Adapter<BackupTasksAdapter.
     }
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-        Task task = itens.get(position).backupItem.getTask();
+        BackupItem item = itens.get(position).backupItem;
+        Task task = item.getTask();
         holder.taskName.setText(task.getName());
+        holder.backupDate.setText(StringUtils.append(true,"=Backup at=",item.getBackupDate().formatDate(),item.getBackupDate().formatTime()));
     }
 
 

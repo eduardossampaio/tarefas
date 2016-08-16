@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="48dp">
+    android:layout_height="72dp">
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -11,20 +11,34 @@
         android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
         android:id="@+id/list_backup_task_item_check"
-        android:layout_alignParentBottom="true" />
+        android:layout_above="@+id/list_backup_task_item_date" />
 
     <TextView
         android:text="TextView"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:id="@+id/list_backup_task_item_name"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="72dp"
+        android:layout_marginTop="12dp"
         android:layout_marginRight="16dp"
-        android:layout_centerVertical="true"
-        android:gravity="center_vertical"
-        android:layout_alignParentBottom="true" />
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_backup_task_item_name"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/list_backup_task_item_date"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_alignParentRight="true" />
 </RelativeLayout>

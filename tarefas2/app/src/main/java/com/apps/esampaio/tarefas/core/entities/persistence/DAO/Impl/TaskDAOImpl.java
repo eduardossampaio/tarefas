@@ -46,6 +46,16 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
     }
 
     @Override
+    public Task getTask(String name) {
+        return beginTransaction()
+                .select()
+                .from("Task")
+                .where()
+                .eq("name","\""+name+"\"")
+                .uniqueResult();
+    }
+
+    @Override
     public Transaction<Task> beginTransaction() {
         return new BaseTransaction<Task>() {
             @Override
@@ -159,6 +169,7 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
     private Task rawUnique(String sql){
         Task task = null;
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
         Cursor cursor = db.rawQuery(sql,null);
         while(cursor.moveToNext()){
             int id = cursor.getInt(0);
