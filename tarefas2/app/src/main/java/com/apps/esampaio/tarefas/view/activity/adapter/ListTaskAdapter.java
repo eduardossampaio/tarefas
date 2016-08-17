@@ -82,13 +82,20 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
 
     @Override
     public void onBindViewHolder(ListTaskAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.taskName.setText(items.get(i).getName());
+        Task task = items.get(i);
+        viewHolder.taskName.setText(task.getName());
 
-        String completedTaskMessages = this.context.getResources().getString(R.string.task_item_completed_tasks);
+        String completedTaskMessages ="";
+        if(task.getSubtasksNumber()==0){
+            completedTaskMessages=context.getString(R.string.task_no_subtasks_registered);
+        }else {
+            completedTaskMessages = this.context.getResources().getString(R.string.task_item_completed_tasks);
+            completedTaskMessages+= task.getCompleteSubtasksNumber()+"/"+task.getSubtasksNumber();
+        }
 
-        viewHolder.progressNumber.setText(completedTaskMessages + items.get(i).getCompleteSubtasksNumber()+"/"+items.get(i).getSubtasksNumber());
-        float percentage = ( (float) items.get(i).getCompleteSubtasksNumber() / (float)  items.get(i).getSubtasksNumber() ) * 100;
+        float percentage = ( (float)task.getCompleteSubtasksNumber() / (float)  task.getSubtasksNumber() ) * 100;
 
+        viewHolder.progressNumber.setText(completedTaskMessages);
         viewHolder.progressBar.setProgress( (int) percentage);
     }
 

@@ -48,7 +48,7 @@ public class ListTasksActivity extends AppCompatActivity {
             @Override
             public void itemClicked(RecyclerView.ViewHolder viewHolder, Task item) {
                 Intent intent = new Intent(ListTasksActivity.this,ListSubtasksActivity.class);
-                intent.putExtra("item",item);
+                intent.putExtra("item",item.getId());
                 startActivity(intent);
             }
 
@@ -84,7 +84,7 @@ public class ListTasksActivity extends AppCompatActivity {
             editor.putBoolean(versionName,true);
             Dialog dialog = new MessageDialog(this,R.string.dialog_release_notes_title,R.string.change_notes);
             dialog.show();
-            editor.commit();
+            editor.apply();
 
         }
 

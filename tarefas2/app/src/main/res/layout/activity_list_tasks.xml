@@ -31,7 +31,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
-
+        app:layout_behavior="com.apps.esampaio.tarefas.view.behaviors.ScrollAwareFABBehavior"
         android:src="@drawable/ic_input_add_white"
         app:layout_anchor="@+id/list_tasks_items_list"
         app:layout_anchorGravity="bottom|right"

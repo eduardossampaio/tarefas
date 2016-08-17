@@ -57,7 +57,7 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
 
     public abstract void itemClicked(RecyclerView.ViewHolder viewHolder,Subtask item);
 
-    public abstract void itemUpdated(Task item);
+    public abstract void itemUpdated(Task task,Subtask subtask);
 
     public void itemLongClicked(RecyclerView.ViewHolder viewHolder,Subtask item){
     }
@@ -93,10 +93,10 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 final int position = viewHolder.getLayoutPosition();
-                final Subtask taskActivity  = item.getSubtasks().get(position);
-                if(taskActivity.isComplete()!=isChecked) {
-                    taskActivity.setComplete(isChecked);
-                    itemUpdated(item);
+                final Subtask subtask  = item.getSubtasks().get(position);
+                if(subtask.isComplete()!=isChecked) {
+                    subtask.setComplete(isChecked);
+                    itemUpdated(item,subtask);
                 }
             }
         });
