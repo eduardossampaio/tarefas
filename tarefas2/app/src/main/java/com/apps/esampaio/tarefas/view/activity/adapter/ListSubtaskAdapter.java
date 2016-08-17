@@ -17,13 +17,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by eduardo on 28/06/2016.
- */
-
 public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtaskAdapter.ViewHolder> {
-
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private TextView taskName;
@@ -43,8 +37,6 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
 
     private List<Subtask> items;
     private Task item;
-
-
     private Context context;
 
     public ListSubtaskAdapter(Task item,Context context){
@@ -57,6 +49,35 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
         this.items = items;
         notifyDataSetChanged();
     }
+
+    public void addItemToEnd(Subtask task){
+        int lastIndex = item.getSubtasks().size();
+        notifyItemInserted(lastIndex);
+
+    }
+
+    public void deleteItem(Subtask item) {
+        int pos = getItemPosition(item);
+        if ( pos != -1){
+            notifyItemRemoved(pos);
+            this.items.remove(pos);
+        }
+    }
+    public void refreshItem(Subtask item){
+        int pos = getItemPosition(item);
+        notifyItemChanged(pos);
+    }
+
+    private int getItemPosition(Subtask item) {
+        for(int i=0;i<items.size();i++){
+            Subtask subtask = items.get(i);
+            if(item.equals(subtask)){
+                return i;
+            }
+        }
+        return  -1;
+    }
+
 
     public abstract void itemClicked(RecyclerView.ViewHolder viewHolder,Subtask item);
 

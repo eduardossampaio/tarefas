@@ -4,7 +4,7 @@
 
     <string name="title_activity_main">MainActivity</string>
     <string name="change_notes">
-        * Layout improvements.\n* Now you can assign date to task\n* Now you can move app to SD CARD
+        * Day tasks are notified
     </string>
 
     <!-- Task activity-->
@@ -39,6 +39,7 @@
 
     <!-- New Subtask Dialog-->
     <string name="dialog_new_subtask_title">New Subtask</string>
+    <string name="dialog_new_subtask_title_edit">Edit Subtask</string>
     <string name="dialog_new_subtask_name">Name</string>
     <string name="dialog_new_subtask_description">Description</string>
     <string name="dialog_new_subtask_select_date">Select Date</string>
@@ -51,6 +52,10 @@
     <!-- Detail subtasks -->
     <string name="detail_subtasks_details_title">Details</string>
     <string name="title_activity_add_task">AddTaskActivity</string>
+
+    <!-- Notifications -->
+    <string name="notification_tasks_title">You have tasks today</string>
+    <string name="notification_tasks_list_title">Today tasks</string>
 
 
 </resources>

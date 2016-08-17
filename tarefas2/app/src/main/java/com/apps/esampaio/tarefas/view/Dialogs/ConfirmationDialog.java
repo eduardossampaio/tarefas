@@ -12,8 +12,6 @@ import com.apps.esampaio.tarefas.R;
 public class ConfirmationDialog extends MessageDialog implements DialogInterface.OnClickListener{
 
 
-
-
     public ConfirmationDialog(Context context,String message){
         super(context,context.getString(R.string.app_name),message);
     }
