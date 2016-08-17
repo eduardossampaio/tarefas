@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.apps.esampaio.tarefas.entities.Task;
+import com.apps.esampaio.tarefas.persistence.DAO.Impl.entities.Entity;
+import com.apps.esampaio.tarefas.persistence.DAO.Impl.entities.TaskEntity;
 import com.apps.esampaio.tarefas.persistence.DAO.TaskDAO;
 import com.apps.esampaio.tarefas.persistence.DatabaseHelper;
 
@@ -17,7 +19,7 @@ import java.util.List;
  * Created by eduardo on 28/06/2016.
  */
 
-public class TaskDAOImpl implements TaskDAO {
+public class TaskDAOImpl extends DAOImpl implements TaskDAO {
     private SQLiteOpenHelper databaseHelper;
 
     public TaskDAOImpl(Context context){
@@ -55,25 +57,21 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public void updateTask(Task task) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("name",task.getName());
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        db.update("task",contentValues,"id = ?",new String[]{""+task.getId()});
+        updateById(db,new TaskEntity(task));
     }
 
     @Override
     public void deleteTask(Task task) {
         SQLiteDatabase db = this.databaseHelper.getWritableDatabase();
-        String [] deleteArgs = {""+task.getId()};
-        db.delete("task","id = ?",deleteArgs);
+        deleteById(db,new TaskEntity(task));
     }
 
     @Override
     public void addTask(Task task) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("name",task.getName());
+        Entity entity = new TaskEntity(task);
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        int primaryKey = (int)db.insert(task.getTableName(),"id",contentValues);
-        task.setId(primaryKey);
+        int id = addEntity(db,entity);
+        task.setId(id);
     }
 }

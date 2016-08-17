@@ -1,30 +1,18 @@
 package com.apps.esampaio.tarefas.entities;
 
-import com.apps.esampaio.tarefas.persistence.Entity;
-
 import java.io.Serializable;
 
 /**
  * Created by eduardo on 28/06/2016.
  */
 
-public class Subtask implements Entity,Serializable{
+public class Subtask implements Serializable{
 
     private int id;
     private int taskId;
     private String name;
     private String description;
     private boolean complete;
-
-    private static final String createTableSql=
-            " create table subtask (" +
-            " id integer not null primary key autoincrement," +
-            " task_id integer not null ," +
-            " name varchar(100) not null," +
-            " description varchar(1000)," +
-            " completed int, "+
-            " FOREIGN KEY(task_id) REFERENCES task(id)" +
-            ");";
 
 
     public Subtask(String name){
@@ -91,13 +79,4 @@ public class Subtask implements Entity,Serializable{
         this.taskId = taskId;
     }
 
-    @Override
-    public String getTableName() {
-        return "subtask";
-    }
-
-    @Override
-    public String getCreateTable() {
-        return createTableSql;
-    }
 }

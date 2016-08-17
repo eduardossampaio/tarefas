@@ -1,7 +1,5 @@
 package com.apps.esampaio.tarefas.entities;
 
-import com.apps.esampaio.tarefas.persistence.Entity;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +8,12 @@ import java.util.List;
  * Created by eduardo on 28/06/2016.
  */
 
-public class Task implements Entity ,Serializable{
+public class Task implements Serializable{
     private int id;
     private String name;
     private List<Subtask> subtasks;
 
-    private static final String createTableScript =
-            "create table task\n" +
-               "(\n" +
-                "\tid integer not null primary key autoincrement,\n" +
-                "\tname varchar(100) not null\n" +
-                ");";
+
 
 
     public Task(int id,String name){
@@ -92,17 +85,6 @@ public class Task implements Entity ,Serializable{
         for (Subtask subtask:subtasks) {
             subtask.setTaskId(getId());
         }
-    }
-
-
-    @Override
-    public String getCreateTable() {
-        return createTableScript;
-    }
-
-    @Override
-    public String getTableName() {
-        return "task";
     }
 
     public void updateTask(Subtask newSubtask) {

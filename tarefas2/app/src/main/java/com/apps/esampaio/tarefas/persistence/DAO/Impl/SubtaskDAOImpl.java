@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.apps.esampaio.tarefas.entities.Subtask;
+import com.apps.esampaio.tarefas.persistence.DAO.Impl.entities.SubtaskEntity;
+import com.apps.esampaio.tarefas.persistence.DAO.Impl.entities.TaskEntity;
 import com.apps.esampaio.tarefas.persistence.DAO.SubtaskDAO;
 import com.apps.esampaio.tarefas.persistence.DatabaseHelper;
 
@@ -16,41 +18,30 @@ import java.util.List;
  * Created by eduardo on 28/06/2016.
  */
 
-public class SubtaskDAOImpl implements SubtaskDAO {
+public class SubtaskDAOImpl extends DAOImpl implements SubtaskDAO {
+
     private DatabaseHelper databaseHelper;
     public SubtaskDAOImpl(Context context){
         databaseHelper = new DatabaseHelper(context);
     }
+
     @Override
     public void addSubtask(Subtask subtask) {
-        ContentValues contentValues = new ContentValues();
-
-        contentValues.put("task_id",subtask.getTaskId());
-        contentValues.put("name",subtask.getName());
-        contentValues.put("description",subtask.getDescription());
-        contentValues.put("completed",subtask.isComplete() ? 1 : 0);
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        int primaryKey = (int)db.insert("subtask","id",contentValues);
-
+        int primaryKey = addEntity(db,new SubtaskEntity(subtask));
         subtask.setId(primaryKey);
     }
 
     @Override
     public void updateSubtask(Subtask subtask) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("name",subtask.getName());
-        contentValues.put("description",subtask.getDescription());
-        contentValues.put("completed",subtask.isComplete() ? 1 : 0);
-
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        db.update("subtask",contentValues,"id = ?",new String[]{""+subtask.getId()});
+        updateById(db,new SubtaskEntity(subtask));
     }
 
     @Override
     public void deleteSubtask(Subtask subtask) {
         SQLiteDatabase db = this.databaseHelper.getWritableDatabase();
-        String [] deleteArgs = {""+subtask.getId()};
-        db.delete("subtask","id = ?",deleteArgs);
+        deleteById(db,new SubtaskEntity(subtask));
     }
 
     public void addOrUpdate(Subtask subtask){
@@ -62,13 +53,8 @@ public class SubtaskDAOImpl implements SubtaskDAO {
     }
 
     public boolean exists(Subtask subtask){
-        boolean exists = false;
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        Cursor cursor = db.query("subtask",null,"id = ?",new String[]{""+subtask.getId()},null,null,null);
-
-        exists = cursor.moveToNext();
-
-        return exists;
+        return exists(db,new SubtaskEntity(subtask));
     }
 
     @Override
