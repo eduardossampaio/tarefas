@@ -1,6 +1,5 @@
 package com.apps.esampaio.tarefas.view.notifications;
 
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -8,9 +7,8 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
 import com.apps.esampaio.tarefas.R;
-import com.apps.esampaio.tarefas.Tasks;
-import com.apps.esampaio.tarefas.entities.Subtask;
-import com.apps.esampaio.tarefas.entities.Task;
+import com.apps.esampaio.tarefas.core.entities.Subtask;
+import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.view.activity.ListSubtasksActivity;
 import com.apps.esampaio.tarefas.view.activity.ListTasksActivity;
 
@@ -37,16 +35,22 @@ public class TasksTodayNotification extends Notification {
         notificationBuilder.setContentTitle(context.getString(R.string.app_name));
         notificationBuilder.setContentText(context.getString(R.string.notification_tasks_title));
 
-        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-
-        inboxStyle.setBigContentTitle(context.getString(R.string.notification_tasks_list_title));
-
-        for (Subtask subtask:subtasks) {
-            inboxStyle.addLine(subtask.getName());
-        }
         notificationBuilder.setAutoCancel(true);
         notificationBuilder.setContentIntent(createIntent());
-        notificationBuilder.setStyle(inboxStyle);
+        if(subtasks.isEmpty()){
+
+        }else if(subtasks.size()==1){
+            notificationBuilder.setContentText(subtasks.get(0).getName());
+        } else {
+            NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+            inboxStyle.setBigContentTitle(context.getString(R.string.notification_tasks_list_title));
+
+            for (Subtask subtask : subtasks) {
+                inboxStyle.addLine(subtask.getName());
+            }
+
+            notificationBuilder.setStyle(inboxStyle);
+        }
 
     }
 

@@ -1,32 +1,30 @@
 package com.apps.esampaio.tarefas.view.activity;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.apps.esampaio.tarefas.R;
 import com.apps.esampaio.tarefas.actions.NotificationScheduler;
-import com.apps.esampaio.tarefas.entities.DateTime;
+import com.apps.esampaio.tarefas.view.fragment.ListTasksFragment;
 
-import java.util.Calendar;
-import java.util.Date;
+import br.liveo.interfaces.OnItemClickListener;
+import br.liveo.model.HelpLiveo;
+import br.liveo.model.Navigation;
+import br.liveo.navigationliveo.NavigationLiveo;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    private HelpLiveo mHelpLiveo;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         new NotificationScheduler(this).schedule();
-
-        Intent intent = new Intent(MainActivity.this,ListTasksActivity.class);
-        startActivity(intent);
     }
 
 

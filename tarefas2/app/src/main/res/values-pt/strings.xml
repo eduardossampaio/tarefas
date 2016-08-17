@@ -4,7 +4,7 @@
     <string name="app_name">Tarefas</string>
 
     <string name="change_notes">
-        * As tarefas do dia agora são notificadas
+        * Horário pode agora ser adicionado à subtarefa\n * Tarefas filtradas por categoria\n * Você pode configurar como os itens são exibidos\n * Você pode configurar notificações\n * Melhorias de layout
     </string>
 
 
@@ -12,6 +12,10 @@
     <string name="empty_task_list">Nenhuma tarefa registrada</string>
     <string name="task_item_completed_tasks">Tarefas Concluídas: </string>
     <string name="task_no_subtasks_registered">Toque para adicionar subtarefas.</string>
+
+    <!-- Tasks fragments -->
+    <string name="today_task_fragment_empty_message">Nenhuma tarefa para hoje</string>
+    <string name="completed_task_fragment_empty_message">Nenhuma tarefa completa</string>
 
     <!-- Dialogs -->
     <string name="dialog_message_ok">Ok</string>
@@ -35,7 +39,7 @@
     <string name="subtasks_no_date">Sem data definida</string>
     <string name="subtasks_enter_name">Informe o Nome</string>
     <string name="subtasks_enter_description">Informe a Descrição</string>
-    <string name="subtasks_schedule_date">Dia: </string>
+    <string name="subtasks_schedule_date">As</string>
 
     <!-- New Subtask Dialog-->
     <string name="dialog_new_subtask_title">Nova Subtarefa</string>
@@ -56,5 +60,59 @@
     <!-- Notifications -->
     <string name="notification_tasks_title">Você tem tarefas para hoje</string>
     <string name="notification_tasks_list_title">Tarefas de hoje</string>
+
+    <!-- Navigation Drawer -->
+    <string name="navigation_drawer_all_tasks">Todas as tarefas</string>
+    <string name="navigation_drawer_today_tasks">Tarefas para hoje</string>
+    <string name="navigation_drawer_completed_tasks">Tarefas completas</string>
+    <string name="navigation_drawer_settings">Configurações</string>
+    <string name="navigation_drawer_rate">Avalie</string>
+
+
+    <!-- Settings -->
+    <string name="title_activity_settings">Configurações</string>
+    <string name="settings_category_display_tasks">Exibição de tarefas</string>
+    <string name="settings_category_notifications">Notificações</string>
+    <!-- order -->
+    <!-- order type -->
+    <string name="settings_title_order">Ordenação</string>
+    <string name="settings_summary_order">A ordem em que as tarefas são exibidas</string>
+    <string-array name="settings_order_labels">
+        <item>Sem ordenação</item>
+        <item>Ordenado por nome</item>
+        <item>Ordenado por data</item>
+        <item>Completas primeiro</item>
+    </string-array>
+    <string-array name="settings_order_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <!-- Capitalize -->
+    <string name="settings_capitalize_first">Primeira letra maiúscula</string>
+
+    <!-- Notifications -->
+    <string name="settings_notification_notify_all">Notificas as tarefas do dia</string>
+    <string name="settings_notification_notify_all_summary">As tarefas são notificadas à meia noite</string>
+    <string name="settings_notification_notify_before">Notificar as tarefas antes de</string>
+    <string-array name="settings_notification_notify_before_label">
+        <item>5 horas</item>
+        <item>3 horas</item>
+        <item>2 horas</item>
+        <item>1 horas</item>
+        <item>Meia hora</item>
+        <item>15 minutos</item>
+    </string-array>
+    <string-array name="settings_notification_notify_before_values">
+        <item>300</item>
+        <item>180</item>
+        <item>120</item>
+        <item>60</item>
+        <item>30</item>
+        <item>15</item>
+    </string-array>
+    <string name="settings_notification_vibrate">Vibrar</string>
+
 
 </resources>

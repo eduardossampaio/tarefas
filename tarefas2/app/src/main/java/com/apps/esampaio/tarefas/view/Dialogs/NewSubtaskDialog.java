@@ -14,13 +14,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.apps.esampaio.tarefas.R;
-import com.apps.esampaio.tarefas.entities.DateTime;
-import com.apps.esampaio.tarefas.entities.Subtask;
+import com.apps.esampaio.tarefas.core.entities.DateTime;
+import com.apps.esampaio.tarefas.core.entities.Subtask;
 import com.apps.esampaio.tarefas.view.listeners.GestureDetectorTouchListener;
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
 import com.codetroopers.betterpickers.radialtimepicker.RadialTimePickerDialogFragment;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -38,6 +37,8 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
     private Button createButton;
     private Button cancelButton;
     private ImageView clearDate;
+    private ImageView clearTime;
+    private ImageView timeIcon;
 
     private EditText name;
     private EditText description;
@@ -61,11 +62,19 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
         this.dateText = (EditText) layout.findViewById(R.id.dialog_new_subtask_date);
         this.timeText = (EditText) layout.findViewById(R.id.dialog_new_subtask_time);
         this.clearDate = (ImageView) layout.findViewById(R.id.clear_date);
+        this.clearTime = (ImageView) layout.findViewById(R.id.clear_time);
+        this.timeIcon = (ImageView) layout.findViewById(R.id.ic_hour);
 
         this.clearDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 invalidateDate();
+            }
+        });
+        this.clearTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                invalidateTime();
             }
         });
 
@@ -99,11 +108,16 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
         this.timeText.setOnTouchListener(new GestureDetectorTouchListener(context) {
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
-                showTimePicker();
-                return super.onSingleTapUp(e);
+                if(dateTime.dateSetted()) {
+                    showTimePicker();
+                    return super.onSingleTapUp(e);
+                }
+                return true;
             }
         });
         builder.setView(layout);
+
+        disableTime();
     }
 
 
@@ -114,6 +128,7 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
                     public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
                         dateTime.setDate(year, monthOfYear, dayOfMonth);
                         displayDate();
+                        enableTime();
                     }
                 })
                 .setFirstDayOfWeek(Calendar.SUNDAY)
@@ -161,6 +176,9 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
 
         displayDate();
         displayTime();
+        if(subtask.getTaskDate()!=null){
+            enableTime();
+        }
     }
 
     public abstract void onItemEntered(String name, String description, Date taskDate, Date taskTime);
@@ -199,5 +217,23 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
     private void invalidateDate() {
         this.dateTime.invalidateDate();
         displayDate();
+        invalidateTime();
+        disableTime();
+
+    }
+    private void invalidateTime(){
+        this.dateTime.invalidateTime();
+        displayTime();
+    }
+    private void enableTime(){
+        this.timeText.setVisibility(View.VISIBLE);
+        this.clearTime.setVisibility(View.VISIBLE);
+        this.timeIcon.setVisibility(View.VISIBLE);
+
+    }
+    private void disableTime(){
+        this.timeText.setVisibility(View.GONE);
+        this.clearTime.setVisibility(View.GONE);
+        this.timeIcon.setVisibility(View.GONE);
     }
 }
