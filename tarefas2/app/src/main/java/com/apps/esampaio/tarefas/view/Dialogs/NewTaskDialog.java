@@ -12,9 +12,6 @@ import android.widget.EditText;
 import com.apps.esampaio.tarefas.R;
 import com.apps.esampaio.tarefas.core.entities.Task;
 
-/**
- * Created by eduardo on 28/06/2016.
- */
 
 public abstract class NewTaskDialog extends Dialog{
     private Button createButton;
@@ -31,7 +28,7 @@ public abstract class NewTaskDialog extends Dialog{
 
         super(context);
 
-        View layout = (View) LayoutInflater.from(context).inflate(R.layout.dialog_new_task,null);
+        View layout = LayoutInflater.from(context).inflate(R.layout.dialog_new_task,null);
         this.title  = (EditText) layout.findViewById(R.id.new_task_task_name);
 
         if(task != null){

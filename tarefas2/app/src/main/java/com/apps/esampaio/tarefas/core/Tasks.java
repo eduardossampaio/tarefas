@@ -3,8 +3,6 @@ package com.apps.esampaio.tarefas.core;
 import android.content.Context;
 
 import com.apps.esampaio.tarefas.core.entities.Comparators.Comparators;
-import com.apps.esampaio.tarefas.core.entities.Comparators.OrderTaskByCompletedComparator;
-import com.apps.esampaio.tarefas.core.entities.Comparators.OrderTaskByNameComparator;
 import com.apps.esampaio.tarefas.core.entities.Subtask;
 import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.core.entities.persistence.DAO.Impl.SubtaskDAOImpl;
@@ -16,10 +14,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-
-/**
- * Created by eduardo on 28/06/2016.
- */
 
 public class Tasks {
     private static TaskDAO taskDAO = null;
@@ -52,16 +46,14 @@ public class Tasks {
         }
         Collections.sort(tasks,taskComparator);
         for (Task task:tasks) {
-            Collections.sort(task.getSubtasks(),subtaskComparator);
+            task.setComparator(subtaskComparator);
+            task.sortSubtasks();
         }
         return tasks;
     }
 
     public List<Task> getTasks(){
         List<Task> tasks = taskDAO.getTasks();
-        for (Task task: tasks) {
-            task.setSubtasks(subtaskDAO.getSubTasks(task.getId()));
-        }
         return order(tasks);
     }
     //TODO arrumar isso em uma sql
@@ -74,32 +66,19 @@ public class Tasks {
 
     private List<Task> getTasksByCompleted(boolean completed) {
         List<Task> tasks = taskDAO.getTasksByCompleted(completed);
-        for (Task task: tasks) {
-            task.setSubtasks(subtaskDAO.getSubTasks(task.getId()));
-        }
         return order(tasks);
     }
-
     public List<Task> getTasksByDate(Date date){
         List<Task> tasks = taskDAO.getTasksByDate(date);
-        for (Task task: tasks) {
-            task.setSubtasks(subtaskDAO.getSubTasksByDate(task.getId(),date));
-        }
         return order(tasks);
     }
     public List<Task> getTasksByDate(Date date,boolean completed){
-        List<Task> tasks = taskDAO.getTasksByDate(date);
-        for (Task task: tasks) {
-            task.setSubtasks(subtaskDAO.getSubTasksByDate(task.getId(),date,completed));
-        }
+        List<Task> tasks = taskDAO.getTasksByDate(date,completed);
         return order(tasks);
     }
 
     public List<Task> getTasksByTime(Date time,boolean completed){
         List<Task> tasks = taskDAO.getTasksByTime(time);
-        for (Task task: tasks) {
-            task.setSubtasks(subtaskDAO.getSubTasksByTime(task.getId(),time,completed));
-        }
         return order(tasks);
     }
 
@@ -109,8 +88,6 @@ public class Tasks {
             subtaskDAO.addSubtask(subtask);
         }
     }
-
-
 
     public void updateTask(Task item) {
         taskDAO.updateTask(item);

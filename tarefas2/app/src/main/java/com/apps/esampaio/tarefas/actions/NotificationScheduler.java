@@ -8,9 +8,7 @@ import android.util.Log;
 
 import com.apps.esampaio.tarefas.core.Constants;
 
-/**
- * Created by eduardo on 05/08/16.
- */
+
 public class NotificationScheduler {
     private Context context;
     private Intent notificationIntent = new Intent(Constants.NOTIFICATION_RECEIVER_TAG);
@@ -27,10 +25,9 @@ public class NotificationScheduler {
 
 
     private boolean alarmUp(){
-        boolean alarmUp = (PendingIntent.getBroadcast(context, 0,
+        return(PendingIntent.getBroadcast(context, 0,
                 notificationIntent,
                 PendingIntent.FLAG_NO_CREATE) != null);
-        return alarmUp;
     }
 
     private void scheduleNotifications(){
@@ -39,7 +36,7 @@ public class NotificationScheduler {
         long interval = 60 * 1000; //1 minute
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,0,notificationIntent,0);
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, startTime, interval, pendingIntent);
     }
 }

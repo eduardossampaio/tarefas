@@ -21,8 +21,6 @@ public class SubtaskDAOImpl extends DAOImpl implements SubtaskDAO {
 
     private DatabaseHelper databaseHelper;
 
-    private final String baseSql = "SELECT id,name,description,completed,task_date,task_time from subtask s";
-
     public SubtaskDAOImpl(Context context) {
         databaseHelper = new DatabaseHelper(context);
     }
@@ -71,23 +69,6 @@ public class SubtaskDAOImpl extends DAOImpl implements SubtaskDAO {
         }
         return tasks;
     }
-
-    @Override
-    public List<Subtask> getSubTasksByDate(int task_id, Date date) {
-        String sql = baseSql+" where "+dateSql("s.task_date")+" = "+dateSql(date.getTime()+"" )+" and s.task_id = " + task_id;
-        return rawQuery(sql);
-    }
-
-    public List<Subtask> getSubTasksByDate(int task_id, Date date, boolean completed) {
-        String sql = baseSql+" where "+dateSql("s.task_date")+" = "+dateSql(date.getTime()+"" )+" and s.task_id = " + task_id+" and completed ="+(completed ? 1 : 0);
-         return rawQuery(sql);
-    }
-
-    public List<Subtask> getSubTasksByTime(int task_id, Date date, boolean completed) {
-        String sql = baseSql+" where "+dateTimeSql("s.task_time")+" = "+dateTimeSql(date.getTime()+"" )+" and s.task_id = " + task_id+" and completed ="+(completed ? 1 : 0);
-        return rawQuery(sql);
-    }
-
 
     private List<Subtask> rawQuery(String sql) {
         List<Subtask> tasks = new ArrayList<>();

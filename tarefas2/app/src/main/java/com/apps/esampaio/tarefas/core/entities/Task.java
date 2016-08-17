@@ -2,6 +2,8 @@ package com.apps.esampaio.tarefas.core.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -9,6 +11,8 @@ public class Task implements Serializable{
     private int id;
     private String name;
     private List<Subtask> subtasks;
+
+    private Comparator<Subtask> comparator;
 
     public Task(int id,String name){
         this.id = id;
@@ -24,7 +28,13 @@ public class Task implements Serializable{
     public Task() {
 
     }
-
+    public void sortSubtasks(){
+        if(comparator!=null)
+            Collections.sort(this.subtasks,this.comparator);
+    }
+    public int getSubtaskIndex(Subtask subtask){
+        return subtasks.indexOf(subtask);
+    }
     public void addSubtask(Subtask subtask){
         this.subtasks.add(subtask);
         subtask.setTaskId(this.id);
@@ -90,6 +100,11 @@ public class Task implements Serializable{
         if(pos >= 0){
             subtasks.remove(pos);
             subtasks.add(pos,newSubtask);
+//            sortSubtasks();
         }
+    }
+
+    public void setComparator(Comparator<Subtask> comparator) {
+        this.comparator = comparator;
     }
 }

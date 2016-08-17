@@ -25,10 +25,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         entitiesClasses.add(SubtaskEntity.class);
     }
 
-    private Context context;
+
     public DatabaseHelper(Context context ){
         super(context,NAME,null,VERSION);
-        this.context = context;
     }
 
     @Override

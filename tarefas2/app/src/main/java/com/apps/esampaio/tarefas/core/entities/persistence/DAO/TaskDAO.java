@@ -16,11 +16,15 @@ public interface TaskDAO {
 
     List<Task> getTasks();
 
+    Task getTask(int id);
+
     List<Task> getTasksByDate(Date date);
+
+    List<Task> getTasksByDate(Date date,boolean completed);
 
     List<Task> getTasksByTime(Date time);
 
-    Task getTask(int id);
-
     List<Task> getTasksByCompleted(boolean completed);
+
+    Transaction<Task> beginTransaction();
 }

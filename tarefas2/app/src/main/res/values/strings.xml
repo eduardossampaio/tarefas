@@ -4,7 +4,7 @@
 
     <string name="title_activity_main">MainActivity</string>
     <string name="change_notes">
-        * Time now can be added to subtask\n * Task filter by category\n * You can configure how items can be displayed\n * You can configure notifications\n * Layout improvements
+        * Interface improvements
     </string>
 
     <!-- Task activity-->
@@ -97,7 +97,7 @@
 
     <!-- Notifications -->
     <string name="settings_notification_notify_all">Notify all tasks of day</string>
-    <string name="settings_notification_notify_all_summary">Tasks are notifyed at midnight</string>
+    <string name="settings_notification_notify_all_summary">Tasks are notified at midnight</string>
     <string name="settings_notification_notify_before">Notify tasks before</string>
     <string-array name="settings_notification_notify_before_label">
         <item>5 hours</item>

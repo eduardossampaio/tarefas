@@ -14,9 +14,7 @@ import com.apps.esampaio.tarefas.view.activity.ListTasksActivity;
 
 import java.util.List;
 
-/**
- * Created by eduardo on 05/08/16.
- */
+
 public class TasksTodayNotification extends Notification {
     private Task task;
     private List<Subtask> subtasks;
@@ -38,7 +36,7 @@ public class TasksTodayNotification extends Notification {
         notificationBuilder.setAutoCancel(true);
         notificationBuilder.setContentIntent(createIntent());
         if(subtasks.isEmpty()){
-
+            return;
         }else if(subtasks.size()==1){
             notificationBuilder.setContentText(subtasks.get(0).getName());
         } else {
@@ -56,12 +54,10 @@ public class TasksTodayNotification extends Notification {
 
     private PendingIntent createIntent(){
         Intent resultIntent = new Intent(context, ListSubtasksActivity.class);
-        resultIntent.putExtra("item",task.getId());
+        resultIntent.putExtra("item",task);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(ListTasksActivity.class);
         stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        return resultPendingIntent;
-
+        return stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 }

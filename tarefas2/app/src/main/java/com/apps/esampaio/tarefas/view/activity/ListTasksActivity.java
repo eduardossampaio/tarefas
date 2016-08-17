@@ -3,18 +3,17 @@ package com.apps.esampaio.tarefas.view.activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.widget.RelativeLayout;
 
 import com.apps.esampaio.tarefas.BuildConfig;
-import com.apps.esampaio.tarefas.core.Constants;
 import com.apps.esampaio.tarefas.R;
 import com.apps.esampaio.tarefas.actions.NotificationScheduler;
+import com.apps.esampaio.tarefas.core.Constants;
 import com.apps.esampaio.tarefas.view.dialogs.MessageDialog;
 import com.apps.esampaio.tarefas.view.fragment.CompletedTasksFragment;
 import com.apps.esampaio.tarefas.view.fragment.ListTasksFragment;
@@ -61,6 +60,7 @@ public class ListTasksActivity extends NavigationLiveo implements OnItemClickLis
         todaysTasksFragment = new TodayTasksFragment();
         completedTasksFragment = new CompletedTasksFragment();
 
+
         showVersionNotes();
         changeDrawerLayoutWitdh();
     }
@@ -68,7 +68,7 @@ public class ListTasksActivity extends NavigationLiveo implements OnItemClickLis
     private void changeDrawerLayoutWitdh(){
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        int height = displaymetrics.heightPixels;
+//        int height = displaymetrics.heightPixels;
         int width = displaymetrics.widthPixels;
         int newWidth=(int)(width* 0.7);
         RelativeLayout drawerLayout = (RelativeLayout) findViewById(R.id.containerList);
@@ -82,12 +82,15 @@ public class ListTasksActivity extends NavigationLiveo implements OnItemClickLis
         //All tasks
         if(position==0){
             setContentFragment(allTasksFragment);
+            changeSubtitle("Todas as tarefas");
         //today tasks
         }else if(position ==1){
             setContentFragment(todaysTasksFragment);
+            changeSubtitle("Tarefas de hoje");
         //completed tasks
         }else if(position ==2){
             setContentFragment(completedTasksFragment);
+            changeSubtitle("Tarefas completas");
         //configuration
         }else if(position ==4){
             Intent intent = new Intent(this,SettingsActivity.class);
@@ -97,7 +100,10 @@ public class ListTasksActivity extends NavigationLiveo implements OnItemClickLis
             openAppInStore();
         }
     }
-
+    private void changeSubtitle(String message){
+        if( getSupportActionBar() != null)
+            getSupportActionBar().setSubtitle(message);
+    }
     private void openAppInStore(){
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
