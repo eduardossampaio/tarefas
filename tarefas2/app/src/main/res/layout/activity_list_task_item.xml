@@ -5,13 +5,15 @@
     android:clickable="true"
     android:focusable="true"
     android:background="?android:attr/selectableItemBackground"
-    android:layout_height="match_parent">
+    android:layout_height="88dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Medium Text"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:id="@+id/list_task_item_task_name"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -22,6 +24,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
+        android:ellipsize="end"
         android:id="@+id/list_task_item_completed_number"
         android:layout_below="@+id/list_task_item_task_name"
         android:layout_alignParentEnd="true"

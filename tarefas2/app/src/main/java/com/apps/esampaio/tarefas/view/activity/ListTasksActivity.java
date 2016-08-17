@@ -63,19 +63,25 @@ public class ListTasksActivity extends AppCompatActivity {
         newTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openNewTaskDialog();
+                createNewTaskDialog();
             }
         });
         updateItems();
-
+        refreshItems();
         showVersionNotes();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateItems();
+        refreshItems();
     }
 
     private void showVersionNotes() {
         int versionCode = BuildConfig.VERSION_CODE;
         String versionName = BuildConfig.VERSION_NAME;
-
 
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREFERENCE_VERSION_NOTES_KEY, 0);
         boolean displayed = sharedPreferences.getBoolean(versionName,false);
@@ -85,11 +91,7 @@ public class ListTasksActivity extends AppCompatActivity {
             Dialog dialog = new MessageDialog(this,R.string.dialog_release_notes_title,R.string.change_notes);
             dialog.show();
             editor.apply();
-
         }
-
-
-
     }
 
 
@@ -114,16 +116,23 @@ public class ListTasksActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private void insertItem(Task task) {
+        adapter.addItemToEnd(task);
+    }
+
     private void updateItems(){
-        List<Task> taskList = tasks.getTasks();
-        if ( taskList.size()==0){
+        int itemCount= this.adapter.getItemCount();
+        if ( itemCount==0){
             emptyListMessage.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.INVISIBLE);
         }else{
             emptyListMessage.setVisibility(View.INVISIBLE);
             recyclerView.setVisibility(View.VISIBLE);
-            adapter.refreshItens(taskList);
         }
+    }
+    private void refreshItems(){
+        List<Task> taskList = tasks.getTasks();
+        adapter.refreshItens(taskList);
     }
 
     private void createEditDialog(final Task item){
@@ -132,7 +141,7 @@ public class ListTasksActivity extends AppCompatActivity {
             public void onItemEntered(String taskName) {
                 item.setName(taskName);
                 tasks.updateTask(item);
-                updateItems();
+                adapter.refreshItem(item);
             }
         };
 
@@ -144,6 +153,7 @@ public class ListTasksActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 super.onClick(dialog, which);
+                adapter.deleteItem(item);
                 tasks.delete(item);
                 updateItems();
             }
@@ -152,19 +162,17 @@ public class ListTasksActivity extends AppCompatActivity {
         deleteDialog.show();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateItems();
-    }
 
-    private void openNewTaskDialog(){
+
+    private void createNewTaskDialog(){
         Dialog dialog = new NewTaskDialog(this) {
             @Override
             public void onItemEntered(String taskName) {
                 Task task  = new Task(taskName);
                 try{
                     tasks.addTask(task);
+//                    updateItems();
+                    insertItem(task);
                     updateItems();
 
                 }catch (Exception e){
@@ -173,5 +181,8 @@ public class ListTasksActivity extends AppCompatActivity {
             }
         };
         dialog.show();
+
     }
+
+
 }

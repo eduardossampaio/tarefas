@@ -1,10 +1,10 @@
 <resources>
 
-    <string name="app_name">Taks</string>
+    <string name="app_name">Tasks</string>
 
     <string name="title_activity_main">MainActivity</string>
     <string name="change_notes">
-        * Layout improvements.
+        * Layout improvements.\n* Now you can assign date to task\n* Now you can move app to SD CARD
     </string>
 
     <!-- Task activity-->
@@ -31,14 +31,26 @@
     <!-- Subtasks -->
     <string name="subtasks_updated_message_checked"> checked as completed</string>
     <string name="subtasks_updated_message_unchecked"> checked as uncompleted</string>
+    <string name="subtasks_no_description">No description</string>
+    <string name="subtasks_no_date">No defined date</string>
+    <string name="subtasks_enter_name">Enter name</string>
+    <string name="subtasks_enter_description">Enter description</string>
+    <string name="subtasks_schedule_date">At: </string>
 
     <!-- New Subtask Dialog-->
     <string name="dialog_new_subtask_title">New Subtask</string>
-    <string name="dialog_new_subtask_name">Subtask Name</string>
+    <string name="dialog_new_subtask_name">Name</string>
     <string name="dialog_new_subtask_description">Description</string>
+    <string name="dialog_new_subtask_select_date">Select Date</string>
+    <string name="dialog_new_subtask_select_time">Select Time</string>
 
     <!-- Subtask options -->
     <string name="dialog_delete_subtask_title">Delete the subtask: </string>
+    <string name="title_activity_dialog_subtask">SubtaskDialogActivity</string>
+
+    <!-- Detail subtasks -->
+    <string name="detail_subtasks_details_title">Details</string>
+    <string name="title_activity_add_task">AddTaskActivity</string>
 
 
 </resources>

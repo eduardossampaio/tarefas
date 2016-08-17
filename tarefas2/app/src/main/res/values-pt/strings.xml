@@ -4,7 +4,7 @@
     <string name="app_name">Tarefas</string>
 
     <string name="change_notes">
-        * Melhorias de layout.
+        * Melhorias de layout.\n* Agora você pode adicionar uma data para uma tarefa\n* Agora você pode mover o aplicativo para o cartão SD
     </string>
 
 
@@ -31,13 +31,25 @@
     <!-- Subtasks -->
     <string name="subtasks_updated_message_checked"> marcado como completado</string>
     <string name="subtasks_updated_message_unchecked"> marcado como não completado</string>
+    <string name="subtasks_no_description">Sem descrição</string>
+    <string name="subtasks_no_date">Sem data definida</string>
+    <string name="subtasks_enter_name">Informe o Nome</string>
+    <string name="subtasks_enter_description">Informe a Descrição</string>
+    <string name="subtasks_schedule_date">Dia: </string>
 
     <!-- New Subtask Dialog-->
     <string name="dialog_new_subtask_title">Nova Subtarefa</string>
     <string name="dialog_new_subtask_name">Nome</string>
     <string name="dialog_new_subtask_description">Descrição</string>
+    <string name="dialog_new_subtask_select_date">Selecione a Data</string>
+    <string name="dialog_new_subtask_select_time">Seleciona a Hora</string>
 
     <!-- Subtask options -->
     <string name="dialog_delete_subtask_title">Deseja deletar a subtarefa: </string>
+    <string name="title_activity_dialog_subtask">SubtaskDialogActivity</string>
+
+    <!-- Detail subtasks -->
+    <string name="detail_subtasks_details_title">Detalhes</string>
+    <string name="title_activity_add_task">AddTaskActivity</string>
 
 </resources>

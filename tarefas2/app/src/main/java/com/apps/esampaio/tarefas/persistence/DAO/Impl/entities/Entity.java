@@ -8,14 +8,15 @@ import android.content.ContentValues;
 
 public interface Entity {
 
-    public String getCreateTableSQL();
+    String getCreateTableSQL();
 
-    public String getTableName();
+    String getTableName();
 
-    public ContentValues getContentValues();
+    ContentValues getContentValues();
 
-    public String getIdColumnName();
-    public int getId();
+    String getIdColumnName();
 
-    public String getUpdateSQL(int dabataseVersion);
+    int getId();
+
+    String[] getUpdateSQLs(int dabataseVersion);
 }

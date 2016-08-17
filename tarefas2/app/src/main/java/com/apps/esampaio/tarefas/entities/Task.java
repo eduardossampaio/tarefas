@@ -71,9 +71,7 @@ public class Task implements Serializable{
 
     @Override
     public boolean equals(Object o) {
-        if ( o instanceof Task == false)
-            return false;
-        return ((Task) o).id == this.id;
+        return o instanceof Task != false && ((Task) o).id == this.id;
     }
 
     public List<Subtask> getSubtasks() {
@@ -87,11 +85,12 @@ public class Task implements Serializable{
         }
     }
 
-    public void updateTask(Subtask newSubtask) {
+    public void updateSubtask(Subtask newSubtask) {
         int pos=-1;
         for(int i=0;i<subtasks.size();i++){
             if ( subtasks.get(i).getId() == newSubtask.getId()){
                 pos = i;
+                break;
             }
         }
         if(pos >= 0){

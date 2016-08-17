@@ -2,13 +2,16 @@ package com.apps.esampaio.tarefas.view.activity;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,6 +24,7 @@ import com.apps.esampaio.tarefas.view.dialogs.NewSubtaskDialog;
 import com.apps.esampaio.tarefas.view.dialogs.OptionsDialog;
 import com.apps.esampaio.tarefas.view.activity.adapter.ListSubtaskAdapter;
 
+import java.util.Date;
 import java.util.List;
 
 public class ListSubtasksActivity extends AppCompatActivity {
@@ -56,10 +60,8 @@ public class ListSubtasksActivity extends AppCompatActivity {
         adapter = new ListSubtaskAdapter(item,this) {
             @Override
             public void itemClicked(RecyclerView.ViewHolder viewHolder, Subtask item) {
-//                Intent intent = new Intent(ListSubtasksActivity.this,DetailSubtask.class);
-//                intent.putExtra("subtask",item);
-//                startActivity(intent);
-
+//                createDetailDialog(item);
+//                startCreatelActivity(item);
             }
 
             @Override
@@ -78,14 +80,26 @@ public class ListSubtasksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showNewSubtaskDialog();
+//                Intent intent = new Intent(ListSubtasksActivity.this,CreateSubtaskActivity.class);
+//                startActivity(intent);
             }
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
         updateItems();
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if( item.getItemId()==android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void updateItems(){
@@ -103,8 +117,10 @@ public class ListSubtasksActivity extends AppCompatActivity {
     private void showNewSubtaskDialog(){
         Dialog dialog = new NewSubtaskDialog(this) {
             @Override
-            public void onItemEntered(String name, String description) {
+            public void onItemEntered(String name, String description,Date taskDate,Date taskTime) {
                 Subtask subtask = new Subtask(name,description);
+                subtask.setTaskDate(taskDate);
+                subtask.setTaskTime(taskTime);
                 item.addSubtask(subtask);
                 tasks.updateTask(item);
                 updateItems();
@@ -138,15 +154,34 @@ public class ListSubtasksActivity extends AppCompatActivity {
     private void createEditDialog(final Subtask subtask) {
         Dialog dialog = new NewSubtaskDialog(this,subtask) {
             @Override
-            public void onItemEntered(String name, String description) {
+            public void onItemEntered(String name, String description,Date taskDate,Date taskTime) {
                 subtask.setName(name);
+                subtask.setTaskDate(taskDate);
+                subtask.setTaskTime(taskTime);
                 subtask.setDescription(description);
-                item.updateTask(subtask);
+                item.updateSubtask(subtask);
                 tasks.updateTask(item);
                 updateItems();
             }
         };
         dialog.show();
+    }
+    private void createDetailDialog(final Subtask subtask){
+        Dialog dialog = new NewSubtaskDialog(this,subtask) {
+            @Override
+            public void onItemEntered(String name, String description,Date taskDate,Date taskTime) {
+                subtask.setName(name);
+                subtask.setDescription(description);
+                subtask.setTaskDate(taskDate);
+                subtask.setTaskTime(taskTime);
+                item.updateSubtask(subtask);
+                tasks.updateTask(item);
+                updateItems();
+            }
+        };
+        dialog.setTitle("-Subtask-");
+        dialog.show();
+
     }
 
     private void createDeleteDialog(final Subtask subtask) {
@@ -175,7 +210,8 @@ public class ListSubtasksActivity extends AppCompatActivity {
         protected void onPostExecute(Subtask subtask) {
             super.onPostExecute(subtask);
             updateItems();
-            String message = subtask.getName();
+            String message = subtask.getName().trim();
+            message+=" ";
             if ( subtask.isComplete())
                 message += ListSubtasksActivity.this.getString(R.string.subtasks_updated_message_checked);
             else
@@ -186,6 +222,26 @@ public class ListSubtasksActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Void... values) {
 
+        }
+    }
+
+
+    private void startCreatelActivity(Subtask subtask){
+        Intent intent = new Intent(ListSubtasksActivity.this,SubtaskDialogActivity.class);
+        intent.putExtra("subtask",subtask);
+        startActivityForResult(intent,SubtaskDialogActivity.REQUEST_CODE_ADD,null);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==SubtaskDialogActivity.REQUEST_CODE_ADD){
+            if(resultCode==SubtaskDialogActivity.RESULT_CODE_COMPLETE){
+                Subtask subtask = (Subtask)data.getSerializableExtra("subtask");
+                if(subtask!=null){
+                    item.updateSubtask(subtask);
+                    tasks.updateTask(item);
+                }
+            }
         }
     }
 }

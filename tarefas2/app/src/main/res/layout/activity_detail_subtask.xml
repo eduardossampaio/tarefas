@@ -2,30 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_detail_subtask"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.DetailSubtask">
+    style="@style/AppTheme"
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:text="TextView"
+
+    <include
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        layout="@layout/dialog_new_subtask"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/activity_detail_subtask_title"
-        android:gravity="center_vertical"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentLeft="true"
+        android:id="@+id/include_layout"
+        android:layout_alignParentRight="true" />
 
-    <TextView
-        android:text="TextView"
+    <include
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_detail_subtask_title"
-        android:layout_alignParentStart="true"
-        android:id="@+id/activity_detail_subtask_description"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true" />
+        layout="@layout/dialog_buttons_layout"
+        android:id="@+id/include_buttons"
+        android:layout_below="@+id/include_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
 </RelativeLayout>
