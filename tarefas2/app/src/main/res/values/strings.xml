@@ -4,8 +4,20 @@
 
     <string name="title_activity_main">MainActivity</string>
     <string name="change_notes">
-        * Interface improvements
+        * Icon changed\n* Now you can backup your tasks\n* Use terms has change
     </string>
+    <!-- license -->
+    <string name="license_terms">
+        By using this application you agree to the following terms:\n\n
+        * Do not use this application to organize wars,terrorists attacks,
+        or attacks on ethnic, religious,social or by hatred reasons against
+        gender, sexuality and identity.\n\n
+        * Do not use this application to organize murders,theft, corruption
+        crimes, embezzlement, extortion or misappropriation of public resources
+    </string>
+    <string name="license_title">Terms of use</string>
+    <string name="license_agree">Agree</string>
+    <string name="license_disagree">Disagree</string>
 
     <!-- Task activity-->
     <string name="empty_task_list">No Tasks Registered</string>
@@ -81,6 +93,7 @@
     <string name="title_activity_settings">Settings</string>
     <string name="settings_category_display_tasks">Display Tasks</string>
     <string name="settings_category_notifications">Notifications</string>
+    <string name="settings_category_backup">Backups</string>
     <!-- order -->
     <!-- order type -->
     <string name="settings_title_order">Order</string>
@@ -89,7 +102,7 @@
         <item>No order</item>
         <item>Order by name</item>
         <item>Order by date</item>
-        <item>Completed first</item>
+        <item>Uncompleted first</item>
     </string-array>
     <string-array name="settings_order_values">
         <item>0</item>
@@ -122,6 +135,10 @@
     </string-array>
     <string name="settings_notification_vibrate">Vibrate</string>
 
+    <!-- backup -->
+    <string name="settings_backup_manual_backup">Manual backup</string>
+    <string name="settings_backup_manual_backup_summary">Enables user to manually backup and restore tasks</string>
+
     <!-- Backup -->
     <string name="backup_task_button_restore_label">Restore</string>
     <string name="backup_task_button_delete_label">Delete</string>
@@ -131,6 +148,9 @@
     <string name="backup_task_time_message">Backup made at</string>
     <string name="backup_task_backup_done">Task successfully backed up </string>
     <string name="backup_task_restore_done">Task successfully restored</string>
+    <string name="dialog_backup_enabled">Manual backup enabled, please restart app</string>
+    <string name="dialog_backup_disabled">Manual backup disabled, please restart app</string>
+
 
 
 </resources>

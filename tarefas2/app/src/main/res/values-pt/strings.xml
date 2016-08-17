@@ -4,8 +4,20 @@
     <string name="app_name">Tarefas</string>
 
     <string name="change_notes">
-        * Melhorias de interface
+        * Ícone alterado\n* Agora você pode fazer backup das suas tarefas\n* Termos de uso alterados
     </string>
+
+    <string name="license_terms">
+      Ao utilizar este aplicativo você concorda com os seguintes termos:\n\n
+        * Não utilizar este aplicativo para organizar guerras, atentatos terroristas,
+        ou agressoões contra grupos étnicos,religiosos,sociais ou por motivos de ódio
+        contra gênero,sexualidade ou identidade.\n\n
+        * Não utilizar este aplicativo para organizar assassinatos,roubos, crimes de
+        corrupção, estelionato, extorção ou desvio de recursos público.
+    </string>
+    <string name="license_title">Termos de uso</string>
+    <string name="license_agree">Concordo</string>
+    <string name="license_disagree">Discordo</string>
 
 
     <!-- Task activity-->
@@ -22,12 +34,15 @@
     <string name="today_task_fragment_empty_message">Nenhuma tarefa para hoje</string>
     <string name="completed_task_fragment_empty_message">Nenhuma tarefa completa</string>
 
+    <string name="backup_task_fragment_empty_message">Nenhum backup de tarefas</string>
+
     <!-- Dialogs -->
     <string name="dialog_message_ok">Ok</string>
     <string name="dialog_message_cancel">Cancelar</string>
     <string name="dialog_message_error">Erro</string>
     <string name="dialog_options_edit">Editar</string>
     <string name="dialog_options_delete">Deletar</string>
+    <string name="dialog_options_backup">Backup</string>
     <string name="dialog_release_notes_title">Novidades da versão</string>
 
     <!-- New Task dialog -->
@@ -81,6 +96,7 @@
     <string name="title_activity_settings">Configurações</string>
     <string name="settings_category_display_tasks">Exibição de tarefas</string>
     <string name="settings_category_notifications">Notificações</string>
+    <string name="settings_category_backup">Backups</string>
     <!-- order -->
     <!-- order type -->
     <string name="settings_title_order">Ordenação</string>
@@ -89,7 +105,7 @@
         <item>Sem ordenação</item>
         <item>Ordenado por nome</item>
         <item>Ordenado por data</item>
-        <item>Completas primeiro</item>
+        <item>Incompletas primeiro</item>
     </string-array>
     <string-array name="settings_order_values">
         <item>0</item>
@@ -122,14 +138,19 @@
     </string-array>
     <string name="settings_notification_vibrate">Vibrar</string>
 
+    <!-- backup -->
+    <string name="settings_backup_manual_backup">Backup manual</string>
+    <string name="settings_backup_manual_backup_summary">Permite o usuário fazer backup e restaurar tarefas manualmente</string>
+
     <!-- Backup -->
     <string name="backup_task_button_restore_label">Restaurar</string>
     <string name="backup_task_button_delete_label" >Deletar</string>
     <string name="backup_task_restore_message">Deseja restaurar estes backups</string>
     <string name="backup_task_delete_message">Deseja delete estes backups</string>
     <string name="backup_task_already_restored_message">Esta tarefa já foi restaurada</string>
-    <string name="backup_task_time_message">Backup realizado em</string>
+    <string name="backup_task_time_message">Salvo em</string>
     <string name="backup_task_backup_done">Backup realizado com sucesso</string>
-
-
+    <string name="backup_task_restore_done">Tarefa restaurada com sucesso</string>
+    <string name="dialog_backup_enabled">Backup manual habilitado, por favor reinicie o aplicativo</string>
+    <string name="dialog_backup_disabled">Backup manual desabilitado, por favor reinicie o aplicativo</string>
 </resources>

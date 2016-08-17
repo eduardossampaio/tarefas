@@ -40,6 +40,9 @@ public class Settings {
     public boolean notifyAllTasks(){
         return getBoolPref("preference_notify_all",true);
     }
+    public boolean manualBackup(){
+        return getBoolPref("preference_enable_manual_backup",false);
+    }
     public Order order(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         int order = Integer.parseInt( preferences.getString("preference_order_type","0") );

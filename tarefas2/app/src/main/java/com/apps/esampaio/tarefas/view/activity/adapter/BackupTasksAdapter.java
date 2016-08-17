@@ -1,6 +1,5 @@
 package com.apps.esampaio.tarefas.view.activity.adapter;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,10 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.apps.esampaio.tarefas.R;
-import com.apps.esampaio.tarefas.core.Backup;
-import com.apps.esampaio.tarefas.core.Settings;
 import com.apps.esampaio.tarefas.core.entities.BackupItem;
-import com.apps.esampaio.tarefas.core.entities.Subtask;
 import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.core.utils.StringUtils;
 
@@ -64,13 +60,13 @@ public class BackupTasksAdapter extends RecyclerView.Adapter<BackupTasksAdapter.
             return backupItem.hashCode();
         }
     }
-    private List<Item> itens;
+    private List<Item> items;
 
     public BackupTasksAdapter(Context context,List<BackupItem> backupItems) {
-        this.itens = new ArrayList<>();
+        this.items = new ArrayList<>();
         this.context = context;
         for (BackupItem backupItem :backupItems) {
-            itens.add(new Item(backupItem));
+            items.add(new Item(backupItem));
         }
     }
 
@@ -81,7 +77,7 @@ public class BackupTasksAdapter extends RecyclerView.Adapter<BackupTasksAdapter.
         holder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Item item =itens.get(holder.getLayoutPosition());
+                Item item = items.get(holder.getLayoutPosition());
                 item.selected = isChecked;
                 itemChanged(item);
             }
@@ -94,7 +90,7 @@ public class BackupTasksAdapter extends RecyclerView.Adapter<BackupTasksAdapter.
     }
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-        BackupItem item = itens.get(position).backupItem;
+        BackupItem item = items.get(position).backupItem;
         Task task = item.getTask();
         holder.taskName.setText(task.getName());
         holder.backupDate.setText(StringUtils.append(true,context.getString(R.string.backup_task_time_message),item.getBackupDate().formatDate(),item.getBackupDate().formatTime()));
@@ -102,19 +98,19 @@ public class BackupTasksAdapter extends RecyclerView.Adapter<BackupTasksAdapter.
 
 
     public void removeItem(BackupItem item) {
-        int pos = this.itens.indexOf(new Item(item));
-        this.itens.remove(pos);
+        int pos = this.items.indexOf(new Item(item));
+        this.items.remove(pos);
         notifyItemRemoved(pos);
     }
 
     @Override
     public int getItemCount() {
-        return itens.size();
+        return items.size();
     }
 
     public int getSelectedItensCount(){
         int count =0;
-        for (Item item:itens) {
+        for (Item item: items) {
             if(item.selected)
                 count++;
         }
@@ -123,12 +119,23 @@ public class BackupTasksAdapter extends RecyclerView.Adapter<BackupTasksAdapter.
 
     public List<BackupItem> getSelectedTasks(){
         List<BackupItem> backupItems = new ArrayList<>();
-        for (Item item: this.itens) {
+        for (Item item: this.items) {
             if(item.selected)
                 backupItems.add(item.backupItem);
         }
         return backupItems;
     }
 
-
+    public boolean haveSelectedMoreThanOne(){
+        for(int i = 0; i<this.items.size(); i++){
+            if(!items.get(i).selected)
+                continue;
+            for(int j = i+1; j<this.items.size(); j++){
+                if( items.get(i).backupItem.equalsName(items.get(j).backupItem) && items.get(j).selected){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

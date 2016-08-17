@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.apps.esampaio.tarefas.R;
 import com.apps.esampaio.tarefas.core.Backup;
+import com.apps.esampaio.tarefas.core.Settings;
 import com.apps.esampaio.tarefas.core.Tasks;
 import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.view.activity.ListSubtasksActivity;
@@ -88,7 +89,6 @@ public class ListTasksFragment extends Fragment {
             }
         });
         updateItems();
-//        refreshItems();
         return baseLayout;
 
     }
@@ -117,16 +117,26 @@ public class ListTasksFragment extends Fragment {
 
 
     protected void createOptionsMenu(final Task item) {
-        final int [] messagesIds={
-                R.string.dialog_options_edit,
-                R.string.dialog_options_delete,
-                R.string.dialog_options_backup
-        };
+        Settings settings = Settings.getInstance(getContext());
+        int [] messagesIds;
+        if(settings.manualBackup()) {
+            messagesIds = new int[]{
+                    R.string.dialog_options_edit,
+                    R.string.dialog_options_delete,
+                    R.string.dialog_options_backup
+            };
+        }else{
+            messagesIds = new int[]{
+                    R.string.dialog_options_edit,
+                    R.string.dialog_options_delete,
+            };
+        }
+        final int[] messageIdsPointer =messagesIds;
         Dialog dialog = new OptionsDialog(getActivity(),messagesIds){
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 super.onClick(dialog, which);
-                int selectedId = messagesIds[which];
+                int selectedId = messageIdsPointer[which];
 
                 if ( selectedId == R.string.dialog_options_edit){
                     createEditDialog(item);

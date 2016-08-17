@@ -1,5 +1,7 @@
 package com.apps.esampaio.tarefas.core.entities;
 
+import com.apps.esampaio.tarefas.core.backups.Exclude;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +13,7 @@ public class Task implements Serializable{
     private int id;
     private String name;
     private List<Subtask> subtasks;
-
+    @Exclude
     private Comparator<Subtask> comparator;
 
     public Task(int id,String name){

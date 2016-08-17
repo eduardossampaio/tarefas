@@ -81,7 +81,7 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
                 .where()
                 .eq("t.id","s.task_id").and()
                 .eqDate("s.task_date",date)
-                .group("t.name")
+//                .group("t.name")
                 .execute();
 
     }
@@ -96,7 +96,7 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
                 .eq("t.id","s.task_id").and()
                 .eqDate("s.task_date",date).and()
                 .eq("s.completed",completed)
-                .group("t.name")
+//                .group("t.name")
                 .execute();
 
     }
@@ -114,7 +114,7 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
                 .eqTime("s.task_time",time).and()
                 .eq("t.id","s.task_id").and()
                 .eq("s.completed",false)
-                .group("t.name")
+//                .group("t.name")
                 .execute();
 
     }
@@ -128,7 +128,7 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
                 .where()
                 .eq("t.id","s.task_id")
                 .and().eq("s.completed",completed)
-                .group("t.name")
+//                .group("t.name")
                 .execute();
 
     }

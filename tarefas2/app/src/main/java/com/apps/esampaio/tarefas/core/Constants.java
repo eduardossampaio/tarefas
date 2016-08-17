@@ -16,4 +16,6 @@ public interface Constants {
 
     String BACKUP_DATE_FORMAT = "yyyyMMddHHmmss";
 
+    String USE_TERMS_AGREED_KEY = "USE_TERMS_AGREED";
+
 }

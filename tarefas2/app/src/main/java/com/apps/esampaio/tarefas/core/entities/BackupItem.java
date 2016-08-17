@@ -17,6 +17,11 @@ public class BackupItem {
         this.backupDate = backupDate;
     }
 
+
+    public boolean equalsName(BackupItem item) {
+        return item.getTask().getName().equals(getTask().getName());
+    }
+
     public File getFile() {
         return file;
     }

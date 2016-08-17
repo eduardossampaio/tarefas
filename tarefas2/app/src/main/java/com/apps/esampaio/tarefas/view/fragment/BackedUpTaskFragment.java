@@ -28,7 +28,7 @@ import java.util.List;
  * Created by eduardo on 15/08/2016.
  */
 
-public class BackupedTaskFragment extends Fragment {
+public class BackedUpTaskFragment extends Fragment {
 
     private TextView emptyMessage;
     private RecyclerView list;
@@ -61,7 +61,10 @@ public class BackupedTaskFragment extends Fragment {
                     if (selectedItensCount == 0) {
                         restoreButton.setEnabled(false);
                         deleteButton.setEnabled(false);
-                    }else {
+                    }else if(haveSelectedMoreThanOne()) {
+                        restoreButton.setEnabled(false);
+                        deleteButton.setEnabled(true);
+                    }else{
                         restoreButton.setEnabled(true);
                         deleteButton.setEnabled(true);
                     }
@@ -83,13 +86,14 @@ public class BackupedTaskFragment extends Fragment {
             });
             refresh();
         } catch (Exception e) {
-
+            e.printStackTrace();
+            emptyMessage.setEnabled(true);
+            emptyMessage.setText(e.getMessage());
         }
         return layout;
     }
 
-    public void refresh(){
-        try {
+    public void refresh() throws Exception {
             List<BackupItem> tasks = backup.getBackupedTasks();
             if(tasks.size()==0){
                 emptyMessage.setVisibility(View.VISIBLE);
@@ -100,9 +104,6 @@ public class BackupedTaskFragment extends Fragment {
                 emptyMessage.setVisibility(View.INVISIBLE);
                 list.setVisibility(View.VISIBLE);
             }
-        }catch (Exception e){
-
-        }
     }
 
     private void restoreButtonClick() {

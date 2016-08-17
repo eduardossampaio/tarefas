@@ -44,9 +44,6 @@ public class ListSubtasksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_subtasks);
 
         layout = findViewById(R.id.activity_list_subtasks);
-//        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
         recyclerView = (RecyclerView) findViewById(R.id.list_subtasks_items_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         emptyListMessage = (TextView) findViewById(R.id.list_subtasks_empty_task_list);
@@ -56,8 +53,6 @@ public class ListSubtasksActivity extends AppCompatActivity {
         adapter = new ListSubtaskAdapter(item,this) {
             @Override
             public void itemClicked(RecyclerView.ViewHolder viewHolder, Subtask item) {
-//                createDetailDialog(item);
-//                startCreatelActivity(item);
             }
 
             @Override
@@ -182,23 +177,6 @@ public class ListSubtasksActivity extends AppCompatActivity {
     private void editSubtask(Subtask subtask){
         editSubtask(subtask, subtask.getName(), subtask.getDescription(), subtask.getTaskDate(), subtask.getTaskTime());
     }
-//    private void createDetailDialog(final Subtask subtask){
-//        Dialog dialog = new NewSubtaskDialog(this,subtask) {
-//            @Override
-//            public void onItemEntered(String name, String description,Date taskDate,Date taskTime) {
-//                subtask.setName(name);
-//                subtask.setDescription(description);
-//                subtask.setTaskDate(taskDate);
-//                subtask.setTaskTime(taskTime);
-//                item.updateSubtask(subtask);
-//                tasks.updateTask(item);
-//                updateItems();
-//            }
-//        };
-//        dialog.setTitle("-Subtask-");
-//        dialog.show();
-//
-//    }
 
     private void createDeleteDialog(final Subtask subtask) {
         Dialog deleteDialog = new ConfirmationDialog(ListSubtasksActivity.this,getString(R.string.dialog_delete_subtask_title)+subtask.getName()+"?"){
@@ -206,7 +184,6 @@ public class ListSubtasksActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 super.onClick(dialog, which);
                 tasks.deleteSubtask(subtask);
-//                item.getSubtasks().remove(subtask);
                 adapter.deleteItem(subtask);
                 updateItems();
             }
@@ -238,11 +215,6 @@ public class ListSubtasksActivity extends AppCompatActivity {
             Snackbar.make(layout,message,Snackbar.LENGTH_SHORT).show();
             editSubtask(subtask);
         }
-
     }
-
-
-
-
 
 }

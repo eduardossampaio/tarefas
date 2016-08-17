@@ -5,6 +5,7 @@ import android.os.Environment;
 import android.os.SystemClock;
 import android.util.JsonWriter;
 
+import com.apps.esampaio.tarefas.core.backups.AnnotationExcludeExtrategy;
 import com.apps.esampaio.tarefas.core.entities.BackupItem;
 import com.apps.esampaio.tarefas.core.entities.DateTime;
 import com.apps.esampaio.tarefas.core.entities.Subtask;
@@ -34,7 +35,7 @@ public class Backup {
     }
 
     public void saveTask(Task task) throws Exception{
-        GsonBuilder builder = new GsonBuilder();
+        GsonBuilder builder = new GsonBuilder().setExclusionStrategies(new AnnotationExcludeExtrategy());
         Gson gson = builder.create();
         String jsonTask = gson.toJson(task);
         if(jsonTask !=null){
@@ -48,7 +49,7 @@ public class Backup {
 
     public List<BackupItem> getBackupedTasks() throws Exception {
         List<BackupItem> items = new ArrayList<>();
-        GsonBuilder builder = new GsonBuilder();
+        GsonBuilder builder = new GsonBuilder().setExclusionStrategies(new AnnotationExcludeExtrategy());
         Gson gson = builder.create();
         File[] savedTasksFiles = Files.readDir(new File(Constants.BASE_SAVE_DIR));
         for (File file:savedTasksFiles) {
