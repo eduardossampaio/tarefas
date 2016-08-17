@@ -11,7 +11,7 @@ public class StringUtils {
         return Character.toUpperCase(s.charAt(0))+s.substring(1);
     }
 
-    public static String append(String ... strings){
+    public static String append(boolean space,String ... strings){
         StringBuilder builder = new StringBuilder();
         for (String s: strings) {
             if(s.startsWith(" ") || s.endsWith(" ")) {
@@ -19,7 +19,8 @@ public class StringUtils {
             }else {
                 builder.append(s);
             }
-            builder.append(" ");
+            if(space)
+                builder.append(" ");
         }
         return builder.toString();
     }

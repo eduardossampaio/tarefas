@@ -46,6 +46,16 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
     }
 
     @Override
+    public Task getTask(String name) {
+        return beginTransaction()
+                .select()
+                .from("Task")
+                .where()
+                .eq("name","\""+name+"\"")
+                .uniqueResult();
+    }
+
+    @Override
     public Transaction<Task> beginTransaction() {
         return new BaseTransaction<Task>() {
             @Override
@@ -71,7 +81,7 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
                 .where()
                 .eq("t.id","s.task_id").and()
                 .eqDate("s.task_date",date)
-                .group("t.name")
+//                .group("t.name")
                 .execute();
 
     }
@@ -86,7 +96,7 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
                 .eq("t.id","s.task_id").and()
                 .eqDate("s.task_date",date).and()
                 .eq("s.completed",completed)
-                .group("t.name")
+//                .group("t.name")
                 .execute();
 
     }
@@ -104,7 +114,7 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
                 .eqTime("s.task_time",time).and()
                 .eq("t.id","s.task_id").and()
                 .eq("s.completed",false)
-                .group("t.name")
+//                .group("t.name")
                 .execute();
 
     }
@@ -118,7 +128,7 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
                 .where()
                 .eq("t.id","s.task_id")
                 .and().eq("s.completed",completed)
-                .group("t.name")
+//                .group("t.name")
                 .execute();
 
     }
@@ -159,6 +169,7 @@ public class TaskDAOImpl extends DAOImpl implements TaskDAO {
     private Task rawUnique(String sql){
         Task task = null;
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
         Cursor cursor = db.rawQuery(sql,null);
         while(cursor.moveToNext()){
             int id = cursor.getInt(0);

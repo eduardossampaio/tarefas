@@ -2,7 +2,7 @@ package com.apps.esampaio.tarefas.core;
 
 import android.content.Context;
 
-import com.apps.esampaio.tarefas.core.entities.Comparators.Comparators;
+import com.apps.esampaio.tarefas.core.entities.comparators.Comparators;
 import com.apps.esampaio.tarefas.core.entities.Subtask;
 import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.core.entities.persistence.DAO.Impl.SubtaskDAOImpl;
@@ -62,6 +62,10 @@ public class Tasks {
         List<Task> uncompletedTasks = getTasksByCompleted(false);
         tasks.removeAll(uncompletedTasks);
         return order(tasks);
+    }
+
+    public boolean exists(Task task){
+        return taskDAO.getTask(task.getName()) != null;
     }
 
     private List<Task> getTasksByCompleted(boolean completed) {

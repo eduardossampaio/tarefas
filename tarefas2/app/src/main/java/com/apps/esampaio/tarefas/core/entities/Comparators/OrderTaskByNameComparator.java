@@ -1,4 +1,4 @@
-package com.apps.esampaio.tarefas.core.entities.Comparators;
+package com.apps.esampaio.tarefas.core.entities.comparators;
 
 import com.apps.esampaio.tarefas.core.entities.Task;
 

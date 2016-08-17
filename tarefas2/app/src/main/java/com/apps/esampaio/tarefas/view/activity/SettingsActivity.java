@@ -8,6 +8,7 @@ import android.preference.PreferenceFragment;
 import android.view.MenuItem;
 
 import com.apps.esampaio.tarefas.R;
+import com.apps.esampaio.tarefas.view.dialogs.MessageDialog;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override
@@ -57,6 +58,17 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     changePreferenceSummary(preference,newValue.toString());
+                    return true;
+                }
+            });
+
+            findPreference("preference_enable_manual_backup").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    Boolean enabled = (Boolean)newValue;
+                    int messageId = enabled ? R.string.dialog_backup_enabled : R.string.dialog_backup_disabled;
+                    MessageDialog messageDialog = new MessageDialog(getActivity(),getString(R.string.app_name),getString(messageId));
+                    messageDialog.show();
                     return true;
                 }
             });
