@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,13 +127,17 @@ public class BackedUpTaskFragment extends Fragment {
     }
 
     private void deleteBackups(){
-        List<BackupItem> items = adapter.getSelectedTasks();
-        Backup backup = new Backup(getContext());
-        for (BackupItem item : items) {
-            backup.delete(item);
-            adapter.removeItem(item);
+        try {
+            List<BackupItem> items = adapter.getSelectedTasks();
+            Backup backup = new Backup(getContext());
+            for (BackupItem item : items) {
+                backup.delete(item);
+                adapter.removeItem(item);
+            }
+            refresh();
+        }catch (Exception e){
+            Log.e("tarefas",e.getMessage(),e);
         }
-        refresh();
     }
     private void restoreBackups(){
         List<BackupItem> items = adapter.getSelectedTasks();
