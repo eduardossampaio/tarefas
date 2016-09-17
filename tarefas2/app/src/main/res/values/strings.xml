@@ -50,8 +50,6 @@
     <!-- Task delete dialog -->
     <string name="dialog_delete_task_title">Delete the task: </string>
 
-
-
     <!-- Subtasks -->
     <string name="subtasks_updated_message_checked"> checked as completed</string>
     <string name="subtasks_updated_message_unchecked"> checked as uncompleted</string>
@@ -83,6 +81,9 @@
     <string name="notification_tasks_title">You have tasks today</string>
     <string name="notification_tasks_list_title">Today tasks</string>
 
+    <!-- Menus -->
+    <string name="menu_list_subtask_edit">Edit</string>
+    <string name="menu_list_subtask_delete">Delete</string>
 
     <!-- Navigation Drawer -->
     <string name="navigation_drawer_all_tasks">All Tasks</string>

@@ -11,7 +11,7 @@ public class OrderSubtaskByCompletedComparator implements Comparator<Subtask>,Se
     @Override
     public int compare(Subtask lhs, Subtask rhs) {
         if ( lhs.isComplete() == rhs.isComplete()){
-            return  0;
+            return  lhs.getName().compareTo(rhs.getName());
         }else if(lhs.isComplete() && ! rhs.isComplete()){
             return 1;
         }else{

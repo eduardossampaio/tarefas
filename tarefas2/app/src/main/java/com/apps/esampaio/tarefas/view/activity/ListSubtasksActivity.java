@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.apps.esampaio.tarefas.view.activity.adapter.ListSubtaskAdapter;
 import com.apps.esampaio.tarefas.view.dialogs.ConfirmationDialog;
 import com.apps.esampaio.tarefas.view.dialogs.DetailSubtaskDialog;
 import com.apps.esampaio.tarefas.view.dialogs.NewSubtaskDialog;
+import com.apps.esampaio.tarefas.view.dialogs.NewTaskDialog;
 import com.apps.esampaio.tarefas.view.dialogs.OptionsDialog;
 
 import java.util.Date;
@@ -79,21 +81,60 @@ public class ListSubtasksActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         updateItems();
-        if(getSupportActionBar()!=null) {
+        updateActionBar();
+
+    }
+    void updateActionBar() {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setSubtitle(item.getName());
         }
-
     }
-
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.list_subtasks_menu,menu);
+        return super.onPrepareOptionsMenu(menu);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if( item.getItemId()==android.R.id.home){
-            finish();
+        switch(item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.list_subtask_menu_edit:
+                editTask();
+                break;
+            case R.id.list_subtask_menu_delete:
+                deleteTask();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteTask(){
+        Dialog deleteDialog = new ConfirmationDialog(this,getString(R.string.dialog_delete_task_title)+item.getName()+"?"){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                super.onClick(dialog, which);
+                tasks.delete(item);
+                finish();
+            }
+        };
+        deleteDialog.show();
+    }
+
+    private void editTask(){
+        Dialog editDialog = new NewTaskDialog(this,item) {
+            @Override
+            public void onItemEntered(String taskName) {
+                item.setName(taskName);
+                tasks.updateTask(item);
+                updateActionBar();
+            }
+        };
+        editDialog.show();
     }
 
     private void updateItems(){
