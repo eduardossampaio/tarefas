@@ -54,6 +54,7 @@ public abstract class NewTaskDialog extends Dialog{
             }
         });
         builder.setView(layout);
+        builder.setCancelable(false);
     }
 
     public  abstract void onItemEntered(String taskName);

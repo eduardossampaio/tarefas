@@ -19,6 +19,7 @@ import com.apps.esampaio.tarefas.core.entities.Subtask;
 import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.view.activity.adapter.ListSubtaskAdapter;
 import com.apps.esampaio.tarefas.view.dialogs.ConfirmationDialog;
+import com.apps.esampaio.tarefas.view.dialogs.DetailSubtaskDialog;
 import com.apps.esampaio.tarefas.view.dialogs.NewSubtaskDialog;
 import com.apps.esampaio.tarefas.view.dialogs.OptionsDialog;
 
@@ -53,6 +54,7 @@ public class ListSubtasksActivity extends AppCompatActivity {
         adapter = new ListSubtaskAdapter(item,this) {
             @Override
             public void itemClicked(RecyclerView.ViewHolder viewHolder, Subtask item) {
+                createDetailDialog(item);
             }
 
             @Override
@@ -152,7 +154,16 @@ public class ListSubtasksActivity extends AppCompatActivity {
                 editSubtask(subtask,name,description,taskDate,taskTime);
             }
         };
-        dialog.setTitle(getString(R.string.dialog_new_subtask_title_edit));
+        dialog.show();
+    }
+
+    private void createDetailDialog(final Subtask subtask) {
+        Dialog dialog = new DetailSubtaskDialog(this,subtask) {
+            @Override
+            public void onItemEntered(String name, String description,Date taskDate,Date taskTime) {
+                editSubtask(subtask,name,description,taskDate,taskTime);
+            }
+        };
         dialog.show();
     }
     private void editSubtask(Subtask subtask,String newName, String newDescription,Date newDate,Date newTime){

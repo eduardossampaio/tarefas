@@ -50,6 +50,8 @@
     <!-- Task delete dialog -->
     <string name="dialog_delete_task_title">Delete the task: </string>
 
+
+
     <!-- Subtasks -->
     <string name="subtasks_updated_message_checked"> checked as completed</string>
     <string name="subtasks_updated_message_unchecked"> checked as uncompleted</string>
@@ -72,8 +74,10 @@
     <string name="title_activity_dialog_subtask">SubtaskDialogActivity</string>
 
     <!-- Detail subtasks -->
-    <string name="detail_subtasks_details_title">Details</string>
-    <string name="title_activity_add_task">AddTaskActivity</string>
+    <string name="dialog_detail_subtasks_title">Details</string>
+    <string name="dialog_detail_subtasks_no_description">No description</string>
+    <string name="dialog_detail_subtasks_no_date">No date</string>
+    <string name="dialog_detail_subtasks_no_time">No time</string>
 
     <!-- Notifications -->
     <string name="notification_tasks_title">You have tasks today</string>

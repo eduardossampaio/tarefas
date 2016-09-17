@@ -116,7 +116,7 @@ public abstract class NewSubtaskDialog extends AppCompatDialog {
             }
         });
         builder.setView(layout);
-
+        builder.setCancelable(false);
         disableTime();
     }
 

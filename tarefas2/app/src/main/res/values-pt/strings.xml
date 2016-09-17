@@ -76,7 +76,6 @@
 
     <!-- Detail subtasks -->
     <string name="detail_subtasks_details_title">Detalhes</string>
-    <string name="title_activity_add_task">AddTaskActivity</string>
 
     <!-- Notifications -->
     <string name="notification_tasks_title">Você tem tarefas para hoje</string>
