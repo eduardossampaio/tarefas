@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -24,14 +25,22 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
         protected TextView taskName;
         private TextView progressNumber;
         private ProgressBar progressBar;
+        private ImageView btDelete;
+        private ImageView btEdit;
         public ViewHolder(View itemView){
-                super(itemView);
-                taskName = (TextView) itemView.findViewById(R.id.list_task_item_task_name);
-                progressNumber = (TextView) itemView.findViewById(R.id.list_task_item_completed_number);
-                progressBar = (ProgressBar) itemView.findViewById(R.id.list_task_item_progress);
-            }
+            super(itemView);
+            taskName = (TextView) itemView.findViewById(R.id.list_task_item_task_name);
+            progressNumber = (TextView) itemView.findViewById(R.id.list_task_item_completed_number);
+            progressBar = (ProgressBar) itemView.findViewById(R.id.list_task_item_progress);
+            btDelete = (ImageView) itemView.findViewById(R.id.bt_delete);
+            btEdit = (ImageView) itemView.findViewById(R.id.bt_edit);
+        }
 
     }
+    public static final int OPTION_DELETE   = 1001;
+    public static final int OPTION_EDIT     = 1002;
+    public static final int OPTION_BACKUP   = 1003;
+
     private List<Task> items;
     private Context context;
     public ListTaskAdapter(Context context){
@@ -87,7 +96,8 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
     public abstract void itemClicked(RecyclerView.ViewHolder viewHolder,Task item);
 
     public void itemLongClicked(RecyclerView.ViewHolder viewHolder,Task item){
-
+    }
+    public void optionSelected(int option,Task item){
     }
 
 
@@ -97,11 +107,13 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
         final View content = view.findViewById(R.id.list_task_item_content);
         final ListTaskAdapter.ViewHolder viewHolder = new ListTaskAdapter.ViewHolder(view);
 
+
+
         content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int pos = viewHolder.getLayoutPosition();
-                Task task = items.get( pos );
+                final Task task = items.get( pos );
                 itemClicked(viewHolder,task);
             }
         });
@@ -109,9 +121,25 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
             @Override
             public boolean onLongClick(View v) {
                 int pos = viewHolder.getLayoutPosition();
-                Task task = items.get( pos );
+                final Task task = items.get( pos );
                 itemLongClicked(viewHolder,task);
                 return true;
+            }
+        });
+        viewHolder.btEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = viewHolder.getLayoutPosition();
+                final Task task = items.get( pos );
+                optionSelected(OPTION_EDIT,task);
+            }
+        });
+        viewHolder.btDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = viewHolder.getLayoutPosition();
+                final Task task = items.get( pos );
+                optionSelected(OPTION_DELETE,task);
             }
         });
         return viewHolder;

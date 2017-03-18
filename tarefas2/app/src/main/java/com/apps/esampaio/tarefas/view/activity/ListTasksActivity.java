@@ -29,8 +29,6 @@ import br.liveo.model.Navigation;
 import br.liveo.navigationliveo.NavigationLiveo;
 
 public class ListTasksActivity extends NavigationLiveo implements OnItemClickListener{
-
-
     private HelpLiveo mHelpLiveo;
 
     //fragments

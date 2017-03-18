@@ -14,30 +14,30 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <LinearLayout
-            android:background="#66ddff00"
             android:id="@+id/bottom_wrapper"
             android:layout_width="160dp"
             android:weightSum="1"
             android:orientation="horizontal"
             android:layout_height="match_parent">
 
-
             <ImageView
-                android:layout_width="76dp"
-                android:background="#F93F28"
-                android:layout_height="match_parent"
                 app:srcCompat="@drawable/ic_delete"
-                android:tint="@android:color/white"
                 android:id="@+id/bt_delete"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@color/delete_icon_swipe_background"
+                android:tint="@android:color/white"
                 android:scaleType="center" />
 
             <ImageView
-                android:background="#2DB2F7"
-                android:layout_width="match_parent"
-                app:srcCompat="@drawable/ic_clear"
-                android:layout_height="match_parent"
-                android:tint="@android:color/white"
+                app:srcCompat="@drawable/ic_edit"
                 android:id="@+id/bt_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@color/edit_icon_swipe_background"
+                android:tint="@android:color/white"
                 android:scaleType="center" />
         </LinearLayout>
 

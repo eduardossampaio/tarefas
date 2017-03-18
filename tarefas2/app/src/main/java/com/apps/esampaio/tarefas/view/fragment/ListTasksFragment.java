@@ -74,9 +74,12 @@ public class ListTasksFragment extends Fragment {
             }
 
             @Override
-            public void itemLongClicked(RecyclerView.ViewHolder viewHolder, Task item) {
-                super.itemLongClicked(viewHolder, item);
-                createOptionsMenu(item);
+            public void optionSelected(int option, Task item) {
+                if(option == OPTION_EDIT){
+                    createEditDialog(item);
+                }else if(option == OPTION_DELETE){
+                    createDeleteDialog(item);
+                }
             }
         };
 
@@ -116,39 +119,39 @@ public class ListTasksFragment extends Fragment {
     }
 
 
-    protected void createOptionsMenu(final Task item) {
-        Settings settings = Settings.getInstance(getContext());
-        int [] messagesIds;
-        if(settings.manualBackup()) {
-            messagesIds = new int[]{
-                    R.string.dialog_options_edit,
-                    R.string.dialog_options_delete,
-                    R.string.dialog_options_backup
-            };
-        }else{
-            messagesIds = new int[]{
-                    R.string.dialog_options_edit,
-                    R.string.dialog_options_delete,
-            };
-        }
-        final int[] messageIdsPointer =messagesIds;
-        Dialog dialog = new OptionsDialog(getActivity(),messagesIds){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                super.onClick(dialog, which);
-                int selectedId = messageIdsPointer[which];
-
-                if ( selectedId == R.string.dialog_options_edit){
-                    createEditDialog(item);
-                }else if ( selectedId == R.string.dialog_options_delete){
-                    createDeleteDialog(item);
-                }else if(selectedId == R.string.dialog_options_backup){
-                    backupTask(item);
-                }
-            }
-        };
-        dialog.show();
-    }
+//    protected void createOptionsMenu(final Task item) {
+//        Settings settings = Settings.getInstance(getContext());
+//        int [] messagesIds;
+//        if(settings.manualBackup()) {
+//            messagesIds = new int[]{
+//                    R.string.dialog_options_edit,
+//                    R.string.dialog_options_delete,
+//                    R.string.dialog_options_backup
+//            };
+//        }else{
+//            messagesIds = new int[]{
+//                    R.string.dialog_options_edit,
+//                    R.string.dialog_options_delete,
+//            };
+//        }
+//        final int[] messageIdsPointer =messagesIds;
+//        Dialog dialog = new OptionsDialog(getActivity(),messagesIds){
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                super.onClick(dialog, which);
+//                int selectedId = messageIdsPointer[which];
+//
+//                if ( selectedId == R.string.dialog_options_edit){
+//                    createEditDialog(item);
+//                }else if ( selectedId == R.string.dialog_options_delete){
+//                    createDeleteDialog(item);
+//                }else if(selectedId == R.string.dialog_options_backup){
+//                    backupTask(item);
+//                }
+//            }
+//        };
+//        dialog.show();
+//    }
 
     private void backupTask(Task item){
         try {
