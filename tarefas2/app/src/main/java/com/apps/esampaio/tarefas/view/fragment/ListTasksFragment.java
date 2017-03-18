@@ -47,7 +47,6 @@ public class ListTasksFragment extends Fragment {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -118,41 +117,6 @@ public class ListTasksFragment extends Fragment {
         updateItems();
     }
 
-
-//    protected void createOptionsMenu(final Task item) {
-//        Settings settings = Settings.getInstance(getContext());
-//        int [] messagesIds;
-//        if(settings.manualBackup()) {
-//            messagesIds = new int[]{
-//                    R.string.dialog_options_edit,
-//                    R.string.dialog_options_delete,
-//                    R.string.dialog_options_backup
-//            };
-//        }else{
-//            messagesIds = new int[]{
-//                    R.string.dialog_options_edit,
-//                    R.string.dialog_options_delete,
-//            };
-//        }
-//        final int[] messageIdsPointer =messagesIds;
-//        Dialog dialog = new OptionsDialog(getActivity(),messagesIds){
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                super.onClick(dialog, which);
-//                int selectedId = messageIdsPointer[which];
-//
-//                if ( selectedId == R.string.dialog_options_edit){
-//                    createEditDialog(item);
-//                }else if ( selectedId == R.string.dialog_options_delete){
-//                    createDeleteDialog(item);
-//                }else if(selectedId == R.string.dialog_options_backup){
-//                    backupTask(item);
-//                }
-//            }
-//        };
-//        dialog.show();
-//    }
-
     private void backupTask(Task item){
         try {
             new Backup(getContext()).saveTask(item);
@@ -221,7 +185,6 @@ public class ListTasksFragment extends Fragment {
 
         deleteDialog.show();
     }
-
 
 
     protected void createNewTaskDialog(){

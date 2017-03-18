@@ -59,11 +59,6 @@ public class ListSubtasksActivity extends AppCompatActivity {
                 createDetailDialog(item);
             }
 
-            @Override
-            public void itemLongClicked(RecyclerView.ViewHolder viewHolder, Subtask item) {
-                super.itemLongClicked(viewHolder, item);
-                showOptionsDilaog(item);
-            }
 
             @Override
             public void itemUpdated(Task item,Subtask subtask) {

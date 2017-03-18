@@ -1,72 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:elevation="10dp"
+    android:layout_marginBottom="15dp"
     android:layout_width="match_parent"
-    android:clickable="true"
-    android:focusable="true"
-    android:background="?android:attr/selectableItemBackground"
-    android:layout_height="72dp">
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <com.daimajia.swipe.SwipeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="16dp"
-        android:id="@+id/relativeLayout">
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/activity_list_subtasks_item_completed"
+        <LinearLayout
+            android:id="@+id/bottom_wrapper"
+            android:layout_width="160dp"
+            android:weightSum="1"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
 
-             />
-    </RelativeLayout>
+            <ImageView
+                app:srcCompat="@drawable/ic_delete"
+                android:id="@+id/bt_delete"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@color/delete_icon_swipe_background"
+                android:tint="@android:color/white"
+                android:scaleType="center" />
 
-    <RelativeLayout
-        android:id="@+id/list_item_layout"
-        android:paddingLeft="72dp"
-        android:paddingRight="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true">
-    <TextView
-        android:text="TextView"
-        android:maxLines="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:ellipsize="end"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textStyle="bold"
-        android:id="@+id/activity_list_subtasks_item_name"
+            <ImageView
+                app:srcCompat="@drawable/ic_edit"
+                android:id="@+id/bt_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@color/edit_icon_swipe_background"
+                android:tint="@android:color/white"
+                android:scaleType="center" />
+        </LinearLayout>
 
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true" />
+        <include
+            android:id="@+id/content_view"
+            layout="@layout/activity_list_subtasks_item_content"/>
 
-    <TextView
-        android:text="TextView"
-        android:maxLines="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_list_subtasks_item_description"
-        android:layout_below="@+id/activity_list_subtasks_item_name"
-        android:layout_alignParentRight="true"
+    </com.daimajia.swipe.SwipeLayout>
 
-        android:ellipsize="end"
-        android:layout_alignParentLeft="true" />
+</android.support.v7.widget.CardView>
 
 
-    </RelativeLayout>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        android:id="@+id/view"
-        android:layout_marginLeft="72dp"
-        android:layout_below="@+id/list_item_layout"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true" />
-
-
-</RelativeLayout>

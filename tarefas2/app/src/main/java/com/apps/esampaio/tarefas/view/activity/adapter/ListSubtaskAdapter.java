@@ -1,12 +1,15 @@
 package com.apps.esampaio.tarefas.view.activity.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.apps.esampaio.tarefas.R;
@@ -16,7 +19,6 @@ import com.apps.esampaio.tarefas.core.entities.Task;
 import com.apps.esampaio.tarefas.core.utils.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtaskAdapter.ViewHolder> {
@@ -28,6 +30,7 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
         private TextView taskDescription;
         private TextView taskDate;
         private CheckBox completed;
+        private ImageView btMenu;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -35,6 +38,7 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
             taskDescription = (TextView) itemView.findViewById(R.id.activity_list_subtasks_item_description);
             completed= (CheckBox) itemView.findViewById(R.id.activity_list_subtasks_item_completed);
             taskDate= (TextView) itemView.findViewById(R.id.activity_list_subtasks_item_date);
+            btMenu = (ImageView) itemView.findViewById(R.id.bt_menu);
         }
     }
 
@@ -106,11 +110,11 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
 
     @Override
     public ListSubtaskAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        final View view  = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_list_subtasks_item2,viewGroup,false);
-
+        final View view  = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_list_subtasks_item,viewGroup,false);
+        final View contentView = view.findViewById(R.id.content_view);
         final ListSubtaskAdapter.ViewHolder viewHolder = new ListSubtaskAdapter.ViewHolder(view);
 
-        view.setOnClickListener(new View.OnClickListener() {
+        contentView.setOnClickListener(new View.OnClickListener() {
             @Override
 
             public void onClick(View v) {
@@ -120,7 +124,7 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
             }
         });
 
-        view.setOnLongClickListener(new View.OnLongClickListener() {
+        contentView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 final int position = viewHolder.getLayoutPosition();
@@ -129,7 +133,12 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
                 return true;
             }
         });
+        contentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         viewHolder.completed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -141,7 +150,22 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
                 }
             }
         });
+        viewHolder.btMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMenu(viewHolder.btMenu);
+            }
+        });
         return viewHolder;
+    }
+
+    private void openMenu(View view){
+        PopupMenu popup = new PopupMenu(context, view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.subtask_popup_menu, popup.getMenu());
+//        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
+        popup.show();
+
     }
 
     @Override
@@ -150,13 +174,14 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
         boolean capitalize = settings.capitalizeFirst();
         Subtask subtask = item.getSubtasks().get(i);
         viewHolder.taskName.setText(StringUtils.capitalize(subtask.getName(),capitalize));
-        if ( subtask.getDescription() != null && ! subtask.getDescription().isEmpty())
+        if ( subtask.getDescription() != null && ! subtask.getDescription().isEmpty()) {
             viewHolder.taskDescription.setText(subtask.getDescription());
-        else
+        }else {
             viewHolder.taskDescription.setText(context.getString(R.string.subtasks_no_description));
-
+        }
 
         if(subtask.getDateTime().dateSetted()){
+            viewHolder.taskDate.setVisibility(View.VISIBLE);
             String formatedDate = subtask.getDateTime().formatDate();
             viewHolder.taskDate.setText(formatedDate);
             if ( subtask.getDateTime().timeSetted()){
@@ -165,7 +190,7 @@ public abstract class ListSubtaskAdapter extends RecyclerView.Adapter<ListSubtas
                 viewHolder.taskDate.setText(StringUtils.append(true,formatedDate,at,formatedTime));
             }
         }else{
-            viewHolder.taskDate.setText(context.getString(R.string.subtasks_no_date));
+            viewHolder.taskDate.setVisibility(View.GONE);
         }
         viewHolder.completed.setChecked(subtask.isComplete());
     }
