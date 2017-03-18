@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "22.0.1"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.esampaio.apps.tarefas"
@@ -43,5 +43,6 @@ dependencies {
     compile 'com.android.support:support-v4:23.4.0'
     compile 'br.com.liveo:navigationdrawer-material:2.5.1'
     compile 'com.android.support:support-vector-drawable:23.4.0'
+    compile "com.daimajia.swipelayout:library:1.2.0@aar"
     compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
 }

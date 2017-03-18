@@ -94,10 +94,10 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
     @Override
     public ListTaskAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         final View view  = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_list_task_item,viewGroup,false);
-
+        final View content = view.findViewById(R.id.list_task_item_content);
         final ListTaskAdapter.ViewHolder viewHolder = new ListTaskAdapter.ViewHolder(view);
 
-        view.setOnClickListener(new View.OnClickListener() {
+        content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int pos = viewHolder.getLayoutPosition();
@@ -105,7 +105,7 @@ public abstract class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapt
                 itemClicked(viewHolder,task);
             }
         });
-        view.setOnLongClickListener(new View.OnLongClickListener() {
+        content.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 int pos = viewHolder.getLayoutPosition();
