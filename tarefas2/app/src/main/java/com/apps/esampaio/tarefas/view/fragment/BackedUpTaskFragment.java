@@ -1,6 +1,5 @@
 package com.apps.esampaio.tarefas.view.fragment;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -132,7 +131,11 @@ public class BackedUpTaskFragment extends Fragment {
             backup.delete(item);
             adapter.removeItem(item);
         }
-        refresh();
+        try {
+            refresh();
+        }catch (Exception e){
+
+        }
     }
     private void restoreBackups(){
         List<BackupItem> items = adapter.getSelectedTasks();
