@@ -19,7 +19,7 @@ import com.apps.esampaio.tarefas.core.Backup;
 import com.apps.esampaio.tarefas.core.Tasks;
 import com.apps.esampaio.tarefas.core.entities.BackupItem;
 import com.apps.esampaio.tarefas.view.activity.adapter.BackupTasksAdapter;
-import com.apps.esampaio.tarefas.view.dialogs.ConfirmationDialog;
+
 import com.apps.esampaio.tarefas.view.dialogs.MessageDialog;
 
 import java.util.List;
@@ -107,8 +107,8 @@ public class BackedUpTaskFragment extends Fragment {
     }
 
     private void restoreButtonClick() {
-        MessageDialog dialog = new ConfirmationDialog(getContext(),getString(R.string.backup_task_restore_message)){
-            @Override
+        MessageDialog dialog = new MessageDialog(getContext(),getString(R.string.backup_task_restore_message), "") {
+
             public void onClick(DialogInterface dialog, int which) {
                 restoreBackups();
             }
@@ -116,16 +116,20 @@ public class BackedUpTaskFragment extends Fragment {
         dialog.show();
     }
     private void deleteButtonClick() {
-        MessageDialog dialog = new ConfirmationDialog(getContext(),getString(R.string.backup_task_delete_message)){
-            @Override
+        MessageDialog dialog = new MessageDialog(getContext(),getString(R.string.backup_task_delete_message), "") {
+
             public void onClick(DialogInterface dialog, int which) {
-                deleteBackups();
+                try {
+                    deleteBackups();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         };
         dialog.show();
     }
 
-    private void deleteBackups(){
+    private void deleteBackups() throws Exception {
         List<BackupItem> items = adapter.getSelectedTasks();
         Backup backup = new Backup(getContext());
         for (BackupItem item : items) {

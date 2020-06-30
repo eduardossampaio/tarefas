@@ -20,8 +20,8 @@ public class DetailSubtask extends AppCompatActivity {
 
         subtask= (Subtask) getIntent().getExtras().get("subtask");
 
-        title= (TextView) findViewById(R.id.activity_detail_subtask_title);
-        description= (TextView) findViewById(R.id.activity_detail_subtask_description);
+//        title= (TextView) findViewById(R.id.activity_detail_subtask_title);
+//        description= (TextView) findViewById(R.id.activity_detail_subtask_description);
 
         title.setText(subtask.getName());
         description.setText(subtask.getDescription());
