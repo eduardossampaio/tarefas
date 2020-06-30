@@ -5,7 +5,7 @@
     android:id="@+id/activity_add_task"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.esampaio.apps.tarefas.AddTaskActivity">
+    tools:context=".view.activity.AddTaskActivity">
 
     <EditText
         android:layout_width="wrap_content"

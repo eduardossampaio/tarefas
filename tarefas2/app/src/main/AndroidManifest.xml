@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.apps.esampaio.tarefas"
+    package="com.apps.esampaio.legacy"
     android:installLocation="auto">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,41 +13,54 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme.ActionBar">
         <activity
-            android:name=".view.activity.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/NewAppTheme"
+            android:name="com.apps.esampaio.new_version.view.task.NewTaskActivity"></activity>
         <activity
-            android:name=".view.activity.ListTasksActivity"
-            android:theme="@style/AppTheme"
-            android:label="@string/app_name">
+            android:name="com.apps.esampaio.new_version.view.main.activity.NewMainActivity"
+            android:theme="@style/NewAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.ListSubtasksActivity">
+
+
+        <!-- Legacy -->
+
+        <activity
+            android:name=".legacy.view.activity.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".legacy.view.activity.ListTasksActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme"></activity>
+        <activity android:name=".legacy.view.activity.ListSubtasksActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.activity.ListTasksActivity" />
+                android:value=".legacy.view.activity.ListTasksActivity" />
         </activity>
 
-        <receiver android:name=".receives.NotificationReceiver">
+        <receiver android:name=".legacy.receives.NotificationReceiver">
             <intent-filter>
                 <action android:name="EXECUTE_NOTIFICATION_TASK" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".receives.StartupReceive">
+        <receiver android:name=".legacy.receives.StartupReceive">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
         <activity
-            android:name=".view.activity.SettingsActivity"
+            android:name=".legacy.view.activity.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme.ActionBar"></activity>
+            android:theme="@style/AppTheme.ActionBar" />
     </application>
 
 </manifest>

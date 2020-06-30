@@ -27,7 +27,7 @@
         android:src="@drawable/ic_input_add_white"
         app:layout_anchor="@+id/list_subtasks_empty_task_list"
         app:layout_anchorGravity="bottom|right"
-        app:layout_behavior="com.apps.esampaio.tarefas.view.behaviors.ScrollAwareFABBehavior" />
+        app:layout_behavior="com.apps.esampaio.legacy.view.behaviors.ScrollAwareFABBehavior" />
 
 
     <TextView

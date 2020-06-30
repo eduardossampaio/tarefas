@@ -8,4 +8,8 @@
     <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
+
+    <!-- New version -->
+
+    <color name="app_screen_background">#f2f7fb</color>
 </resources>
