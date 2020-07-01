@@ -38,7 +38,7 @@ class NewMainActivity : AppCompatActivity() {
 
         this.tasks = Tasks(this);
 
-//        createTasks()
+        createTasks()
 
         this.taskListRVAdapter = TaskListRVAdapter(emptyList<Task>().toMutableList());
 
@@ -117,10 +117,12 @@ class NewMainActivity : AppCompatActivity() {
 
         subtask = Subtask("subtarefa3", "blablala");
         subtask.taskDate = Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24 * 5) )
+        subtask.isComplete = true;
         task2.addSubtask(subtask);
 
         subtask = Subtask("subtarefa4", "blablala");
         subtask.taskDate = Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24 * 3) )
+        subtask.isComplete = true;
         task2.addSubtask(subtask);
 
         tasks.addTask(task2);

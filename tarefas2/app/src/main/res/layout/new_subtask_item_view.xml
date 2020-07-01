@@ -9,7 +9,7 @@
     android:orientation="horizontal"
     android:background="@drawable/new_task_item_background"
 
-    android:layout_marginBottom="30dp"
+    android:layout_marginBottom="15dp"
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:layout_width="match_parent"
@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/new_task_item_color"
-        android:layout_width="10dp"
+        android:layout_width="6dp"
         android:layout_height="0dp"/>
 
     <LinearLayout
@@ -41,8 +41,8 @@
         android:layout_marginLeft="20dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/indicator_color"
@@ -63,7 +63,7 @@
             android:id="@+id/taskDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:text="kkk"
             android:textColor="#7b7b87"
             android:textSize="18sp"
@@ -74,24 +74,6 @@
 
 
     </LinearLayout>
-
-
-    <com.app.adprogressbarlib.AdCircleProgress
-        android:id="@+id/pgb_progress2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:backgroundTintMode="add"
-        app:adpgb_background_color="@android:color/transparent"
-        custom:adpgb_show_text="true"
-        app:adpgb_text_color="@color/accent"
-        app:adpgb_finished_color="@color/accent"
-        app:adpgb_unfinished_color="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
-        app:layout_constraintTop_toTopOf="parent"
-        custom:adpgb_finished_stroke_width="5dp"
-        app:adpgb_progress="50"
-        custom:adpgb_unfinished_stroke_width="5dp" />
 
 
 

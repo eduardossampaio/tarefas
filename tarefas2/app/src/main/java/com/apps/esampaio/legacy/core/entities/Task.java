@@ -61,6 +61,15 @@ public class Task implements Serializable{
         return this.subtasks.size();
     }
 
+    public float getCompletedPercentage() {
+
+        if(this.subtasks.size() == 0 || getCompleteSubtasksNumber() == 0){
+            return 0;
+        }
+
+        return  ( ((float) this.subtasks.size())   / ( (float) getCompleteSubtasksNumber() )  ) * 100;
+    }
+
     public int getCompleteSubtasksNumber(){
         int completed = 0;
         for (Subtask subtask: subtasks) {
@@ -80,6 +89,7 @@ public class Task implements Serializable{
             subtask.setTaskId(getId());
         }
     }
+
 
 
     @Override
@@ -109,7 +119,6 @@ public class Task implements Serializable{
         if(pos >= 0){
             subtasks.remove(pos);
             subtasks.add(pos,newSubtask);
-//            sortSubtasks();
         }
     }
 
