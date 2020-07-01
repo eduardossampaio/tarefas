@@ -1,6 +1,6 @@
 package com.apps.esampaio.new_version.view.task
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.apps.esampaio.legacy.R
 

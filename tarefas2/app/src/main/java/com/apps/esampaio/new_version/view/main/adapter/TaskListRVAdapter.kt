@@ -1,6 +1,6 @@
 package com.apps.esampaio.new_version.view.main.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +25,7 @@ class TaskListRVAdapter : RecyclerView.Adapter<TaskListRVAdapter.TaskViewHolder>
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TaskViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.new_task_item_view, parent,false);
         return TaskViewHolder(view);
     }
@@ -34,23 +34,29 @@ class TaskListRVAdapter : RecyclerView.Adapter<TaskListRVAdapter.TaskViewHolder>
         return this.taskList.size;
     }
 
+    override fun getItemId(position: Int): Long {
+        return this.taskList[position].hashCode().toLong();
+    }
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = taskList[position];
 
         holder.taskName.text = task.name;
-//        holder.takDescription.text = "< description >";
 
         when (task.subtasksNumber) {
             0 -> {
-                holder.takDescription.text = "Nenhuma tarefa criada"
+                holder.takDescription.text = "Nenhuma tarefa"
             }
             1 -> {
-                holder.takDescription.text = "1 tarefa criada"
+                holder.takDescription.text = "1 tarefa"
             }
             else -> {
-                holder.takDescription.text =   "${task.subtasksNumber} tarefas criada"
+                holder.takDescription.text =   "${task.subtasksNumber} tarefas"
             }
         }
+    }
 
+    fun updateItems(tasks: MutableList<Task>){
+        this.taskList = tasks;
+        notifyDataSetChanged()
     }
 }

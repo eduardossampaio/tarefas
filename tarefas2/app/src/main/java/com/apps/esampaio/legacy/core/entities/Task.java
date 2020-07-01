@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 
 public class Task implements Serializable{
@@ -16,7 +17,12 @@ public class Task implements Serializable{
     @Exclude
     private Comparator<Subtask> comparator;
 
-    public Task(int id,String name){
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, subtasks);
+    }
+
+    public Task(int id, String name){
         this.id = id;
         this.name = name;
         subtasks = new ArrayList<>();

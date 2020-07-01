@@ -2,7 +2,7 @@ package com.apps.esampaio.legacy.view.notifications;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.support.v4.app.NotificationCompat;
+import androidx.core.app.NotificationCompat;
 
 import com.apps.esampaio.legacy.R;
 import com.apps.esampaio.legacy.core.Settings;

@@ -2,10 +2,10 @@ package com.apps.esampaio.legacy.view.dialogs;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDialog;
+import androidx.fragment.app.FragmentManager;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialog;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;

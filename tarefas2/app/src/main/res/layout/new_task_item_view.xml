@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:wheel="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:background="@drawable/new_task_item_background"
 
@@ -16,10 +17,9 @@
 
 
 
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
 
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
+
     android:paddingRight="15dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -35,11 +35,14 @@
         android:layout_height="0dp"/>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginLeft="20dp"
+        android:gravity="center"
         android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/indicator_color"
@@ -73,9 +76,25 @@
     </LinearLayout>
 
 
+    <com.app.adprogressbarlib.AdCircleProgress
+        android:id="@+id/pgb_progress2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTintMode="add"
+        app:adpgb_background_color="@android:color/transparent"
+        custom:adpgb_show_text="true"
+        app:adpgb_text_color="@color/accent"
+        app:adpgb_finished_color="@color/accent"
+        app:adpgb_unfinished_color="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+        app:layout_constraintTop_toTopOf="parent"
+        custom:adpgb_finished_stroke_width="5dp"
+        app:adpgb_progress="50"
+        custom:adpgb_unfinished_stroke_width="5dp" />
 
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

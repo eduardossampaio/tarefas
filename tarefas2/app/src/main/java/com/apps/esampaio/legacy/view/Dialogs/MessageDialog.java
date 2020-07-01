@@ -2,7 +2,7 @@ package com.apps.esampaio.legacy.view.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Created by eduardo on 30/06/2016.
