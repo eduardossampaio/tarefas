@@ -58,7 +58,7 @@
     <string name="subtasks_updated_message_unchecked"> marcado como não completado</string>
     <string name="subtasks_no_description">Sem descrição</string>
     <string name="subtasks_no_date">Sem data definida</string>
-    <string name="subtasks_enter_name">Informe o Nome</string>
+    <string name="subtasks_enter_name">Nome</string>
     <string name="subtasks_enter_description">Informe a Descrição</string>
     <string name="subtasks_schedule_date">As</string>
 
@@ -153,4 +153,8 @@
     <string name="backup_task_restore_done">Tarefa restaurada com sucesso</string>
     <string name="dialog_backup_enabled">Backup manual habilitado, por favor reinicie o aplicativo</string>
     <string name="dialog_backup_disabled">Backup manual desabilitado, por favor reinicie o aplicativo</string>
+    <string name="task">Tarefa</string>
+    <string name="add_task">Nova Categoria</string>
+    <string name="new_category">Nova categoria</string>
+    <string name="enter_date">Data(opcional)</string>
 </resources>

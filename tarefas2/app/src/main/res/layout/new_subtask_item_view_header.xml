@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:adpgb_finished_stroke_width="3dp"
-        app:adpgb_show_text="true"
+        app:adpgb_show_text="false"
         app:adpgb_unfinished_stroke_width="3dp" />
 
 

@@ -43,7 +43,13 @@ public class Tasks {
     }
 
 
-
+    public void saveOrUpdateTask(Task item) {
+        if(item.getId() == -1){
+            addTask(item);
+        }else{
+            updateTask(item);
+        }
+    }
     public void updateTask(Task item) {
         taskDAO.updateTask(item);
         for (Subtask subtask: item.getSubtasks()) {

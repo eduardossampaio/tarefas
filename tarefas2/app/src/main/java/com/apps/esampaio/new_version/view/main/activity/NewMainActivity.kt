@@ -3,8 +3,7 @@ package com.apps.esampaio.new_version.view.main.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.ViewGroup
-import android.widget.LinearLayout
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +20,7 @@ import java.util.*
 
 class NewMainActivity : AppCompatActivity() {
     lateinit var taskList : RecyclerView;
-    lateinit var newTaskButton : ViewGroup;
+    lateinit var newTaskButton : ImageButton;
     lateinit var tabBar : TabLayout;
 
     private lateinit var tasks : Tasks;
@@ -31,14 +30,14 @@ class NewMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_main)
-        taskList = findViewById<RecyclerView>(R.id.task_list)
-        newTaskButton = findViewById<LinearLayout>(R.id.new_task_button)
-        tabBar = findViewById<TabLayout>(R.id.option_tabs)
+        taskList = findViewById(R.id.task_list)
+        newTaskButton = findViewById(R.id.new_task_button)
+        tabBar = findViewById(R.id.option_tabs)
 
 
         this.tasks = Tasks(this);
 
-        createTasks()
+//        createTasks()
 
         this.taskListRVAdapter = TaskListRVAdapter(emptyList<Task>().toMutableList());
 

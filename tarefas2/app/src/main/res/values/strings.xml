@@ -55,7 +55,7 @@
     <string name="subtasks_updated_message_unchecked"> checked as uncompleted</string>
     <string name="subtasks_no_description">No description</string>
     <string name="subtasks_no_date">No defined date</string>
-    <string name="subtasks_enter_name">Enter name</string>
+    <string name="subtasks_enter_name">Name</string>
     <string name="subtasks_enter_description">Enter description</string>
     <string name="subtasks_schedule_date">At</string>
 
@@ -150,6 +150,11 @@
     <string name="backup_task_restore_done">Task successfully restored</string>
     <string name="dialog_backup_enabled">Manual backup enabled, please restart app</string>
     <string name="dialog_backup_disabled">Manual backup disabled, please restart app</string>
+    <string name="task">Tarefa</string>
+    <string name="add_task">Nova Categoria</string>
+    <string name="new_category">Nova categoria</string>
+    <string name="enter_date">Data(opcional)</string>
+    <string name="enter_time">Hora(opcional)</string>
 
 
 </resources>

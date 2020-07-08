@@ -41,7 +41,7 @@ dependencies {
     implementation 'androidx.vectordrawable:vectordrawable:1.0.0'
 
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.code-troopers.betterpickers:library:3.0.0'
+    implementation 'com.code-troopers.betterpickers:library:3.1.0'
     implementation 'org.lucasr.dspec:dspec:0.1.1'
     implementation 'br.com.liveo:navigationdrawer-material:2.5.1'
     implementation group: 'com.google.code.gson', name: 'gson', version: '1.7.2'

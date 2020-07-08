@@ -22,7 +22,9 @@ public class Subtask implements Serializable{
     }
 
     public Subtask(){
-
+        this.name = "";
+        this.complete = false;
+        this.dateTime=new DateTime();
     }
     public Subtask(String name,boolean completed){
         this.name = name;

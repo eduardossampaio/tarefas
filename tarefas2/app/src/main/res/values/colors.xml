@@ -4,12 +4,22 @@
     <color name="primary_dark">#512DA8</color>
     <color name="primary_light">#D1C4E9</color>
     <color name="accent">#FF4081</color>
+
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
 
     <!-- New version -->
-
+    <color name="new_primary">#fafafa</color>
+    <color name="new_primary_light">#ffffff</color>
+    <color name="new_primary_dark">#c7c7c7</color>
     <color name="app_screen_background">#f2f7fb</color>
+    <color name="white">#fff</color>
+    <color name="button_green">#2C872C</color>
+    <color name="button_green_pressed">#206320</color>
+    <color name="button_red">#C51414</color>
+    <color name="button_red_pressed">#971010</color>
+    <color name="button_accent">#FF4081</color>
+    <color name="button_accent_pressed">#BD2F5F</color>
 </resources>
