@@ -12,8 +12,8 @@ import androidx.appcompat.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.widget.RelativeLayout;
 
-import com.apps.esampaio.legacy.BuildConfig;
-import com.apps.esampaio.legacy.R;
+import com.apps.esampaio.BuildConfig;
+import com.apps.esampaio.R;
 import com.apps.esampaio.legacy.actions.NotificationScheduler;
 import com.apps.esampaio.legacy.core.Constants;
 import com.apps.esampaio.legacy.core.Settings;

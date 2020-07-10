@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.apps.esampaio.legacy.R;
+import com.apps.esampaio.R;
 import com.apps.esampaio.legacy.core.entities.Task;
 
 import java.util.Date;

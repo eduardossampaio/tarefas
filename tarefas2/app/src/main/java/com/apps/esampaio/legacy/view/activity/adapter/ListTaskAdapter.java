@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.apps.esampaio.legacy.R;
+import com.apps.esampaio.R;
 import com.apps.esampaio.legacy.core.Settings;
 import com.apps.esampaio.legacy.core.entities.Task;
 import com.apps.esampaio.legacy.core.utils.StringUtils;

@@ -22,4 +22,12 @@
     <color name="button_red_pressed">#971010</color>
     <color name="button_accent">#FF4081</color>
     <color name="button_accent_pressed">#BD2F5F</color>
+
+    <string-array name="colors">
+        <item>#264653</item>
+        <item>#6e8898</item>
+        <item>#7d53de</item>
+        <item>#faf33e</item>
+        <item>#d80032</item>
+    </string-array>
 </resources>

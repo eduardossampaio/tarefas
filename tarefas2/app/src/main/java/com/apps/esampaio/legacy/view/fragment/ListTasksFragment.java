@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.apps.esampaio.legacy.R;
+import com.apps.esampaio.R;
 import com.apps.esampaio.legacy.core.Backup;
 import com.apps.esampaio.legacy.core.Settings;
 import com.apps.esampaio.legacy.core.Tasks;

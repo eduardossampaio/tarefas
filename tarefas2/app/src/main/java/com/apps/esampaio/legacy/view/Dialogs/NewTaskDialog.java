@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.apps.esampaio.legacy.R;
+import com.apps.esampaio.R;
 import com.apps.esampaio.legacy.core.entities.Task;
 
 

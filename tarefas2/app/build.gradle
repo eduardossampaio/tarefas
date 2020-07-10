@@ -49,6 +49,8 @@ dependencies {
 
     implementation 'com.github.Adilhusen:circle-progress-ad-android-:1.0'
     implementation("app.futured.donut:library:2.0.0")
+    implementation 'com.github.dhaval2404:colorpicker:1.2'
+    implementation 'com.github.noowenz:CustomDateTimePicker:1.01'
 }
 repositories {
     mavenCentral()

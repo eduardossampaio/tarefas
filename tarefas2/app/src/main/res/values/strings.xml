@@ -155,6 +155,9 @@
     <string name="new_category">Nova categoria</string>
     <string name="enter_date">Data(opcional)</string>
     <string name="enter_time">Hora(opcional)</string>
+    <string name="new_category_name">Category Name</string>
+    <string name="save">Save</string>
+    <string name="enter_date_time">Data e hora (Opcional)</string>
 
 
 </resources>

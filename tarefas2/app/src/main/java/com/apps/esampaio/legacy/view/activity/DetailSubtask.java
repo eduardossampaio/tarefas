@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.apps.esampaio.legacy.R;
+import com.apps.esampaio.R;
 import com.apps.esampaio.legacy.entities.Subtask;
 
 public class DetailSubtask extends AppCompatActivity {

@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.adprogressbarlib.AdCircleProgress
-import com.apps.esampaio.legacy.R
+import com.apps.esampaio.R
 import com.apps.esampaio.legacy.core.entities.Subtask
 import com.apps.esampaio.legacy.core.entities.Task
 

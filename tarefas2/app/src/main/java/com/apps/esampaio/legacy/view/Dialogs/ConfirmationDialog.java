@@ -1,15 +1,15 @@
-package com.apps.esampaio.legacy.view.dialogs;
+package com.apps.esampaio.legacy.view.Dialogs;
 
 import android.content.Context;
 import android.content.DialogInterface;
 
-import com.apps.esampaio.legacy.R;
+import com.apps.esampaio.R;
 
 /**
  * Created by eduardo on 28/06/2016.
  */
 
-public class ConfirmationDialog extends MessageDialog implements DialogInterface.OnClickListener{
+public class ConfirmationDialog extends com.apps.esampaio.legacy.view.dialogs.MessageDialog implements DialogInterface.OnClickListener{
 
 
     public ConfirmationDialog(Context context,String message){

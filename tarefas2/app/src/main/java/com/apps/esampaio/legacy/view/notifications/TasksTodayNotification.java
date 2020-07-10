@@ -6,7 +6,7 @@ import android.content.Intent;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
 
-import com.apps.esampaio.legacy.R;
+import com.apps.esampaio.R;
 import com.apps.esampaio.legacy.core.entities.Subtask;
 import com.apps.esampaio.legacy.core.entities.Task;
 import com.apps.esampaio.legacy.view.activity.ListSubtasksActivity;

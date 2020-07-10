@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import com.apps.esampaio.legacy.R
+import com.apps.esampaio.R
 import com.apps.esampaio.legacy.entities.Task
 
 
-class TaskCategorySpinnerAdapter(ctx: Context, private val taskList: List<Task>) : ArrayAdapter<Task>(ctx, 0, taskList) {
+class TaskCategorySpinnerAdapter(ctx: Context, private var taskList: MutableList<Task>) : ArrayAdapter<Task>(ctx, 0, taskList) {
 
     private val layoutInflater: LayoutInflater = LayoutInflater.from(ctx);
 
@@ -62,5 +62,10 @@ class TaskCategorySpinnerAdapter(ctx: Context, private val taskList: List<Task>)
 
     fun isNewTask(position: Int) : Boolean{
         return position == this.taskList.size;
+    }
+
+    fun addEnd(selectedTask: Task) {
+        this.taskList.add(selectedTask);
+        notifyDataSetChanged();
     }
 }

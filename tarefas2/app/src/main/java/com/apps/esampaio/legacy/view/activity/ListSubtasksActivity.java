@@ -4,23 +4,25 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.apps.esampaio.legacy.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.apps.esampaio.R;
 import com.apps.esampaio.legacy.core.Tasks;
 import com.apps.esampaio.legacy.core.entities.Subtask;
 import com.apps.esampaio.legacy.core.entities.Task;
+import com.apps.esampaio.legacy.view.Dialogs.ConfirmationDialog;
 import com.apps.esampaio.legacy.view.activity.adapter.ListSubtaskAdapter;
-import com.apps.esampaio.legacy.view.dialogs.ConfirmationDialog;
+
 import com.apps.esampaio.legacy.view.dialogs.NewSubtaskDialog;
 import com.apps.esampaio.legacy.view.dialogs.OptionsDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Date;
 import java.util.List;

@@ -1,61 +1,67 @@
 package com.apps.esampaio.new_version.view.task
 
+import android.app.Dialog
 import android.os.Bundle
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.apps.esampaio.legacy.R
+import com.apps.esampaio.R
 import com.apps.esampaio.legacy.Tasks
 import com.apps.esampaio.legacy.core.entities.DateTime
 import com.apps.esampaio.legacy.entities.Subtask
 import com.apps.esampaio.legacy.entities.Task
 import com.apps.esampaio.new_version.view.task.adapter.TaskCategorySpinnerAdapter
+import com.apps.esampaio.new_version.view.task.dialogs.NewCategoryDialog
+import com.apps.esampaio.new_version.view.task.dialogs.NewCategoryDialogListener
+import com.apps.esampaio.new_version.view.utils.DisableViewTextWatcher
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment
 import com.codetroopers.betterpickers.radialtimepicker.RadialTimePickerDialogFragment
+import com.noowenz.customdatetimepicker.CustomDateTimePicker
 import java.util.*
 
-class NewTaskActivity : AppCompatActivity() {
+class NewTaskActivity : AppCompatActivity(), NewCategoryDialogListener{
 
-    lateinit var cdp: CalendarDatePickerDialogFragment
-    lateinit var rtpd: RadialTimePickerDialogFragment;
-
-    private val FRAG_TAG_DATE_PICKER = "DATE_PICKER_1"
-    private val FRAG_TAG_TIME_PICKER = "TIME_PICKER_1"
-
-    lateinit  var tasksService: Tasks
-
+    /** Views **/
     lateinit var taskCategorySpinner: Spinner;
-    lateinit var taskAdapter: TaskCategorySpinnerAdapter;
-    lateinit var selectDate : Button;
-    lateinit var selectHour : Button;
+    lateinit var taskCategoryAdapter: TaskCategorySpinnerAdapter;
+
     lateinit var saveButton : Button;
     lateinit var cancelButton : Button;
+    lateinit var addDateTimeButton : Button
+    lateinit var deleteDateButton : ImageButton
 
     lateinit var subtaskName : EditText;
     lateinit var subtaskDescription : EditText;
-
+    lateinit var dateTimePicker: CustomDateTimePicker;
+    /*****/
 
     var subtask = Subtask();
     var selectedTask : Task? = null;
+    var selectedDate: Date? = null;
+    lateinit  var tasksService: Tasks
+    lateinit var allTasks : MutableList<Task>;
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_task)
         tasksService = Tasks(this);
-        val tasks = tasksService.tasks;
+        allTasks = tasksService.tasks;
 
         taskCategorySpinner = findViewById(R.id.task_category);
-        selectDate = findViewById(R.id.add_date)
-        selectHour = findViewById(R.id.add_time)
+
         saveButton = findViewById(R.id.save_task_button)
         cancelButton = findViewById(R.id.cancel_task_button)
+        addDateTimeButton = findViewById(R.id.add_date_time);
+        deleteDateButton = findViewById(R.id.remove_date);
 
-         subtaskName = findViewById(R.id.subtask_name)
+        subtaskName = findViewById(R.id.subtask_name)
         subtaskDescription  =  findViewById(R.id.subtask_description)
 
-        taskAdapter = TaskCategorySpinnerAdapter(this,tasks.toList());
+        taskCategoryAdapter = TaskCategorySpinnerAdapter(this,allTasks);
 
 
         taskCategorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -64,30 +70,20 @@ class NewTaskActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
                 Log.d("NewTaskActivity", "onItemSelected: $position")
 
-                if(taskAdapter.isNewTask(position)){
-
+                if(taskCategoryAdapter.isNewTask(position)){
+                    createNewCategory();
                 }else{
-                    selectedTask = tasks[position];
+                    selectedTask = allTasks[position];
                 }
             }
         }
 
-        taskCategorySpinner.adapter = taskAdapter;
+        taskCategorySpinner.adapter = taskCategoryAdapter;
 
-      setupDatePicker()
-        setupTimePicker()
-
-
-
-        selectDate.setOnClickListener {
-            Log.d("NewTaskActivity", "selecionou data");
-            showDatePicker();
-
+        addDateTimeButton.setOnClickListener {
+            dateTimePicker.showDialog();
         }
-        selectHour.setOnClickListener {
-            Log.d("NewTaskActivity", "selecionou hora");
-            showTimePicker()
-        }
+
 
         saveButton.setOnClickListener {
             saveButtonPressed()
@@ -97,23 +93,43 @@ class NewTaskActivity : AppCompatActivity() {
             cancelButtonPressed()
         }
 
+        deleteDateButton.setOnClickListener {
+            onDateDeleted();
+        }
+
+        subtaskName.addTextChangedListener(DisableViewTextWatcher(saveButton, disableOnInit = true))
+
+    }
+
+    private fun createNewCategory() {
+        val newCategoryDialog = NewCategoryDialog(this);
+        newCategoryDialog.listener = this;
+        newCategoryDialog.show();
+
     }
 
     override fun onResume() {
         super.onResume()
-        taskAdapter.notifyDataSetChanged();
+        taskCategoryAdapter.notifyDataSetChanged();
+        setupDateTimePicker();
+
         //let subtask vinda de outra tela
     }
 
-    private fun showDatePicker() {
+    private fun onDateSelected(dateSelected:Date) {
+        this.selectedDate = dateSelected;
+        this.deleteDateButton.visibility = View.VISIBLE
+        this.addDateTimeButton.text = selectedDate.toString();
 
-        cdp.show(supportFragmentManager, FRAG_TAG_DATE_PICKER)
     }
 
-    private fun showTimePicker() {
-
-        rtpd.show(supportFragmentManager, FRAG_TAG_TIME_PICKER)
+    private fun onDateDeleted() {
+        this.selectedDate = null;
+        this.deleteDateButton.visibility = View.GONE
+        this.addDateTimeButton.text = getString(R.string.enter_date_time)
     }
+
+
 
     private fun saveButtonPressed() {
 
@@ -123,52 +139,45 @@ class NewTaskActivity : AppCompatActivity() {
             this.subtask.taskId = selectedTask!!.id;
             selectedTask!!.addSubtask(this.subtask);
             tasksService.saveOrUpdateTask(selectedTask)
+            finish();
         }
 
-//        this.tasksService.updateTask()
-
-//        item.addSubtask(subtask)
-//        tasks.updateTask(item)
-//        item.sortSubtasks()
-//        adapter.addItem(subtask, item.getSubtaskIndex(subtask))
-//        updateItems()
     }
+
     private fun cancelButtonPressed() {
-
+        finish();
     }
 
 
 
-    private fun setupDatePicker(){
+    private fun setupDateTimePicker(){
+        dateTimePicker = CustomDateTimePicker(this, object  : CustomDateTimePicker.ICustomDateTimeListener{
+                override fun onCancel() {
 
-        cdp = CalendarDatePickerDialogFragment()
-                .setOnDateSetListener { dialog, year, monthOfYear, dayOfMonth ->
-//                    subtask.dateTime.setDate(year, monthOfYear, dayOfMonth)
-//                    displayDate()
-//                    enableTime()
                 }
-                .setFirstDayOfWeek(Calendar.SUNDAY)
-                .setDoneText(getString(R.string.dialog_message_ok))
-//                .setThemeCustom(R.style.MyCustomBetterPickersDialogs)
-                .setThemeLight()
-                .setCancelText(getString(R.string.dialog_message_cancel))
-        val timeToSet: DateTime = DateTime.getCurrentDateTime()
 
-        val y = timeToSet.year
-        val m = timeToSet.month
-        val d = timeToSet.day
-        cdp.setPreselectedDate(y, m, d)
+                override fun onSet(dialog: Dialog, calendarSelected: Calendar, dateSelected: Date, year: Int, monthFullName: String, monthShortName: String, monthNumber: Int, day: Int, weekDayFullName: String, weekDayShortName: String, hour24: Int, hour12: Int, min: Int, sec: Int, AM_PM: String) {
+                    onDateSelected(dateSelected);
+                }
+
+            });
+        dateTimePicker.setDate(Calendar.getInstance())
     }
 
-    private fun setupTimePicker(){
-        rtpd = RadialTimePickerDialogFragment()
-                .setOnTimeSetListener { dialog, hourOfDay, minute ->
-//                    subtask.dateTime.setTime(hourOfDay, minute)
-//                    displayTime()
-                }
-                .setThemeLight()
-                .setThemeCustom(R.style.MyCustomBetterPickersDialogs)
-                .setDoneText(getString(R.string.dialog_message_ok))
-                .setCancelText(getString(R.string.dialog_message_cancel))
+
+
+    override fun onSave(categoryName: String, selectedColor: String) {
+        Toast.makeText(this,"$categoryName =>  $selectedColor", Toast.LENGTH_SHORT).show()
+        this.selectedTask = Task(categoryName);
+        allTasks.add(this.selectedTask!!);
+        taskCategoryAdapter.addEnd(selectedTask!!);
+        taskCategorySpinner.setSelection(allTasks.size -1)
+
+
+    }
+
+    override fun onCancel() {
+        taskCategorySpinner.setSelection(0);
+
     }
 }

@@ -9,7 +9,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.apps.esampaio.legacy.R;
+import com.apps.esampaio.R;
 import com.apps.esampaio.legacy.core.entities.BackupItem;
 import com.apps.esampaio.legacy.core.entities.Task;
 import com.apps.esampaio.legacy.core.utils.StringUtils;

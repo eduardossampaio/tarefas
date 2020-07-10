@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.apps.esampaio.legacy.R
+import com.apps.esampaio.R
 import com.apps.esampaio.legacy.core.Tasks
 import com.apps.esampaio.legacy.core.entities.Subtask
 import com.apps.esampaio.legacy.core.entities.Task
@@ -34,10 +34,7 @@ class NewMainActivity : AppCompatActivity() {
         newTaskButton = findViewById(R.id.new_task_button)
         tabBar = findViewById(R.id.option_tabs)
 
-
         this.tasks = Tasks(this);
-
-//        createTasks()
 
         this.taskListRVAdapter = TaskListRVAdapter(emptyList<Task>().toMutableList());
 

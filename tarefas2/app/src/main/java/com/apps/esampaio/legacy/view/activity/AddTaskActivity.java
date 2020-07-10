@@ -3,7 +3,7 @@ package com.apps.esampaio.legacy.view.activity;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.apps.esampaio.legacy.R;
+import com.apps.esampaio.R;
 
 public class AddTaskActivity extends AppCompatActivity {
 
