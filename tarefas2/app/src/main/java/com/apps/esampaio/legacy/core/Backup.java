@@ -2,6 +2,9 @@ package com.apps.esampaio.legacy.core;
 
 import android.content.Context;
 
+import com.apps.esampaio.legacy.core.Constants;
+import com.apps.esampaio.legacy.core.Files;
+import com.apps.esampaio.legacy.core.Tasks;
 import com.apps.esampaio.legacy.core.backups.AnnotationExcludeExtrategy;
 import com.apps.esampaio.legacy.core.entities.BackupItem;
 import com.apps.esampaio.legacy.core.entities.DateTime;
@@ -31,7 +34,7 @@ public class Backup {
         Gson gson = builder.create();
         String jsonTask = gson.toJson(task);
         if(jsonTask !=null){
-            String dateFormated = DateUtils.formatDate(System.currentTimeMillis(),Constants.BACKUP_DATE_FORMAT);
+            String dateFormated = DateUtils.formatDate(System.currentTimeMillis(), Constants.BACKUP_DATE_FORMAT);
             String fileName = StringUtils.append(false,Constants.BASE_SAVE_DIR+"/",task.getName(),"-",dateFormated,".json");
             File baseDir = new File(fileName);
             //TODO verificar se já tem backup salvo

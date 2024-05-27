@@ -27,7 +27,7 @@ public class NotificationScheduler {
     private boolean alarmUp(){
         return(PendingIntent.getBroadcast(context, 0,
                 notificationIntent,
-                PendingIntent.FLAG_NO_CREATE) != null);
+                PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE) != null);
     }
 
     private void scheduleNotifications(){
@@ -35,7 +35,7 @@ public class NotificationScheduler {
         long startTime = 0;
         long interval = 60 * 1000; //1 minute
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,0,notificationIntent,0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,0,notificationIntent, PendingIntent.FLAG_IMMUTABLE);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, startTime, interval, pendingIntent);
     }
