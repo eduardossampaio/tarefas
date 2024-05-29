@@ -1,3 +1,8 @@
+## Deprecation disclaimer
+This app is deprecated. I recommend that you use the code in this repository only for study purposes, or for a quick look of how apps were implemented in the past.
+You can check out the newer version on this 
+[repository](https://github.com/eduardossampaio/MyTasksMobileApp)
+
 ## Sobre o aplicativo
 Um pequeno gerenciador de tarefas para Android. Leve e fácil de usar, ele não consome recursos do seu aparelho desnecessáriamenten não possui propagandas e não abusa das permissões
 
